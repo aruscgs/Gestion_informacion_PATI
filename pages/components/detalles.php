@@ -242,7 +242,7 @@ $nomc = $nom->fetch_assoc();
 				<td>
 					<label id="lblUmbral<?php echo $i;?>" title="Umbral<?php echo $i;?>" ondblclick="PressClick('lblUmbral', 'txtUmbral',<?php echo $i;?>)"><?php echo $row['Tipo_de_umbral'];?></label>
 					<select id="txtUmbral<?php echo $i;?>" class="select" name="Umbral" onkeydown="EnterToTab(<?php echo $row['id_umbral'];?>,'lblUmbral', 'txtUmbral',<?php echo $i?>, <?php echo $row['id_detalle'];?>)" style="display: none; width:60px; border-radius: 10px; text-align: center; margin-left: 30px; border-bottom-left-radius: inherit; border-left-color: turquoise;"  required>
-							<option value="<?php echo $row['Tipo_de_umbral'];?>" disabled selected> <?php echo $row['Tipo_de_umbral'];?> </option>
+							<option value="<?php echo $row['id_umbral'];?>" disabled selected> <?php echo $row['Tipo_de_umbral'];?> </option>
 							<option value="1">porcentaje</option>
 							<option value="2">sesiones</option>
 							<option value="3">segundos</option>
@@ -1472,7 +1472,7 @@ var array_texto = new Array(2)
 										var contratogg=document.getElementById("nom_contrato").value;
 										var codigo_contratogg= document.getElementById("cod_contrato").value;
 										var cedulagg=document.getElementById("cedula").value;
-										
+
 											var Datos_Correo = {
 											 "nombre_host":nombre_hostgg,
 											 "id_detalles":id_detallesgg,
@@ -1625,7 +1625,6 @@ var array_texto = new Array(2)
 										var contratogg=document.getElementById("nom_contrato").value;
 										var codigo_contratogg= document.getElementById("cod_contrato").value;
 										var cedulagg=document.getElementById("cedula").value;
-
 										var Datos_Correo = {
 											"nombre_host":nombre_hostgg,
  										 "id_detalles":id_detallesgg,
@@ -1663,6 +1662,7 @@ var array_texto = new Array(2)
 										var contratogg=document.getElementById("nom_contrato").value;
 										var codigo_contratogg= document.getElementById("cod_contrato").value;
 										var cedulagg=document.getElementById("cedula").value;
+
 										var Datos_Correo = {
 											"nombre_host":nombre_hostgg,
  										 "id_detalles":id_detallesgg,
