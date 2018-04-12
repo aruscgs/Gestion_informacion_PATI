@@ -1466,12 +1466,13 @@ var array_texto = new Array(2)
 										var txtCheqgg=document.getElementById("lbltiempoC"+i).innerHTML;
 										var txtWarningg=document.getElementById("lblwarning"+i).innerHTML;
 										var txtCriticalgg=document.getElementById("lblcritical"+i).innerHTML;
-										var txtUmbralgg=umbraliddefinity;
+										var txtUmbralgg=document.getElementById("txtUmbral"+i).value;
 										var txtHorariogg=document.getElementById("lblHorario"+i).innerHTML;
 										var ipgg= document.getElementById("ip_ci").value;
 										var contratogg=document.getElementById("nom_contrato").value;
 										var codigo_contratogg= document.getElementById("cod_contrato").value;
 										var cedulagg=document.getElementById("cedula").value;
+										
 											var Datos_Correo = {
 											 "nombre_host":nombre_hostgg,
 											 "id_detalles":id_detallesgg,
@@ -1504,7 +1505,7 @@ var array_texto = new Array(2)
 									var txtCheqgg=document.getElementById("txtiempoC"+i).value;
 									var txtWarningg=document.getElementById("lblwarning"+i).innerHTML;
 									var txtCriticalgg=document.getElementById("lblcritical"+i).innerHTML;
-									var txtUmbralgg=umbraliddefinity;
+									var txtUmbralgg=document.getElementById("txtUmbral"+i).value;
 									var txtHorariogg=document.getElementById("lblHorario"+i).innerHTML;
 									var ipgg= document.getElementById("ip_ci").value;
 									var contratogg=document.getElementById("nom_contrato").value;
@@ -1542,7 +1543,7 @@ var array_texto = new Array(2)
 												var txtCheqgg=document.getElementById("lbltiempoC"+i).innerHTML;
 												var txtWarningg=document.getElementById("txtWarning"+i).value;
 												var txtCriticalgg=document.getElementById("lblcritical"+i).innerHTML;
-												var txtUmbralgg=umbraliddefinity;
+												var txtUmbralgg=document.getElementById("txtUmbral"+i).value;
 												var txtHorariogg=document.getElementById("lblHorario"+i).innerHTML;
 												var ipgg= document.getElementById("ip_ci").value;
 												var contratogg=document.getElementById("nom_contrato").value;
@@ -1580,7 +1581,7 @@ var array_texto = new Array(2)
 	 										var txtCheqgg=document.getElementById("lbltiempoC"+i).innerHTML;
 	 										var txtWarningg=document.getElementById("lblwarning"+i).innerHTML;
 	 										var txtCriticalgg=document.getElementById("txtCritical"+i).value;
-	 										var txtUmbralgg=umbraliddefinity;
+	 										var txtUmbralgg=document.getElementById("txtUmbral"+i).value;
 	 										var txtHorariogg=document.getElementById("lblHorario"+i).innerHTML;
 	 										var ipgg= document.getElementById("ip_ci").value;
 	 										var contratogg=document.getElementById("nom_contrato").value;
@@ -1624,6 +1625,7 @@ var array_texto = new Array(2)
 										var contratogg=document.getElementById("nom_contrato").value;
 										var codigo_contratogg= document.getElementById("cod_contrato").value;
 										var cedulagg=document.getElementById("cedula").value;
+
 										var Datos_Correo = {
 											"nombre_host":nombre_hostgg,
  										 "id_detalles":id_detallesgg,
@@ -1655,7 +1657,7 @@ var array_texto = new Array(2)
 										var txtCheqgg=document.getElementById("lbltiempoC"+i).innerHTML;
 										var txtWarningg=document.getElementById("lblwarning"+i).innerHTML;
 										var txtCriticalgg=document.getElementById("lblcritical"+i).innerHTML;
-										var txtUmbralgg=umbraliddefinity;
+										var txtUmbralgg=document.getElementById("txtUmbral"+i).value;
 										var txtHorariogg=document.getElementById("txtHorario"+i).value;
 										var ipgg= document.getElementById("ip_ci").value;
 										var contratogg=document.getElementById("nom_contrato").value;
