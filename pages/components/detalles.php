@@ -1429,36 +1429,25 @@ var array_texto = new Array(2)
 							}else if (DeliverTxt == 13) {
 								var receiveTxt = document.getElementById(LabelYd).innerHTML='C°';
 							}
-
 							}else {
 								var DeliverTxt = document.getElementById(TextId).value;
 								var receiveTxt = document.getElementById(LabelYd).innerHTML=DeliverTxt;
 							}
-
 						}
 
+
 						function EnterToTab(umbraliddefinity, lbl, txt, i, servicio){
-
-
 							if (event.keyCode == 13) {
-
 								var txtcompara = txt+i;
 								var lblcompara = lbl+i;
-
 								var early = document.getElementById(lblcompara).innerHTML;
 								var late = document.getElementById(txtcompara).value;
-
-
 								document.getElementById(lbl+i).style.display="block";
 								document.getElementById(txt+i).style.display="none";
-
 								if (early == late) {
 
 									alertify.error("Sin Cambios");
 
-
-								}else if (late=='') {
-									alertify.error("Campos Vacios.");
 								}else {
 									var claveDelay = txtcompara.indexOf("Delay");
 									var claveChequeo = txtcompara.indexOf("tiempoC");
@@ -1466,8 +1455,6 @@ var array_texto = new Array(2)
 									var claveCritical = txtcompara.indexOf("Critical");
 									var claveUmbral = txtcompara.indexOf("Umbral");
 									var claveHorario = txtcompara.indexOf("Horario");
-
-
 
 									if (claveDelay >= 0 ) {
 										var nombre_hostgg= document.getElementById("nombre_ci").value;
@@ -1483,8 +1470,6 @@ var array_texto = new Array(2)
 										var contratogg=document.getElementById("nom_contrato").value;
 										var codigo_contratogg= document.getElementById("cod_contrato").value;
 										var cedulagg=document.getElementById("cedula").value;
-
-
 											var Datos_Correo = {
 											 "nombre_host":nombre_hostgg,
 											 "id_detalles":id_detallesgg,
@@ -1506,15 +1491,9 @@ var array_texto = new Array(2)
 												type: 'post',
 												success: function (response) {
  														$("#resultadoActualiza").html(response);
-
 														 alertify.success("Delay Actualizado.");
-
 												}
-
 											});
-
-
-
 									}else if (claveChequeo >= 0) {
 									var nombre_hostgg= document.getElementById("nombre_ci").value;
 									var id_detallesgg=servicio;
@@ -1529,7 +1508,6 @@ var array_texto = new Array(2)
 									var contratogg=document.getElementById("nom_contrato").value;
 									var codigo_contratogg= document.getElementById("cod_contrato").value;
 									var cedulagg=document.getElementById("cedula").value;
-
 									var Datos_Correo = {
 										"nombre_host":nombre_hostgg,
  									 "id_detalles":id_detallesgg,
@@ -1551,24 +1529,10 @@ var array_texto = new Array(2)
 										type: 'post',
 										success: function (response) {
 												$("#resultadoActualiza").html(response);
-
 												 alertify.success("Tiempo Chequeo Actualizado.");
-
 										}
-
 									});
-
 									}else if (claveWarning >= 0) {
-										var txtUmbralgg=umbraliddefinity;
-										alert("umbral: "+txtUmbralgg);
-										 if (txtUmbralgg != 7) {
-											var txtWarningg=document.getElementById("txtwarning"+i).value;
-											alert("Comparar si estan vacios txt: "+txtWarningg);
-											var txtCriticalgg=document.getElementById("lblcritical"+i).innerHTML;
-											alert("Comparar si estan vacios lbl: "+txtCriticalgg);
-											if (txtWarningg == '' || txtCriticalgg == '') {
-												alertify.error("Campos Vacios.");
-											}else {
 												var nombre_hostgg= document.getElementById("nombre_ci").value;
 												var id_detallesgg=servicio;
 												var id_serviciogg=document.getElementById("lblServicio"+i).innerHTML;
@@ -1582,18 +1546,6 @@ var array_texto = new Array(2)
 												var contratogg=document.getElementById("nom_contrato").value;
 												var codigo_contratogg= document.getElementById("cod_contrato").value;
 												var cedulagg=document.getElementById("cedula").value;
-												alert(nombre_hostgg);
-												alert(id_detallesgg);
-												alert(id_serviciogg);
-												alert(txtDelagg);
-												alert(txtCheqgg);
-												alert(txtWarningg);
-												alert(txtCriticalgg);
-												alert(txtUmbralgg);
-												alert(txtHorariogg);
-												alert(txtHorariogg);
-												alert(ipgg);
-												alert(contratogg);
 												var Datos_Correo = {
 													"nombre_host":nombre_hostgg,
 												 "id_detalles":id_detallesgg,
@@ -1615,26 +1567,10 @@ var array_texto = new Array(2)
 													type: 'post',
 													success: function (response) {
 															$("#resultadoActualiza").html(response);
-
 															 alertify.success("Valor Warning Actualizado.");
-
 													}
-
 												});
-
-											}
-
-										}
-
 									}else if (claveCritical >= 0) {
-
-										if (txtUmbralgg != 7) {
-										 var txtWarningg=document.getElementById("lblwarning"+i).innerHTML;
-										 var txtCriticalgg=document.getElementById("txtcritical"+i).value;
-										 if (txtWarningg == '' || txtCriticalgg == '') {
-											 alertify.error("Campos Vacios.");
-										 }else {
-
 											var nombre_hostgg= document.getElementById("nombre_ci").value;
 	 										var id_detallesgg=servicio;
 	 										var id_serviciogg=document.getElementById("lblServicio"+i).innerHTML;
@@ -1648,7 +1584,6 @@ var array_texto = new Array(2)
 	 										var contratogg=document.getElementById("nom_contrato").value;
 	 										var codigo_contratogg= document.getElementById("cod_contrato").value;
 	 										var cedulagg=document.getElementById("cedula").value;
-
 	 										var Datos_Correo = {
 	 											"nombre_host":nombre_hostgg,
 	  										 "id_detalles":id_detallesgg,
@@ -1670,15 +1605,9 @@ var array_texto = new Array(2)
 	 											type: 'post',
 	 											success: function (response) {
 	 													$("#resultadoActualiza").html(response);
-
 	 													 alertify.success("Valor Critico Actualizado.");
-
 	 											}
-
 	 										});
-									 }
-
-								 }
 									}else if (claveUmbral >=0 ) {
 										var nombre_hostgg= document.getElementById("nombre_ci").value;
 										var id_detallesgg=servicio;
@@ -1693,7 +1622,6 @@ var array_texto = new Array(2)
 										var contratogg=document.getElementById("nom_contrato").value;
 										var codigo_contratogg= document.getElementById("cod_contrato").value;
 										var cedulagg=document.getElementById("cedula").value;
-
 										var Datos_Correo = {
 											"nombre_host":nombre_hostgg,
  										 "id_detalles":id_detallesgg,
@@ -1714,13 +1642,9 @@ var array_texto = new Array(2)
  										 url: 'pages/backend/includes/actualiza_detalle.php',
  										 type: 'post',
  										 success: function (response) {
-
 													alertify.success("Tipo de Umbral Actualizado.");
-
  										 }
-
  									 });
-
 									}else if (claveHorario >= 0) {
 										var nombre_hostgg= document.getElementById("nombre_ci").value;
 										var id_detallesgg=servicio;
@@ -1735,7 +1659,6 @@ var array_texto = new Array(2)
 										var contratogg=document.getElementById("nom_contrato").value;
 										var codigo_contratogg= document.getElementById("cod_contrato").value;
 										var cedulagg=document.getElementById("cedula").value;
-
 										var Datos_Correo = {
 											"nombre_host":nombre_hostgg,
  										 "id_detalles":id_detallesgg,
@@ -1756,18 +1679,12 @@ var array_texto = new Array(2)
 											url: 'pages/backend/includes/actualiza_detalle.php',
 											type: 'post',
 											success: function (response) {
-
 													 alertify.success("Horario Actualizado.");
-
-
 											}
-
 										});
-
 									}
 									GuardandoDatosJuntos(lbl, txt, i);
 								}
-
 							}
 
 						}
