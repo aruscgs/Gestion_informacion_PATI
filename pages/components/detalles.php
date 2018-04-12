@@ -1448,6 +1448,8 @@ var array_texto = new Array(2)
 
 									alertify.error("Sin Cambios");
 
+								}else if(late==''){
+									alertify.error("Campo Vacio");
 								}else {
 									var claveDelay = txtcompara.indexOf("Delay");
 									var claveChequeo = txtcompara.indexOf("tiempoC");
