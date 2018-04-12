@@ -1,11 +1,11 @@
 <?php
 class conexion{
-	public $conexion;
-	private $server = "localhost";
-	private $usuario = "user_gti";
-	private $pass = "C0mpur3d3sGTI";
-	private $db = "gti";
-	public $pdo_conn;
+    public $conexion;
+    private $server = "localhost";
+    private $usuario = "root";
+    private $pass = "";
+    private $db = "gti_produccion_actual";
+
 	public function __construct() {
 		$this->conexion = new mysqli ( $this->server, $this->usuario, $this->pass, $this->db );
 		//PRUEBA PULL
@@ -41,16 +41,16 @@ class conexion{
 	        $_SESSION ['cargo'] = $cargo;
 	        $_SESSION ['area'] = $area;
 	        $_SESSION ['correo'] = $correo;
-	        
+
 	        echo "<script>location.href ='index.php'</script>";
 	        //header('Location: ../index.php');
 	    }else{
-	        
+
 	        echo "<script>alertify.error('Usuario o contraseña incorrecto/a.');
 </script>";
-	        
+
 	    }
-	    
+
 	}
 	public function tiempo($tiempo, $user_id, $minutos, $numero, $nombre) {
 		//$this->tiempo = $tiempo;
@@ -465,6 +465,13 @@ public function registrardemanda ($user_id,$id,$descripcion,$fecha_fin,$tiempoRe
 		$consulta = $this->conexion->query ( $query );
 	}
 
+  public function update_detalle_ci($id, $delay, $check, $war, $cri, $umbral, $horario)
+	{
+		$query = "update detalle_servicio set delay=$delay, tiempo_chequeo=$check, val_war='$war', val_cri='$cri',
+		id_tipo_umbral=$umbral, horario='$horario' where id_detalle=$id";
+		$consulta = $this->conexion->query ( $query );
+	}
+
 	public function deleteEscalamiento($id)
 	{
 		$query="delete from escalamiento where id_detalle=$id";
@@ -552,95 +559,6 @@ public function modificar_ci($id_ci, $ip,$nombre_ci,$horario_noti, $ambiente, $t
 
 	}
 
-
-
-
-         	function crea_cliente_indicador($nombre,$zona){
-	    
-	    $query="insert into cliente (cliente,zona) values ('$nombre','$zona')";
-	    $consulta = $this->conexion->query($query);
-	}
-
-
-	function crear_servicio_indicador($nombre_ser){
-	    $query="insert into servicio_indicador (nombre) VALUE('$nombre_ser')";
-	    $consulta = $this->conexion->query($query);
-	}
-
-
-
-	function asigna_servicio_cliente($id_cliente,$id_servicio,$ans){
-	    
-	    $query="insert into cliente_servicio(id_cliente,id_servicio,ANS)values($id_cliente,$id_servicio,'$ans')";
-	    $consulta = $this->conexion->query($query);
-	    
-	
-	}
-
-
-
-	public function actualizar_permiso_indicador($cedula,$crear,$consultar,$editar,$administrar,$fecha_inicio_crear,
-	    $fecha_fin_crear,$fecha_inicio_modificar,$fecha_fin_modificar,$ano,$mes){
-	        
-	        $query="update permiso_indicador set crear='$crear',consultar='$consultar',editar='$editar',administrar='$administrar',
-        f_inicio_crear='$fecha_inicio_crear',f_fin_crear='$fecha_fin_crear',f_inicio='$fecha_inicio_modificar',f_fin='$fecha_fin_modificar',
-        mes_de_permiso='$mes',ano_permiso='$ano' where cedula='$cedula'";
-	        
-	        $consulta=$this->conexion->query($query);
-	        
-	}
-
-
-
-	public function actualiza_indicadores($id,$ind_cr,$ind_cl,$ind_gral,$cumplimiento,$justificacion,$plan_accion){
-	    $query="update indicador_operacion set indicador_cr=$ind_cr,indicador_cl=$ind_cl,
-        indicador_general=$ind_gral,cumplimiento=$cumplimiento,justificacion='$justificacion',
-        plan_accion='$plan_accion' where id='$id'";
-	    
-	    $consulta=$this->conexion->query($query);
-	}
-
-
-
-
-	public function cambia_estado_editar_indicador($cedula){
-	    
-	    $query="update permiso_indicador set editar=0 where cedula='$cedula'";
-	    
-	    $consulta=$this->conexion->query($query);
-	    
-	}
-
-
-
-
-	public function dar_permiso_indicador($cedula,$crear,$consultar,$editar,$administrar,$fecha_inicio_crear,
-	    $fecha_fin_crear,$fecha_inicio_modificar,$fecha_fin_modificar,$ano,$mes){
-	        
-	        $query="insert into permiso_indicador (cedula,crear,consultar,editar,administrar,f_inicio_crear,f_fin_crear,f_inicio,f_fin,mes_de_permiso,ano_permiso)
-        values ('$cedula','$crear','$consultar','$editar','$administrar','$fecha_inicio_crear','$fecha_fin_crear','$fecha_inicio_modificar',
-        '$fecha_fin_modificar','$mes','$ano')";
-	        
-	        $consulta=$this->conexion->query($query);
-	        
-	}
-
-
-
-
-
-
-/*       	function insertar_indicadores($servicio,$cliente,$zona,$mes,$ans,$ind_cr,$ind_cl,$ind_gral,$cumplimiento,
-			$justificacion,$plan_acc){
-	$query="insert into indicador_operacion (descripcion_servicio,cliente,zona,fecha,ans_acordado,indicador_cr,indicador_cl,
-	indicador_general,cumplimiento,justificacion,plan_accion) values ('$servicio','$cliente',
-    '$zona','$mes','$ans',$ind_cr,$ind_cl,$ind_gral,$cumplimiento,'$justificacion','$plan_acc')";
-
-	$consulta = $this->conexion->query($query);
-
-	}*/
-
-
        	function insertar_indicadores($servicio,$cliente,$zona,$mes,$ans,$ind_cr,$ind_cl,$ind_gral,$cumplimiento,
 			$justificacion,$plan_acc){
 	$query="insert into indicador_operacion (descripcion_servicio,cliente,zona,fecha,ans_acordado,indicador_cr,indicador_cl,
@@ -653,19 +571,74 @@ public function modificar_ci($id_ci, $ip,$nombre_ci,$horario_noti, $ambiente, $t
 
 
 
-	public function cambia_estado_crear_indicador($cedula){
-	    
-	    $query="update permiso_indicador set crear=0 where cedula='$cedula'";
-	    
+	public function actualiza_indicadores($id,$ind_cr,$ind_cl,$ind_gral,$cumplimiento,$justificacion,$plan_accion){
+	    $query="update indicador_operacion set indicador_cr=$ind_cr,indicador_cl=$ind_cl,
+        indicador_general=$ind_gral,cumplimiento=$cumplimiento,justificacion='$justificacion',
+        plan_accion='$plan_accion' where id='$id'";
+
 	    $consulta=$this->conexion->query($query);
-	    
 	}
 
 
 
+	function crea_cliente_indicador($nombre,$zona){
+
+	    $query="insert into cliente (cliente,zona) values ('$nombre','$zona')";
+	    $consulta = $this->conexion->query($query);
+	}
 
 
+	function asigna_servicio_cliente($id_cliente,$id_servicio,$ans){
 
+	    $query="insert into cliente_servicio(id_cliente,id_servicio,ANS)values($id_cliente,$id_servicio,'$ans')";
+	    $consulta = $this->conexion->query($query);
+
+
+	}
+
+	public function cambia_estado_editar_indicador($cedula){
+
+	    $query="update permiso_indicador set editar=0 where cedula='$cedula'";
+
+	    $consulta=$this->conexion->query($query);
+
+	}
+
+	public function cambia_estado_crear_indicador($cedula){
+
+	    $query="update permiso_indicador set crear=0 where cedula='$cedula'";
+
+	    $consulta=$this->conexion->query($query);
+
+	}
+
+	function crear_servicio_indicador($nombre_ser){
+	    $query="insert into servicio_indicador (nombre) VALUE('$nombre_ser')";
+	    $consulta = $this->conexion->query($query);
+	}
+
+	public function actualizar_permiso_indicador($cedula,$crear,$consultar,$editar,$administrar,$fecha_inicio_crear,
+	    $fecha_fin_crear,$fecha_inicio_modificar,$fecha_fin_modificar,$ano,$mes){
+
+	        $query="update permiso_indicador set crear='$crear',consultar='$consultar',editar='$editar',administrar='$administrar',
+        f_inicio_crear='$fecha_inicio_crear',f_fin_crear='$fecha_fin_crear',f_inicio='$fecha_inicio_modificar',f_fin='$fecha_fin_modificar',
+        mes_de_permiso='$mes',ano_permiso='$ano' where cedula='$cedula'";
+
+	        $consulta=$this->conexion->query($query);
+
+	}
+
+
+	public function dar_permiso_indicador($cedula,$crear,$consultar,$editar,$administrar,$fecha_inicio_crear,
+	    $fecha_fin_crear,$fecha_inicio_modificar,$fecha_fin_modificar,$ano,$mes){
+
+	        $query="insert into permiso_indicador (cedula,crear,consultar,editar,administrar,f_inicio_crear,f_fin_crear,f_inicio,f_fin,mes_de_permiso,ano_permiso)
+        values ('$cedula','$crear','$consultar','$editar','$administrar','$fecha_inicio_crear','$fecha_fin_crear','$fecha_inicio_modificar',
+        '$fecha_fin_modificar','$mes','$ano')";
+
+	        $consulta=$this->conexion->query($query);
+
+	}
 
 	public function rotarescala($cedula, $id_evento, $nota)
 	{
@@ -685,15 +658,6 @@ public function modificar_ci($id_ci, $ip,$nombre_ci,$horario_noti, $ambiente, $t
 
 	}
 
-
-
-	public function cambia_estado_persona($cedula){
-	    
-	    $query="update new_personas set estado='1' where cedula='$cedula'";
-	    $consulta=$this->conexion->query($query);
-	    
-	}
-
         public function recuperar_detalle($ci,$componente){
 
 	    $query="update detalle_servicio set estado='A' where id_host='$ci' and id_tipo_servicio='$componente' and estado='I'";
@@ -701,6 +665,11 @@ public function modificar_ci($id_ci, $ip,$nombre_ci,$horario_noti, $ambiente, $t
 
 	}
 
+				public function cambia_estado_persona($cedula){
+
+	           $query="update new_personas set estado='1' where cedula='$cedula'";
+	           $consulta=$this->conexion->query($query);
+ }
 
          	public function cambia_estado_ci_desactivar($id_contrato,$id_ci){
 
@@ -715,25 +684,27 @@ public function modificar_ci($id_ci, $ip,$nombre_ci,$horario_noti, $ambiente, $t
 	    $consulta=$this->conexion->query($query);
 
 	}
-         
 
-	
-	public function registrar_analisis($contrato,$plataforma,$tipo,$ano,$mes,$analisis){
-	    
-	    $query="insert into analisis_reporte (id_contrato,plataforma,tipo,ano,mes,descripcion_analisis)
-        values ('$contrato','$plataforma','$tipo','$ano','$mes','$analisis')";
-	    
+
+
+	public function registrar_analisis($contrato,$plataforma,$ano,$mes,$analisis){
+
+	    $query="insert into analisis_reporte (id_contrato,plataforma,ano,mes,descripcion_analisis)
+        values ('$contrato','$plataforma','$ano','$mes','$analisis')";
+
 	    $consulta=$this->conexion->query($query);
-	    
-	}
 
+	}
 
 	public function edita_analisis($id_analisis,$descripcion_analisis){
-	    
+
 	    $query="update analisis_reporte set descripcion_analisis='$descripcion_analisis' where id='$id_analisis'";
 	    $consulta=$this->conexion->query($query);
-	    
+
 	}
+
+
+
 
 }
 ?>

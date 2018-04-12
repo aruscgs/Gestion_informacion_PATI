@@ -1,5 +1,7 @@
 <link rel="stylesheet" href="plugins/select2/select2.min.css"/>
 <link rel="stylesheet" href="plugins/multiselect/multipleSelect.css">
+<script src="plugins/jQuery/jquery-2.2.3.min.js"></script>
+<script src="plugins/alertify.min.js"></script>
 
 
 
@@ -75,7 +77,6 @@
 
 
 
-
 <?php
 
 error_reporting(E_ALL ^ E_NOTICE);
@@ -88,11 +89,12 @@ $cedula=$userinfo->user_id;
 
 
 $conn = $oe->conexion->query("select a.id_detalle, a.accion_critico, a.tiempo_chequeo, a.horario, a.id_host, a.puerto, a.accion_critico, e.nombre as CI, b.tipo as Servicio, a.disponibilidad,  a.delay, a.val_war as Warning, a.val_cri
-								as Critical,  d.nombre as Tipo_de_umbral from detalle_servicio a, tipo_servicios b, tipo_umbral d,
+								as Critical, d.id_tipo_umbral as id_umbral ,d.nombre as Tipo_de_umbral from detalle_servicio a, tipo_servicios b, tipo_umbral d,
 								 hosts e where a.id_host=e.id and a.id_tipo_servicio=b.id and a.id_tipo_umbral=d.id_tipo_umbral and
 								 e.id='$id' and a.estado='A' order by a.id_detalle desc");
 
 $ser = $oe->conexion->query("SELECT * FROM tipo_servicios");
+$umbra = $oe->conexion->query("SELECT * FROM tipo_umbral");
 $escala = $oe->conexion->query("select a.nombre, a.cedula  from new_personas a, sub_grupo b where a.cedula=b.cedula;");
 $com_del=$oe->conexion->query("select a.id,a.tipo from tipo_servicios a, detalle_servicio b where b.id_tipo_servicio=a.id and b.estado='I' and b.id_host='$id'");
 
@@ -190,10 +192,10 @@ $nomc = $nom->fetch_assoc();
 		</thead>
 		<tbody>
 		<?php
-		while($row = $conn->fetch_assoc())
+
+
+		$i=1; while($row = $conn->fetch_assoc())
 			{
-
-
                              	    //quitamos los espacios a la accion critica
 			    $accion=$row["accion_critico"];
 			    //$cadenalimpia =  str_replace("\r\n"," ",$accion);
@@ -209,28 +211,51 @@ $nomc = $nom->fetch_assoc();
 
 
 				<td style="text-align: left;">
-					<label  class="accion" title="Acción Crítica: <?php echo $textoArea;?>"> <?php echo $row['Servicio'];?> </label>
+					<label id="lblServicio<?php echo $i;?>" class="accion" title="Acción Crítica: <?php echo $textoArea;?>"> <?php echo $row['Servicio'];?> </label>
 				</td>
 
 
 				<td>
-					<?php echo $row['delay'];?>
+					<label id="lbldelay<?php echo $i;?>" title="delay<?php echo $i;?>" ondblclick="PressClick('lbldelay', 'txtDelay',<?php echo $i;?>)"><?php echo $row['delay'];?></label>
+					<input id="txtDelay<?php echo $i;?>" type="number" min="0" max="100" name="txtDelay" onkeydown="EnterToTab(<?php echo $row['id_umbral'];?>,'lbldelay','txtDelay',<?php echo $i?>, <?php echo $row['id_detalle'];?>)"
+					value="<?php echo $row['delay'];?>" style="display: none; width: 50px; height: 30px; border-radius: 10px; text-align: center; margin-left: 30px; border-bottom-left-radius: inherit; border-left-color: turquoise;">
 				</td>
 
 				<td>
-					<?php echo $row['tiempo_chequeo'];?>
+					<label id="lbltiempoC<?php echo $i;?>" title="tiempoC<?php echo $i;?>" ondblclick="PressClick('lbltiempoC', 'txtiempoC',<?php echo $i;?>)"><?php echo $row['tiempo_chequeo'];?></label>
+					<input id="txtiempoC<?php echo $i;?>" type="number" min="0" max="100" name="TiempoC" onkeydown="EnterToTab(<?php echo $row['id_umbral'];?>,'lbltiempoC', 'txtiempoC',<?php echo $i?>, <?php echo $row['id_detalle'];?>)" value="<?php echo $row['tiempo_chequeo'];?>"
+					style="display: none; width: 50px; height: 30px; border-radius: 10px; text-align: center; margin-left: 30px; border-bottom-left-radius: inherit; border-left-color: turquoise;">
 				</td>
 
 				<td>
-					<?php echo $row['Warning'];?>
+					<label id="lblwarning<?php echo $i;?>" title="warning<?php echo $i;?>" ondblclick="PressClick('lblwarning', 'txtWarning',<?php echo $i;?>)"><?php echo $row['Warning'];?></label>
+					<input id="txtWarning<?php echo $i;?>" type="number" min="0" max="999" name="Warning" onkeydown="EnterToTab(<?php echo $row['id_umbral'];?>,'lblwarning', 'txtWarning',<?php echo $i?>, <?php echo $row['id_detalle'];?>)" value="<?php echo $row['Warning'];?>"
+					style ="display: none; width: 50px; height: 30px; border-radius: 10px; text-align: center; margin-left: 30px; border-bottom-left-radius: inherit; border-left-color: turquoise;">
 				</td>
 
 				<td>
-					<?php echo $row['Critical'];?>
+					<label id="lblcritical<?php echo $i;?>" title="critical<?php echo $i;?>" ondblclick="PressClick('lblcritical', 'txtCritical',<?php echo $i;?>)"><?php echo $row['Critical'];?></label>
+					<input id="txtCritical<?php echo $i;?>" type="number" min="0" max="999" name="Critical" onkeydown="EnterToTab(<?php echo $row['id_umbral'];?>,'lblcritical', 'txtCritical',<?php echo $i?>, <?php echo $row['id_detalle'];?>)" value="<?php echo $row['Critical'];?>"
+					style="display: none; width: 50px; height: 30px; border-radius: 10px; text-align: center; margin-left: 30px; border-bottom-left-radius: inherit; border-left-color: turquoise;">
 				</td>
 
 				<td>
-					<?php echo $row['Tipo_de_umbral'];?>
+					<label id="lblUmbral<?php echo $i;?>" title="Umbral<?php echo $i;?>" ondblclick="PressClick('lblUmbral', 'txtUmbral',<?php echo $i;?>)"><?php echo $row['Tipo_de_umbral'];?></label>
+					<select id="txtUmbral<?php echo $i;?>" class="select" name="Umbral" onkeydown="EnterToTab(<?php echo $row['id_umbral'];?>,'lblUmbral', 'txtUmbral',<?php echo $i?>, <?php echo $row['id_detalle'];?>)" style="display: none; width:60px; border-radius: 10px; text-align: center; margin-left: 30px; border-bottom-left-radius: inherit; border-left-color: turquoise;"  required>
+							<option value="<?php echo $row['Tipo_de_umbral'];?>" disabled selected> <?php echo $row['Tipo_de_umbral'];?> </option>
+							<option value="1">porcentaje</option>
+							<option value="2">sesiones</option>
+							<option value="3">segundos</option>
+							<option value="5">MB</option>
+							<option value="6">unidades</option>
+							<option value="7">Down</option>
+							<option value="8">Ping</option>
+							<option value="9">GB</option>
+							<option value="10">Minutos</option>
+							<option value="11">Estado</option>
+							<option value="12">Milisegundos</option>
+							<option value="13">C°</option>
+						</select>
 				</td>
 
 				<td>
@@ -240,7 +265,14 @@ $nomc = $nom->fetch_assoc();
 				</td>
 				<!-- ESTE ES LA COLUMNA DE LOS HORARIOS DE NOTIFICACIÓN POR SERVICIO PARA PONER EL COMENTARIO -->
 				<td>
-					<?php echo $row['horario'];?>
+					<label id="lblHorario<?php echo $i;?>" title="Horario<?php echo $i;?>" ondblclick="PressClick('lblHorario', 'txtHorario',<?php echo $i;?>)"><?php echo $row['horario'];?></label>
+          <select id="txtHorario<?php echo $i;?>" class="select" name="Horario" onkeydown="EnterToTab(<?php echo $row['id_umbral'];?>,'lblHorario', 'txtHorario',<?php echo $i?>, <?php echo $row['id_detalle'];?>)" style="display: none; width:60px; border-radius: 10px; text-align: center; margin-left: 30px; border-bottom-left-radius: inherit; border-left-color: turquoise;"  required>
+           <option value="<?php echo $row['horario'];?>" disabled selected><?php echo $row['horario'];?></option>
+					 <option value="7x24">7x24</option>
+					 <option value="5x12">5x12</option>
+					 <option value="Habil">Habil</option>
+					 <option value="Lunes - Sábado 6:00 a.m a 5:00 p.m">Lunes - Sábado 6:00 a.m a 5:00 p.m</option>
+          </select>
 				</td>
 
 
@@ -262,7 +294,7 @@ $nomc = $nom->fetch_assoc();
 					</div>
 				</td>
 			</tr>
-		<?php }?>
+		<?php $i++;}?>
 		</tbody>
 	</table>
 <br>
@@ -350,9 +382,8 @@ $nomc = $nom->fetch_assoc();
 				<option value="" disabled selected> Horario notifi </option>
 				<option value="7x24">7x24</option>
 				<option value="5x12">5x12</option>
-			        <option value="5x16">5x16</option>
-                         	<option value="habil">Hábil</option>
-				<option value="Lunes-Sábado_6:00a.m-5:00p.m">Lunes - Sábado 6:00 a.m a 5:00 p.m</option>
+				<option value="habil">Hábil</option>
+				<option value="Lunes - Sábado 6:00 a 5:00">Lunes - Sábado 6:00 a.m a 5:00 p.m</option>
 			</select>
 		</td>
 
@@ -530,10 +561,9 @@ $nomc = $nom->fetch_assoc();
       <select id="Uhorario_op" name="Uhorario" class="w3-input war" style="width:70%" required>
 				<option value=""></option>
 				<option value="7x24">7x24</option>
-		         	<option value="5x12">5x12</option>
-			        <option value="5x16">5x16</option>
-                         	<option value="habil">Hábil</option>
-				<option value="Lunes-Sábado_6:00a.m-5:00p.m">Lunes - Sábado 6:00 a.m a 5:00 p.m</option>
+				<option value="5x12">5x12</option>
+				<option value="habil">Hábil</option>
+				<option value="habil">Lunes - Sábado 6:00 a.m a 5:00 p.m</option>
 
 			</select><br><br>
 
@@ -720,7 +750,7 @@ $nomc = $nom->fetch_assoc();
 	<!-- FIN MODAL CONFIGURAR ESCALA -->
 
 
-
+<div id="resultadoActualiza"></div>
 
 
 	<script src="plugins/multiselect/multipleSelect.js"></script>
@@ -820,8 +850,6 @@ function enviarDato()
 
 function updateservicio()
 {
-
-
 	$.ajax({
 
 	type:  'POST',
@@ -898,13 +926,6 @@ function MostrarConsulta(datos,contra){
 	    	    $('.accion').tooltip();
 	    	});
 
-
-
-
-
-
-
-
             function verifica_datos_mod_sub(){
 				$('#modalescala').modal('hide');
 
@@ -973,11 +994,8 @@ function MostrarConsulta(datos,contra){
 																	 }
 															}
 
-
-
 							}else if(Udelay == ""){
 								Udelay = "0";
-
 
 																if(Utipo_umbral != "7-down") {
 																			 if (Ucri == "" && Uwar == "") {
@@ -1328,7 +1346,6 @@ function MostrarConsulta(datos,contra){
 
 			}
 
-
 		     $(document).ready(function(){
 		    	 $("#txt_buscar").keyup(function(){
 		    	 _this = this;
@@ -1341,4 +1358,418 @@ function MostrarConsulta(datos,contra){
 		    	 });
 		    	 });
 		    	});
+var contador = 0;
+
+
+var array_label = new Array(2)
+var array_texto = new Array(2)
+
+						function PressClick(lbl,txt,i){
+
+						   	   document.getElementById(lbl+i).style.display="none";
+							  	 document.getElementById(txt+i).style.display="block";
+
+
+						contador++;
+									if (contador==1){
+										var label = lbl+i;
+										var texto = txt+i;
+
+										array_label[0]=label;
+										array_texto[0]=texto;
+
+									}else{
+										var restlbl = document.getElementById(lbl+i).innerHTML;
+										var restxt = document.getElementById(txt+i).value=restlbl;
+										var labelearly = lbl+i;
+										var textoearly = txt+i;
+										array_label[1]=labelearly;
+										array_texto[1]=textoearly;
+
+									  var labelate = array_label[0];
+										var txtlate = array_texto[0];
+
+										document.getElementById(labelate).style.display="block";
+								  	document.getElementById(txtlate).style.display="none";
+
+									array_label[0]=array_label[1];
+									array_texto[0]=array_texto[1];
+
+									}
+						}
+
+						function GuardandoDatosJuntos(lbl, txt, i){
+							var TextId = txt+i;
+							var LabelYd = lbl+i;
+							var claveUmbral = TextId.indexOf("Umbral");
+							if (claveUmbral >=0) {
+								var DeliverTxt = document.getElementById(TextId).value;
+							if (DeliverTxt == 1) {
+								var receiveTxt = document.getElementById(LabelYd).innerHTML='porcentaje';
+							}else if (DeliverTxt == 2) {
+								var receiveTxt = document.getElementById(LabelYd).innerHTML='sesiones';
+							}else if (DeliverTxt == 3) {
+								var receiveTxt = document.getElementById(LabelYd).innerHTML='segundos';
+							}else if (DeliverTxt == 5) {
+								var receiveTxt = document.getElementById(LabelYd).innerHTML='MB';
+							}else if (DeliverTxt == 6) {
+								var receiveTxt = document.getElementById(LabelYd).innerHTML='unidades';
+							}else if (DeliverTxt == 7) {
+								var receiveTxt = document.getElementById(LabelYd).innerHTML='Down';
+							}else if (DeliverTxt == 8) {
+								var receiveTxt = document.getElementById(LabelYd).innerHTML='ping';
+							}else if (DeliverTxt == 9) {
+								var receiveTxt = document.getElementById(LabelYd).innerHTML='GB';
+							}else if (DeliverTxt == 10) {
+								var receiveTxt = document.getElementById(LabelYd).innerHTML='Minutos';
+							}else if (DeliverTxt == 11) {
+								var receiveTxt = document.getElementById(LabelYd).innerHTML='Estado';
+							}else if (DeliverTxt == 12) {
+								var receiveTxt = document.getElementById(LabelYd).innerHTML='Milisegundos';
+							}else if (DeliverTxt == 13) {
+								var receiveTxt = document.getElementById(LabelYd).innerHTML='C°';
+							}
+
+							}else {
+								var DeliverTxt = document.getElementById(TextId).value;
+								var receiveTxt = document.getElementById(LabelYd).innerHTML=DeliverTxt;
+							}
+
+						}
+
+						function EnterToTab(umbraliddefinity, lbl, txt, i, servicio){
+
+
+							if (event.keyCode == 13) {
+
+								var txtcompara = txt+i;
+								var lblcompara = lbl+i;
+
+								var early = document.getElementById(lblcompara).innerHTML;
+								var late = document.getElementById(txtcompara).value;
+
+
+								document.getElementById(lbl+i).style.display="block";
+								document.getElementById(txt+i).style.display="none";
+
+								if (early == late) {
+
+									alertify.error("Sin Cambios");
+
+
+								}else if (late=='') {
+									alertify.error("Campos Vacios.");
+								}else {
+									var claveDelay = txtcompara.indexOf("Delay");
+									var claveChequeo = txtcompara.indexOf("tiempoC");
+									var claveWarning = txtcompara.indexOf("Warning");
+									var claveCritical = txtcompara.indexOf("Critical");
+									var claveUmbral = txtcompara.indexOf("Umbral");
+									var claveHorario = txtcompara.indexOf("Horario");
+
+
+
+									if (claveDelay >= 0 ) {
+										var nombre_hostgg= document.getElementById("nombre_ci").value;
+										var id_detallesgg=servicio;
+										var id_serviciogg=document.getElementById("lblServicio"+i).innerHTML;
+										var txtDelagg=document.getElementById("txtDelay"+i).value;
+										var txtCheqgg=document.getElementById("lbltiempoC"+i).innerHTML;
+										var txtWarningg=document.getElementById("lblwarning"+i).innerHTML;
+										var txtCriticalgg=document.getElementById("lblcritical"+i).innerHTML;
+										var txtUmbralgg=umbraliddefinity;
+										var txtHorariogg=document.getElementById("lblHorario"+i).innerHTML;
+										var ipgg= document.getElementById("ip_ci").value;
+										var contratogg=document.getElementById("nom_contrato").value;
+										var codigo_contratogg= document.getElementById("cod_contrato").value;
+										var cedulagg=document.getElementById("cedula").value;
+
+
+											var Datos_Correo = {
+											 "nombre_host":nombre_hostgg,
+											 "id_detalles":id_detallesgg,
+											 "Uservicio":id_serviciogg,
+											 "Udelay":txtDelagg,
+											 "Ucheck":txtCheqgg,
+											 "Uwar":txtWarningg,
+											 "Ucri":txtCriticalgg,
+											 "Utipo_umbral":txtUmbralgg,
+											 "Uhorario":txtHorariogg,
+											 "contrato":contratogg,
+											 "codigo_contrato":codigo_contratogg,
+											 "cedula":cedulagg,
+											 "ip":ipgg
+											 };
+											 $.ajax({
+												data: Datos_Correo,
+												url: 'pages/backend/includes/actualiza_detalle.php',
+												type: 'post',
+												success: function (response) {
+ 														$("#resultadoActualiza").html(response);
+
+														 alertify.success("Delay Actualizado.");
+
+												}
+
+											});
+
+
+
+									}else if (claveChequeo >= 0) {
+									var nombre_hostgg= document.getElementById("nombre_ci").value;
+									var id_detallesgg=servicio;
+									var id_serviciogg=document.getElementById("lblServicio"+i).innerHTML;
+									var txtDelagg=document.getElementById("lbldelay"+i).innerHTML;
+									var txtCheqgg=document.getElementById("txtiempoC"+i).value;
+									var txtWarningg=document.getElementById("lblwarning"+i).innerHTML;
+									var txtCriticalgg=document.getElementById("lblcritical"+i).innerHTML;
+									var txtUmbralgg=umbraliddefinity;
+									var txtHorariogg=document.getElementById("lblHorario"+i).innerHTML;
+									var ipgg= document.getElementById("ip_ci").value;
+									var contratogg=document.getElementById("nom_contrato").value;
+									var codigo_contratogg= document.getElementById("cod_contrato").value;
+									var cedulagg=document.getElementById("cedula").value;
+
+									var Datos_Correo = {
+										"nombre_host":nombre_hostgg,
+ 									 "id_detalles":id_detallesgg,
+ 									 "Uservicio":id_serviciogg,
+ 									 "Udelay":txtDelagg,
+ 									 "Ucheck":txtCheqgg,
+ 									 "Uwar":txtWarningg,
+ 									 "Ucri":txtCriticalgg,
+ 									 "Utipo_umbral":txtUmbralgg,
+ 									 "Uhorario":txtHorariogg,
+ 									 "contrato":contratogg,
+ 									 "codigo_contrato":codigo_contratogg,
+ 									 "cedula":cedulagg,
+ 									 "ip":ipgg
+									 };
+									 $.ajax({
+										data: Datos_Correo,
+										url: 'pages/backend/includes/actualiza_detalle.php',
+										type: 'post',
+										success: function (response) {
+												$("#resultadoActualiza").html(response);
+
+												 alertify.success("Tiempo Chequeo Actualizado.");
+
+										}
+
+									});
+
+									}else if (claveWarning >= 0) {
+										var txtUmbralgg=umbraliddefinity;
+										alert("umbral: "+txtUmbralgg);
+										 if (txtUmbralgg != 7) {
+											var txtWarningg=document.getElementById("txtwarning"+i).value;
+											alert("Comparar si estan vacios txt: "+txtWarningg);
+											var txtCriticalgg=document.getElementById("lblcritical"+i).innerHTML;
+											alert("Comparar si estan vacios lbl: "+txtCriticalgg);
+											if (txtWarningg == '' || txtCriticalgg == '') {
+												alertify.error("Campos Vacios.");
+											}else {
+												var nombre_hostgg= document.getElementById("nombre_ci").value;
+												var id_detallesgg=servicio;
+												var id_serviciogg=document.getElementById("lblServicio"+i).innerHTML;
+												var txtDelagg=document.getElementById("lbldelay"+i).innerHTML;
+												var txtCheqgg=document.getElementById("lbltiempoC"+i).innerHTML;
+												var txtWarningg=document.getElementById("txtWarning"+i).value;
+												var txtCriticalgg=document.getElementById("lblcritical"+i).innerHTML;
+												var txtUmbralgg=umbraliddefinity;
+												var txtHorariogg=document.getElementById("lblHorario"+i).innerHTML;
+												var ipgg= document.getElementById("ip_ci").value;
+												var contratogg=document.getElementById("nom_contrato").value;
+												var codigo_contratogg= document.getElementById("cod_contrato").value;
+												var cedulagg=document.getElementById("cedula").value;
+												alert(nombre_hostgg);
+												alert(id_detallesgg);
+												alert(id_serviciogg);
+												alert(txtDelagg);
+												alert(txtCheqgg);
+												alert(txtWarningg);
+												alert(txtCriticalgg);
+												alert(txtUmbralgg);
+												alert(txtHorariogg);
+												alert(txtHorariogg);
+												alert(ipgg);
+												alert(contratogg);
+												var Datos_Correo = {
+													"nombre_host":nombre_hostgg,
+												 "id_detalles":id_detallesgg,
+												 "Uservicio":id_serviciogg,
+												 "Udelay":txtDelagg,
+												 "Ucheck":txtCheqgg,
+												 "Uwar":txtWarningg,
+												 "Ucri":txtCriticalgg,
+												 "Utipo_umbral":txtUmbralgg,
+												 "Uhorario":txtHorariogg,
+												 "contrato":contratogg,
+												 "codigo_contrato":codigo_contratogg,
+												 "cedula":cedulagg,
+												 "ip":ipgg
+												 };
+												 $.ajax({
+													data: Datos_Correo,
+													url: 'pages/backend/includes/actualiza_detalle.php',
+													type: 'post',
+													success: function (response) {
+															$("#resultadoActualiza").html(response);
+
+															 alertify.success("Valor Warning Actualizado.");
+
+													}
+
+												});
+
+											}
+
+										}
+
+									}else if (claveCritical >= 0) {
+
+										if (txtUmbralgg != 7) {
+										 var txtWarningg=document.getElementById("lblwarning"+i).innerHTML;
+										 var txtCriticalgg=document.getElementById("txtcritical"+i).value;
+										 if (txtWarningg == '' || txtCriticalgg == '') {
+											 alertify.error("Campos Vacios.");
+										 }else {
+
+											var nombre_hostgg= document.getElementById("nombre_ci").value;
+	 										var id_detallesgg=servicio;
+	 										var id_serviciogg=document.getElementById("lblServicio"+i).innerHTML;
+	 										var txtDelagg=document.getElementById("lbldelay"+i).innerHTML;
+	 										var txtCheqgg=document.getElementById("lbltiempoC"+i).innerHTML;
+	 										var txtWarningg=document.getElementById("lblwarning"+i).innerHTML;
+	 										var txtCriticalgg=document.getElementById("txtCritical"+i).value;
+	 										var txtUmbralgg=umbraliddefinity;
+	 										var txtHorariogg=document.getElementById("lblHorario"+i).innerHTML;
+	 										var ipgg= document.getElementById("ip_ci").value;
+	 										var contratogg=document.getElementById("nom_contrato").value;
+	 										var codigo_contratogg= document.getElementById("cod_contrato").value;
+	 										var cedulagg=document.getElementById("cedula").value;
+
+	 										var Datos_Correo = {
+	 											"nombre_host":nombre_hostgg,
+	  										 "id_detalles":id_detallesgg,
+	  										 "Uservicio":id_serviciogg,
+	  										 "Udelay":txtDelagg,
+	  										 "Ucheck":txtCheqgg,
+	  										 "Uwar":txtWarningg,
+	  										 "Ucri":txtCriticalgg,
+	  										 "Utipo_umbral":txtUmbralgg,
+	  										 "Uhorario":txtHorariogg,
+	  										 "contrato":contratogg,
+	  										 "codigo_contrato":codigo_contratogg,
+	  										 "cedula":cedulagg,
+	  										 "ip":ipgg
+	 										 };
+	 										 $.ajax({
+	 											data: Datos_Correo,
+	 											url: 'pages/backend/includes/actualiza_detalle.php',
+	 											type: 'post',
+	 											success: function (response) {
+	 													$("#resultadoActualiza").html(response);
+
+	 													 alertify.success("Valor Critico Actualizado.");
+
+	 											}
+
+	 										});
+									 }
+
+								 }
+									}else if (claveUmbral >=0 ) {
+										var nombre_hostgg= document.getElementById("nombre_ci").value;
+										var id_detallesgg=servicio;
+										var id_serviciogg=document.getElementById("lblServicio"+i).innerHTML;
+										var txtDelagg=document.getElementById("lbldelay"+i).innerHTML;
+										var txtCheqgg=document.getElementById("lbltiempoC"+i).innerHTML;
+										var txtWarningg=document.getElementById("lblwarning"+i).innerHTML;
+										var txtCriticalgg=document.getElementById("lblcritical"+i).innerHTML;
+										var txtUmbralgg=document.getElementById("txtUmbral"+i).value;
+										var txtHorariogg=document.getElementById("lblHorario"+i).innerHTML;
+										var ipgg= document.getElementById("ip_ci").value;
+										var contratogg=document.getElementById("nom_contrato").value;
+										var codigo_contratogg= document.getElementById("cod_contrato").value;
+										var cedulagg=document.getElementById("cedula").value;
+
+										var Datos_Correo = {
+											"nombre_host":nombre_hostgg,
+ 										 "id_detalles":id_detallesgg,
+ 										 "Uservicio":id_serviciogg,
+ 										 "Udelay":txtDelagg,
+ 										 "Ucheck":txtCheqgg,
+ 										 "Uwar":txtWarningg,
+ 										 "Ucri":txtCriticalgg,
+ 										 "Utipo_umbral":txtUmbralgg,
+ 										 "Uhorario":txtHorariogg,
+ 										 "contrato":contratogg,
+ 										 "codigo_contrato":codigo_contratogg,
+ 										 "cedula":cedulagg,
+ 										 "ip":ipgg
+										 };
+										 $.ajax({
+ 										 data: Datos_Correo,
+ 										 url: 'pages/backend/includes/actualiza_detalle.php',
+ 										 type: 'post',
+ 										 success: function (response) {
+
+													alertify.success("Tipo de Umbral Actualizado.");
+
+ 										 }
+
+ 									 });
+
+									}else if (claveHorario >= 0) {
+										var nombre_hostgg= document.getElementById("nombre_ci").value;
+										var id_detallesgg=servicio;
+										var id_serviciogg=document.getElementById("lblServicio"+i).innerHTML;
+										var txtDelagg=document.getElementById("lbldelay"+i).innerHTML;
+										var txtCheqgg=document.getElementById("lbltiempoC"+i).innerHTML;
+										var txtWarningg=document.getElementById("lblwarning"+i).innerHTML;
+										var txtCriticalgg=document.getElementById("lblcritical"+i).innerHTML;
+										var txtUmbralgg=umbraliddefinity;
+										var txtHorariogg=document.getElementById("txtHorario"+i).value;
+										var ipgg= document.getElementById("ip_ci").value;
+										var contratogg=document.getElementById("nom_contrato").value;
+										var codigo_contratogg= document.getElementById("cod_contrato").value;
+										var cedulagg=document.getElementById("cedula").value;
+
+										var Datos_Correo = {
+											"nombre_host":nombre_hostgg,
+ 										 "id_detalles":id_detallesgg,
+ 										 "Uservicio":id_serviciogg,
+ 										 "Udelay":txtDelagg,
+ 										 "Ucheck":txtCheqgg,
+ 										 "Uwar":txtWarningg,
+ 										 "Ucri":txtCriticalgg,
+ 										 "Utipo_umbral":txtUmbralgg,
+ 										 "Uhorario":txtHorariogg,
+ 										 "contrato":contratogg,
+ 										 "codigo_contrato":codigo_contratogg,
+ 										 "cedula":cedulagg,
+ 										 "ip":ipgg
+										 };
+										 $.ajax({
+											data: Datos_Correo,
+											url: 'pages/backend/includes/actualiza_detalle.php',
+											type: 'post',
+											success: function (response) {
+
+													 alertify.success("Horario Actualizado.");
+
+
+											}
+
+										});
+
+									}
+									GuardandoDatosJuntos(lbl, txt, i);
+								}
+
+							}
+
+						}
+
 </script>
