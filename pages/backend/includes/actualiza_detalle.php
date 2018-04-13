@@ -22,9 +22,13 @@ $nombre_act=$nombre_usuario_actualiza->fetch_assoc();
 $nombre_usuario_actualiza=$nombre_act["nombre"];
 $correo_actualiza=$nombre_act["correo"];
 
-$nuevo=array($num_delay,$chequeo,$valor_warning,$valor_critical,$horario_op);
-$servicio=array("delay","tiempo de chequeo","valor warning","valor critical","puerto",
-    "accion critica","disponibilidad","tipo umbral","horario");
+$nombre_umbral=$con->conexion->query("select id_tipo_umbral,nombre from tipo_umbral where id_tipo_umbral='$umbral'");
+$nombre_Tipo_Umbral=$nombre_umbral->fetch_assoc();
+$id_TipoUmbral=$nombre_Tipo_Umbral["id_tipo_umbral"];
+$Nom_TipoUmbral=$nombre_Tipo_Umbral["nombre"];
+
+$nuevo=array($num_delay,$chequeo,$valor_warning,$valor_critical,$Nom_TipoUmbral,$horario_op);
+$servicio=array("delay","tiempo de chequeo","valor warning","valor critical","tipo umbral","horario");
 $cambio=array();
 $registro_ant=$con->conexion->query("select a.nombre, b.* from hosts a, detalle_servicio b where a.id=b.id_host and b.id_detalle=$id_detalle");
 $reg_ant=$registro_ant->fetch_array();
@@ -40,8 +44,8 @@ for($i=0;$i<count($nuevo);$i++){
 $headers = "MIME-Version: 1.0\r\n";
 $headers .= "Content-type: text/html; charset=UTF-8\r\n";
 $headers .= "From: Monitoreo NOC <compuredescgcnoc@arus.com.co>" . "\r\n";
-$this_mail = mail("juan.maya@arus.com.co,", "Cambio en subcomponente de CI del contrato [$nombre_contra]", " Subcomponentes  modificados:<br><br> <strong>$nom_servicio</strong> del CI: <strong>$nombre_host</strong><br><br>Detalles del cambio:<br><br>$cambio[0]<br>$cambio[1]<br>$cambio[2]<br>$cambio[3]
-        		<br>$cambio[4]<br><br>Persona que generó el cambio: $nombre_usuario_actualiza", $headers);
+$this_mail = mail("juan.maya@arus.com.co, $correo_actualiza ,linux_noc@arus.com.co", "Cambio en subcomponente de CI del contrato [$nombre_contra]", " Subcomponentes  modificados:<br><br> <strong>$nom_servicio</strong> del CI: <strong>$nombre_host</strong><br><br>Detalles del cambio:<br><br>$cambio[0]<br>$cambio[1]<br>$cambio[2]<br>$cambio[3]
+        		<br>$cambio[4]<br>$cambio[5]<br><br>Persona que generó el cambio: $nombre_usuario_actualiza", $headers);
 $con->update_detalle_ci($id_detalle, $num_delay, $chequeo, $valor_warning, $valor_critical, $umbral, $horario_op);
 $con->cerrar();
 ?>

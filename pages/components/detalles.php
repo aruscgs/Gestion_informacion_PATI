@@ -1493,7 +1493,7 @@ var array_texto = new Array(2)
 												url: 'pages/backend/includes/actualiza_detalle.php',
 												type: 'post',
 												success: function (response) {
- 														$("#resultadoActualiza").html(response);
+ 														//$("#resultadoActualiza").html(response);
 														 alertify.success("Delay Actualizado.");
 												}
 											});
@@ -1531,7 +1531,7 @@ var array_texto = new Array(2)
 										url: 'pages/backend/includes/actualiza_detalle.php',
 										type: 'post',
 										success: function (response) {
-												$("#resultadoActualiza").html(response);
+												//$("#resultadoActualiza").html(response);
 												 alertify.success("Tiempo Chequeo Actualizado.");
 										}
 									});
@@ -1569,7 +1569,7 @@ var array_texto = new Array(2)
 													url: 'pages/backend/includes/actualiza_detalle.php',
 													type: 'post',
 													success: function (response) {
-															$("#resultadoActualiza").html(response);
+															//$("#resultadoActualiza").html(response);
 															 alertify.success("Valor Warning Actualizado.");
 													}
 												});
@@ -1607,7 +1607,7 @@ var array_texto = new Array(2)
 	 											url: 'pages/backend/includes/actualiza_detalle.php',
 	 											type: 'post',
 	 											success: function (response) {
-	 													$("#resultadoActualiza").html(response);
+	 													//$("#resultadoActualiza").html(response);
 	 													 alertify.success("Valor Critico Actualizado.");
 	 											}
 	 										});
@@ -1645,6 +1645,7 @@ var array_texto = new Array(2)
  										 url: 'pages/backend/includes/actualiza_detalle.php',
  										 type: 'post',
  										 success: function (response) {
+											//$("#resultadoActualiza").html(response);
 													alertify.success("Tipo de Umbral Actualizado.");
  										 }
  									 });
@@ -1683,6 +1684,7 @@ var array_texto = new Array(2)
 											url: 'pages/backend/includes/actualiza_detalle.php',
 											type: 'post',
 											success: function (response) {
+												//$("#resultadoActualiza").html(response);
 													 alertify.success("Horario Actualizado.");
 											}
 										});
