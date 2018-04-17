@@ -284,9 +284,22 @@ $_PAGE_CONFIG = array(
 						"9" => '031',
 						//"10" => "029",
 						"11" => '043',
+            "12" => '005',
 
 				)
 		),
+
+    "005" => array(
+        "show" => true,
+        "isSubmenu" => true,
+        "big" => "Gestión de eventos",
+        "small" => "Descargar Caracterizacion",
+        "menu" => "Descargar Caracterizacion",
+        "link" => 'pages/gestion_eventos/descarga_caracterizacion/Caracterizacion.php',
+        "menu_css_class" => "fas fa-download"
+    ),
+
+
 		"013" => array(
 				"show" => true,
 				"isSubmenu" => true,
@@ -544,7 +557,7 @@ $_PAGE_CONFIG = array(
 	        "page11" => "059",
 	        "page12" => "060",
 	        "page13" => "061",
-                
+
 
 	)
 
@@ -589,7 +602,7 @@ $_PAGE_CONFIG = array(
 						"menu_css_class" => "fa-user-plus",
 						"link" => 'pages/components/crear_cliente_servicio.php'
 						    ),
-						    
+
 						    "059" => array(
 						    "show" => true,
 						    "isSubmenu" => true,
@@ -599,7 +612,7 @@ $_PAGE_CONFIG = array(
 						    "menu_css_class" => "fa-pencil-square-o",
 						    "link" => 'pages/components/asigna_servicio.php'
 						        ),
-						        
+
 						        "060" => array(
 						        "show" => true,
 						        "isSubmenu" => true,
@@ -607,11 +620,11 @@ $_PAGE_CONFIG = array(
 						        "small" => "Reporte mensual",
 						        "menu" => "Reporte mensual",
 						        "menu_css_class" => "fa fa-pie-chart",
-						        
+
 						        "link" => 'pages/components/reporte_mensual_indicadores.php'
 						            ),
 
-                           
+
 
                                                        "061" => array(
 						            "show" => true,
@@ -620,7 +633,7 @@ $_PAGE_CONFIG = array(
 						            "small" => "Gestión de permisos",
 						            "menu" => "Gestionar permisos",
 						            "menu_css_class" => "fa fa-unlock",
-						            
+
 						            "link" => 'pages/components/gestionar_permisos.php'
 						                ),
 
@@ -634,11 +647,11 @@ $_PAGE_CONFIG = array(
 						                "small" => "Editar informes",
 						                "menu" => "Editar informes",
 						                "menu_css_class" => "fa-pencil-square-o",
-						                
+
 						                "link" => 'pages/components/editar_informes.php'
 						                    ),
 
-                                                            
+
 
 
                                                                "064" => array(
@@ -648,7 +661,7 @@ $_PAGE_CONFIG = array(
 						                        "small" => "Detalles",
 						                        "menu" => "Detalles evento por CI",
 						                        "menu_css_class" => "fa-file-pdf-o",
-						                        
+
 						                        "link" => 'pages/components/detalles_evento_ci.php'
 						                            ),
 
@@ -812,8 +825,8 @@ $_PAGE_CONFIG = array(
                            "link" => "pages/reportes/reporte_hora_extra/body.php"
 
                                  ),
-                                 
-                                 
+
+
                                  "055" => array(
                                  "show" => true,
                                  "isSubmenu" => true,
@@ -824,7 +837,7 @@ $_PAGE_CONFIG = array(
                                  "link" => "pages/reportes/registro_contrato/body.php"
                                      ),
 
-            
+
 			"056" => array(
 						"show" => true,
 						"isSubmenu" => true,
@@ -834,7 +847,7 @@ $_PAGE_CONFIG = array(
 						"menu_css_class" => "fa-file-pdf-o",
 						"link" => 'pages/reportes/registro_detalles_contrato/registro_detalles_contrato.php'
 						    ),
-						    
+
 
 
                                     		    "057" => array(
