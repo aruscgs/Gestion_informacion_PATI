@@ -26,8 +26,8 @@ if (isset ( $_SESSION ['authenticated'] )) {
     </script>-->
 <!-- Meta tag Keywords -->
 <!-- css files -->
-<link rel="stylesheet" href="dist/css/login.css" type="text/css"
-	media="all" />
+<link href="https://fonts.googleapis.com/css?family=Allan" rel="stylesheet">
+<link rel="stylesheet" href="dist/css/login.css" type="text/css"media="all" />
 <link type="text/css" rel="stylesheet"
 	href="dist/css/pages/cronometro.css">
 <!-- Style-CSS -->
@@ -40,28 +40,21 @@ if (isset ( $_SESSION ['authenticated'] )) {
 <link rel="shortcut icon" href="dist/img/favicon.ico">
 <link rel="stylesheet" href="plugins/alertify.default.css">
 <link rel="stylesheet" href="plugins/alertify.core.css">
+<link rel="stylesheet" href="login.css">
 <script src="plugins/alertify.min.js"></script>
 
-
-<style type="text/css">
-img#sac {
-    position: absolute;
-    left: 0px;
-    top: 120px;
-}
-
-
-
-</style>
 <!-- //css files -->
 </head>
 
 <body>
 	<!-- main -->
 	<div class="w3ls-header">
-		<h1>SISTEMA DE INFORMACIÓN GTI</h1>
+		<h1 id="title_login">PLATAFORMA ADMINISTRACION DE T.I</h1>
 		<div class="header-main">
-			<img src="dist/img/unnamed.png">
+			<img id="logoPati" src="dist\img\PATI_POSICION.png" alt="Smiley face" height="100" width="100";
+			style="margin-left: -117px; margin-left: 0px; width: 190px; height: 242px; margin-top: -130px; margin-bottom: -20px;">
+
+
 			<div class="header-bottom">
 				<div class="header-right w3agile">
 					<div class="header-left-bottom agileinfo">
@@ -85,12 +78,13 @@ img#sac {
 							<p id="mensaje" style="color: red;"></p>
 							<p>
 								<a href="recuperar.php"><i class="fa fa-key" aria-hidden="true"></i>
-									olvidaste la contraseña ? 
-							
+									olvidaste la contraseña ?
+
 							</p>
 							</a>
 
 						</form>
+						<img src="dist/img/unnamed.png" style="margin-bottom: -32px; width: 107px;">
 					</div>
 				</div>
 			</div>
@@ -100,13 +94,13 @@ img#sac {
 
 
 	<!-- jQuery 2.2.3 -->
-	<script src="plugins/jQuery/jquery-2.2.3.min.js"></script> 
+	<script src="plugins/jQuery/jquery-2.2.3.min.js"></script>
 	<!-- Bootstrap 3.3.6 -->
 	<script src="bootstrap/js/bootstrap.min.js"></script>
 
 
 
-	
+
 
 
 
@@ -114,9 +108,9 @@ img#sac {
 
 	<script>
             $( document ).ready(function() {
-                
 
-                
+
+
 
                 $('#envia').click(function(){
                     var correo = $('#correo').val();
@@ -125,15 +119,15 @@ img#sac {
                     console.log(password);
                     if(correo != '' && password != ''){
 
-                       
+
                         $.ajax({
                             url: 'seguridad/login.php',
                             method: 'POST',
                             data: {correo: correo, password: password},
                             success: function(data){
-                                
+
                                 $('#mensaje').html(data);
-                            	
+
                                   if(msg=='1'){
 
                                    // $("#envia").click(function (){
@@ -141,7 +135,7 @@ img#sac {
                                    // });
                                 }else{
 
-                                 
+
                                     window.location = msg;
                                 }
                             }
@@ -150,21 +144,21 @@ img#sac {
                     }else if(correo=='' || password ==''){
 
                     	alertify.error("Campos vacios!");
-                    	  
+
                       // $('#mensaje').html('INGRESE LOS DATOS');
                     }
                 });
-                
-                $("input").keypress(function(event) { 
-                    if (event.which == 13) { 
-                        event.preventDefault(); 
+
+                $("input").keypress(function(event) {
+                    if (event.which == 13) {
+                        event.preventDefault();
                         $('#envia').click();
-                    } 
+                    }
                 });
 
             });
-         
-         
+
+
         </script>
 
 </body>

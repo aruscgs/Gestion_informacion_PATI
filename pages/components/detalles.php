@@ -1,80 +1,10 @@
 <link rel="stylesheet" href="plugins/select2/select2.min.css"/>
 <link rel="stylesheet" href="plugins/multiselect/multipleSelect.css">
+<link rel="stylesheet" href="pages/components/styles/detalle.css">
 <script src="plugins/jQuery/jquery-2.2.3.min.js"></script>
 <script src="plugins/alertify.min.js"></script>
 
-
-
-
-
-
 	<div id="resultado1"></div>
-
-
-
-<style>
-	.select2-container--default .select2-selection--single, .w3-input
-	{
-		padding: 5px;
-	    display: block;
-	    border: none;
-	    border-bottom: 1px solid #ccc;
-	}
-
-	.ms-options ms-active
-	{
-		min-height: 100px;
-		max-height: 100px;
-	}
-
-	.ms-drop.bottom
-	{
-		width: 310px;
-
-	}
-
-	#search {
-    float: right;
-    margin-top: 9px;
-    width: 250px;
-}
-
-.search {
-    padding: 5px 0;
-    width: 230px;
-    height: 30px;
-    position: relative;
-    left: 10px;
-    float: left;
-    line-height: 22px;
-}
-
-    .search input {
-        position: absolute;
-        float: Left;
-
-
-        height: 30px;
-        line-height: 18px;
-        padding: 0 2px 0 2px;
-        border-radius:1px;
-    }
-
-        .search:hover input, .search input:focus {
-            width: 200px;
-            margin-left: 0px;
-        }
-
-#btn_search {
-    height: 30px;
-    position: absolute;
-    right: 0;
-    top: 5px;
-    border-radius:1px;
-}
-
-</style>
-
 
 
 <?php

@@ -1,0 +1,115 @@
+.stroke {
+-webkit-text-fill-color: yellowgreen;
+-webkit-text-stroke: 1px black;
+}
+img#sac {
+    position: absolute;
+    left: 0px;
+    top: 120px;
+}
+.header-main:after {
+    content: '';
+position: absolute;
+    top: 0;
+    right: 0;
+    width: 0;
+    height: 0;
+    border-top: 200px solid #636362;
+    /* border-radius: 0px; */
+    border-right: 0px solid transparent;
+    border-left: 232px solid transparent;
+}
+.header-left-bottom p a {
+    font-size: 17px;
+    color: #636362;
+}
+.header-main:before {
+    content: '';
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 0;
+    height: 0px;
+		border-top: 110px solid #224f9e;
+    border-right: 320px solid transparent;
+    border-left: 0px solid transparent;
+    z-index: 1;
+}
+.header-left-bottom input[type="email"] {
+    outline: none;
+    font-size: 19px;
+    color: #000;
+    border: none;
+    width: 90%;
+    display: inline-block;
+    background: transparent;
+    font-family: inherit;
+    text-align: center;
+    letter-spacing: 1px;
+}
+
+.header-left-bottom input[type="password"] {
+    outline: none;
+    font-size: 18px;
+    color: #000;
+    border: none;
+    width: 90%;
+    display: inline-block;
+    background: transparent;
+    font-family: unset;
+    text-align: center;
+    letter-spacing: 0px;
+}
+
+.header-main {
+    padding: 11em 4em 2.5em;
+    width: 23%;
+		margin: 0 auto;
+		background: -webkit-gradient( linear, left top, left bottom, color-stop(0.5, #ffffff), color-stop(1, #bec4c6) );
+    text-align: center;
+    position: relative;
+    z-index: 999;
+}
+
+.header-main {
+    padding: 11em 4em 2.5em;
+    width: 23%;
+    border-radius: 50px;
+		box-shadow: 2px 1px 12px 4px rgba(119, 119, 119, 0.76);
+		-moz-box-shadow: 2px 1px 12px 4px rgba(119, 119, 119, 0.76);
+		-webkit-box-shadow: 2px 1px 12px 4px rgba(119, 119, 119, 0.76);
+    margin: 0 auto;
+    background: -webkit-gradient( linear, left top, left bottom, color-stop(0.5, #ffffff), color-stop(1, #bec4c6) );
+    text-align: center;
+    position: relative;
+    z-index: 999;
+	}
+
+.header-left-bottom input[type="button"] {
+    background: #40ad49;
+    color: #FFF;
+    font-size: 20px;
+    text-transform: uppercase;
+    padding: .5em 2em;
+    letter-spacing: 0px;
+    transition: 0.5s all;
+    -webkit-transition: 0.5s all;
+    -moz-transition: 0.5s all;
+    -o-transition: 0.5s all;
+    display: inline-block;
+    cursor: pointer;
+    outline: none;
+    border: none;
+    font-family: unset;
+		margin-top: -20px;
+}
+
+#title_login{
+	    text-shadow: 0 0 0.2em #1000ff, 0 0 0.2em #3e00ff, 0 0 0.2em #0008ff;
+			font-family: 'Allan', cursive;
+			text-align: center;
+			text-transform: uppercase;
+			font-weight: 500;
+			font-size: 50px;
+			letter-spacing: 15px;
+}

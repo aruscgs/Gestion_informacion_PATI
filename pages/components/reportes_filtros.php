@@ -1,16 +1,6 @@
- 
+
   <link rel="stylesheet" href="plugins/select2/select2.min.css"/>
-<style>
-
-.select2-container--default .select2-selection--single
-{
-	border-radius: 0;
-    border-color: #d2d6de;
-    width: 100%;
-    height: 34px;
-}
-</style>
-
+  <link rel="stylesheet" href="pages/components/styles/reportes.css">
 
   <script>
 <?php
@@ -76,7 +66,7 @@ function printSelectFilterMonth($filter, $nombre, $result, $requerido) {
 		<div class="input-group-addon">
 			<i class="fa fa-list"></i>
 		</div>
-		
+
 
 
 		<select  class="form-control select2" id="select_item"  style="width: 100%;"
@@ -88,9 +78,9 @@ function printSelectFilterMonth($filter, $nombre, $result, $requerido) {
 	while ( $row = $result->fetch_object () ) {
 		?>
 					                   		<option value="<?php echo $row->value; ?>"><?php echo $row->display; ?></option>
-					                   <?php } ?>    
+					                   <?php } ?>
 					                </select>
-					
+
 	</div>
 	<!-- /.input group -->
 </div>
@@ -128,10 +118,10 @@ function printSelectFilter($filter, $nombre, $result, $requerido) {
 		<div class="input-group-addon">
 			<i class="fa fa-list"></i>
 		</div>
-		
-		
 
- 
+
+
+
 
 		<select  class="form-control select2" id="select_item"  style="width: 100%;"
 			id="<?php echo $filter;?>" name="<?php echo $filter;?>"
@@ -142,9 +132,9 @@ function printSelectFilter($filter, $nombre, $result, $requerido) {
 	while ( $row = $result->fetch_object () ) {
 		?>
 					                   		<option value="<?php echo $row->value; ?>"><?php echo $row->display; ?></option>
-					                   <?php } ?>    
+					                   <?php } ?>
 					                </select>
-					
+
 	</div>
 	<!-- /.input group -->
 </div>
@@ -158,9 +148,9 @@ function printFilterModal($filtros, $page, $conn) {
 	<button class="btn btn-info" data-toggle="modal" data-target="#myModal">
 		<i class="fa fa-filter" aria-hidden="true"></i> Filtrar
 	</button>
-	
+
 	<?php
-	
+
 	if (isset ( $_POST ["filtered"] )) {
 		echo "<p>";
 		foreach ( $filtros as $filtro => $value ) {
@@ -168,14 +158,14 @@ function printFilterModal($filtros, $page, $conn) {
 			if ($val == '') {
 				$val = "NaN";
 			}
-		
+
 		}
 		echo "</p>";
-		 
 
-	
+
+
 	}
-	
+
 	?>
 
 
@@ -193,47 +183,51 @@ function printFilterModal($filtros, $page, $conn) {
 					<div class="col-md-13">
 
 						<div class="box box-info">
-
 							<div class="box-body">
+                <div class="row">
+                  <div class="col-md-1">
+                    <img id="logoPati" src="dist\img\PATI-08.png" alt="Smiley face";>
+                  </div>
+                  <div class="col-md-11">
+                    <form action="index.php?page=<?php echo $page;?>" method="POST">
+    									<input type="hidden" name="filtered" value="1">
+    								<?php
+    	foreach ( $filtros as $filtro => $params ) {
+    		$tipo = $params ["tipo"];
+    		$requerido = "required";
+    		if (isset ( $params ["requerido"] )) {
+    			if (! $params ["requerido"]) {
+    				$requerido = "";
+    			}
+    		}
+    		if ($tipo == "date") {
+    			printDateFilter ( $filtro, $params ["nombre"], $requerido );
+    		}
+    		elseif ($tipo == "text") {
+    			printTextFilter ( $filtro, $params ["nombre"], $requerido );
+    		} elseif ($tipo == "numeric") {
+    			printNumericFilter ( $filtro, $params ["nombre"], $requerido );
+    		} elseif ($tipo == "select") {
+    			$query = $params ["query_select"];
+    			$result = $conn->conexion->query ( $query );
+    			printSelectFilter ( $filtro, $params ["nombre"], $result, $requerido );
+    		}else if($tipo == "month"){
+    			$query = $params ["query_select"];
+    			$result = $conn->conexion->query ( $query );
+    			printSelectFilterMonth ( $filtro, $params ["nombre"], $result, $requerido );
+    		}
+    	}
+    	?>
+    								<div class="form-group">
+    										<button type="submit" class="btn btn-success"
+    											style="width: 150px;">Filtrar</button>
+    										&nbsp; &nbsp; &nbsp; &nbsp; <a href="index.php"><button
+    												type="button" class="btn btn-danger" style="width: 150px;">Cancelar</button></a>
+    									</div>
 
-								<form action="index.php?page=<?php echo $page;?>" method="POST">
-									<input type="hidden" name="filtered" value="1">
-								<?php
-	foreach ( $filtros as $filtro => $params ) {
-		$tipo = $params ["tipo"];
-		$requerido = "required";
-		if (isset ( $params ["requerido"] )) {
-			if (! $params ["requerido"]) {
-				$requerido = "";
-			}
-		}
-		if ($tipo == "date") {
-			printDateFilter ( $filtro, $params ["nombre"], $requerido );
-		}
-		elseif ($tipo == "text") {
-			printTextFilter ( $filtro, $params ["nombre"], $requerido );
-		} elseif ($tipo == "numeric") {
-			printNumericFilter ( $filtro, $params ["nombre"], $requerido );
-		} elseif ($tipo == "select") {
-			$query = $params ["query_select"];
-			$result = $conn->conexion->query ( $query );
-			printSelectFilter ( $filtro, $params ["nombre"], $result, $requerido );
-		}else if($tipo == "month"){
-			$query = $params ["query_select"];
-			$result = $conn->conexion->query ( $query );
-			printSelectFilterMonth ( $filtro, $params ["nombre"], $result, $requerido );
-		}
-	}
-	?>
-								<div class="form-group">
-										<button type="submit" class="btn btn-success"
-											style="width: 150px;">Filtrar</button>
-										&nbsp; &nbsp; &nbsp; &nbsp; <a href="index.php"><button
-												type="button" class="btn btn-danger" style="width: 150px;">Cancelar</button></a>
-									</div>
-
-								</form>
-
+    								</form>
+                  </div>
+                </div>
 
 							</div>
 							<!-- /.box-body -->
@@ -267,11 +261,11 @@ function applyFilters($query, $filtros) {
 
 <script src="plugins/select2/select2.full.js"></script>
 <script>
-$(document).ready(function() { 
+$(document).ready(function() {
     $("select").select2({
             placeholder: "Select a State",
             allowClear: true
-     }); 
+     });
 });
 </script>
 

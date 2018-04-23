@@ -1,54 +1,24 @@
 <script src="plugins/jquery.table2excel.js"></script>
-
-<style>
-#cronometro [type=button] {
-	font: normal 9pt arial;
-	width: 14%;
-}
-
-
-
-.boton.disabled, .boton[disabled], fieldset[disabled] .boton {
-	cursor: not-allowed;
-	filter: alpha(opacity = 65);
-	-webkit-box-shadow: none;
-	box-shadow: none;
-	opacity: .75;
-}
-
-.boton:hover {
-	color: #333;
-	background-color: #e6e6e6;
-	border-color: #adadad;
-}
-
-@media ( max-width : 700px) {
-	#cronometro {
-		width: 40%;
-	}
-}
-</style>
-
-
+<link rel="stylesheet" href="pages/components/styles/registro_bita.css">
 
 
 <script>
 function inserta_actividad(cedula){
 
 		var parametros = {
-	           
+
 	            "cedula": cedula
 	        };
-		
+
 	    $.ajax({
-	        
+
 	       	type:  'POST',
-	       	
+
 	       	url:   'pages/backend/inserta_primera_actividad.php',
-	       	
+
 	        data: parametros,
-	              
-	               success:  function (data) 
+
+	               success:  function (data)
 	               {
 	                  $("#tiempo").html(data);
 
@@ -56,19 +26,67 @@ function inserta_actividad(cedula){
 	       });
 
 
-		
 
-		
+
+
 	}
+
+
+
+
+
+function typewrite(element,text,delay) {
+
+	/*
+
+	Simula el tipeo de teclas
+
+	element:	elemento donde insertar el texto.
+	text:		texto a tipear.
+	delay:		tiempo entre teclas (en milisegundos).
+
+	*/
+
+	// Insertar la siguiente letra
+	aux = document.getElementById(element).innerHTML;
+	aux = aux.concat(text.charAt(0));
+	document.getElementById(element).innerHTML = aux;
+
+	// Esperar "delay" milisegundos para la próxima tecla
+	if (text.length > 1) {
+		// Eliminar la tecla actual
+		text = text.substr(1);
+		setTimeout(typewrite,delay,element,text,delay);
+	}
+}
+
+
+window.onload=function() {
+
+	$("#type").click();
+}
+$(document).ready(function(){
+	 // $('#type').trigger('click');
+	});
+
 </script>
 
 
+
+
+
+
+<input type="text"  readonly="readonly"  style="display: none; overflow:auto; " id="texto" value="Hola mi nombre es PATI y quiero recordarte que debes ponerme al día con el tiempo que tienes pendiente.">
+<input type="text" style="display: none" id="delay" value="75">
+<input type="button" id="type" value="Tipear"  style="display: none;"
+onclick="document.getElementById('area').innerHTML='';
+typewrite('area',document.getElementById('texto').value,document.getElementById('delay').value);">
 
 <?php
 // Para los festivos
 $dias = array ();
 $conn = $wish->conexion->query ( "SELECT fecha FROM festivo " );
-$horas = $wish->conexion->query ( "select sum(tiempoReal) as total from registro_actividad r 
+$horas = $wish->conexion->query ( "select sum(tiempoReal) as total from registro_actividad r
 								where cedula = $userinfo->user_id and DATE(fecha_inicio) = DATE(NOW()) and estado in ('F', 'R');" );
 
 $min1 = $wish->conexion->query ( "select tiempo_calculado, descripcion, fecha_inicio from registro_actividad where id_contrato=1 and cedula=$userinfo->user_id" );
@@ -91,14 +109,14 @@ $ctrl = $wish->getFechaControlUser ( $userinfo->user_id );
 
 
 
-/*$pending_query = "select 
-v.selected_date, 
-(select  (sum(tiempoReal)/60) as registro 
-	from registro_actividad 
-    where cedula = $userinfo->user_id 
+/*$pending_query = "select
+v.selected_date,
+(select  (sum(tiempoReal)/60) as registro
+	from registro_actividad
+    where cedula = $userinfo->user_id
 		and DATE_FORMAT(fecha_inicio,'%Y-%m-%d') = v.selected_date
-) as tiempo 
-from 
+) as tiempo
+from
 (select adddate('1970-01-01',t4.i*10000 + t3.i*1000 + t2.i*100 + t1.i*10 + t0.i) selected_date from
  (select 0 i union select 1 union select 2 union select 3 union select 4 union select 5 union select 6 union select 7 union select 8 union select 9) t0,
  (select 0 i union select 1 union select 2 union select 3 union select 4 union select 5 union select 6 union select 7 union select 8 union select 9) t1,
@@ -106,7 +124,7 @@ from
  (select 0 i union select 1 union select 2 union select 3 union select 4 union select 5 union select 6 union select 7 union select 8 union select 9) t3,
  (select 0 i union select 1 union select 2 union select 3 union select 4 union select 5 union select 6 union select 7 union select 8 union select 9) t4) v
 where v.selected_date between '$ctrl' and NOW() - INTERVAL 1 DAY
-and DATE_FORMAT(v.selected_date,'%w') <> 0 
+and DATE_FORMAT(v.selected_date,'%w') <> 0
 and DATE_FORMAT(v.selected_date,'%w') <> 6
 and DATE_FORMAT(v.selected_date,'%Y-%m-%d') <> '$dias[0]'
 and DATE_FORMAT(v.selected_date,'%Y-%m-%d') <> '$dias[1]'
@@ -118,7 +136,7 @@ and DATE_FORMAT(v.selected_date,'%Y-%m-%d') <> '$dias[6]'
 and DATE_FORMAT(v.selected_date,'%Y-%m-%d') <> '$dias[7]'
 and DATE_FORMAT(v.selected_date,'%Y-%m-%d') <> '$dias[8]'
 and DATE_FORMAT(v.selected_date,'%Y-%m-%d') <> '$dias[9]'
-and DATE_FORMAT(v.selected_date,'%Y-%m-%d') <> '$dias[10]' 
+and DATE_FORMAT(v.selected_date,'%Y-%m-%d') <> '$dias[10]'
 and DATE_FORMAT(v.selected_date,'%Y-%m-%d') <> '$dias[11]'
 and DATE_FORMAT(v.selected_date,'%Y-%m-%d') <> '$dias[12]'
 and DATE_FORMAT(v.selected_date,'%Y-%m-%d') <> '$dias[13]'
@@ -139,29 +157,29 @@ $estado=$estado_usuario->fetch_assoc();
 if($estado["estado"]=='2'){
 
     $cedula=$userinfo->user_id;
-    
+
    // echo $cedula."<br>";
-    
+
     $fecha = date('Y-m-j');
     //echo "fecha actual ".$fecha. "<br>";
     //echo date('j')." dia actual <br>";
     $nuevafecha = strtotime ( '+1 day' , strtotime ( $fecha ) ) ;
     $nuevafecha = date ( 'Y-m-j' , $nuevafecha );
-    $primer_dia_mes=$nuevafecha;   
+    $primer_dia_mes=$nuevafecha;
     //echo $primer_dia_mes." dia actual mas 1" ;
-    
+
     if(date('j')=='01'){
-        
+
         $wish->cambia_estado_persona($cedula);
-        
+
     }
     //echo $estado["estado"];
 
 }
 
 $pending_query ="select v.selected_date,(select (sum(tiempoReal)/60) as registro
- from registro_actividad where cedula = $userinfo->user_id and DATE_FORMAT(fecha_inicio,'%Y-%m-%d') = v.selected_date ) 
-as tiempo from (select fecha as selected_date from fecha_control)v where v.selected_date BETWEEN '$primer_dia_mes' 
+ from registro_actividad where cedula = $userinfo->user_id and DATE_FORMAT(fecha_inicio,'%Y-%m-%d') = v.selected_date )
+as tiempo from (select fecha as selected_date from fecha_control)v where v.selected_date BETWEEN '$primer_dia_mes'
 and date_add(NOW(), INTERVAL -1 DAY) and DATE_FORMAT(v.selected_date,'%w') <> 0 and DATE_FORMAT(v.selected_date,'%w') <> 6
 and DATE_FORMAT(v.selected_date,'%Y-%m-%d') <> '$dias[0]'
 and DATE_FORMAT(v.selected_date,'%Y-%m-%d') <> '$dias[1]'
@@ -173,7 +191,7 @@ and DATE_FORMAT(v.selected_date,'%Y-%m-%d') <> '$dias[6]'
 and DATE_FORMAT(v.selected_date,'%Y-%m-%d') <> '$dias[7]'
 and DATE_FORMAT(v.selected_date,'%Y-%m-%d') <> '$dias[8]'
 and DATE_FORMAT(v.selected_date,'%Y-%m-%d') <> '$dias[9]'
-and DATE_FORMAT(v.selected_date,'%Y-%m-%d') <> '$dias[10]' 
+and DATE_FORMAT(v.selected_date,'%Y-%m-%d') <> '$dias[10]'
 and DATE_FORMAT(v.selected_date,'%Y-%m-%d') <> '$dias[11]'
 and DATE_FORMAT(v.selected_date,'%Y-%m-%d') <> '$dias[12]'
 and DATE_FORMAT(v.selected_date,'%Y-%m-%d') <> '$dias[13]'
@@ -193,7 +211,7 @@ while ( $arr = $pen->fetch_array () ) {
 	$selected_date = $arr ["selected_date"];
 	$tiempo = $arr ["tiempo"];
 	$tmp = array (
-			$selected_date => $tiempo 
+			$selected_date => $tiempo
 	);
 	if ($tiempo < 8.5) {
 		array_push ( $reg_pen, $tmp );
@@ -201,14 +219,14 @@ while ( $arr = $pen->fetch_array () ) {
 	}
 }
 
-$current_query = "select 
+$current_query = "select
 DATE_FORMAT(fecha_inicio,'%T') hora, id,
 (select a.actividad from actividad a where a.id = r.id_actividad) actividad,
 (select a.categoria from actividad a where a.id = r.id_actividad) categoria,
 descripcion,
 tiempoReal
-from 
-registro_actividad r 
+from
+registro_actividad r
 where cedula = $userinfo->user_id and DATE(fecha_inicio) = DATE(NOW()) and estado = 'F'
 order by fecha_inicio desc;";
 
@@ -236,13 +254,125 @@ $reg_cur = $wish->conexion->query ( $current_query );
 
 
 
+	<!-- INICIO DE MODAL ESCALAMIENTO -->
+	<div class="modal fade" id="modalescala" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+		<div style="width: 130%; border-radius:10px;" id="modalesc" class="modal-content">
+		<div class="modal-header">
+		<button type="button" class="btn btn-default pull-right" data-dismiss="modal" aria-hidden="true">&times;</button>
+		</div>
+		<div class="modal-body">
+		<div class="col-md-13">
+		<div class="box box-info">
+		<div class="box-body">
+
+        <label style="font-size: 22px;">Escalamiento</label> <br><br>
+
+       <div id="resultado"></div>
+		<!-- <button type="button" class="btn btn-danger pull-right butt" data-dismiss="modal" aria-hidden="true">Cerrar</button> -->
+
+		</div>
+		 </div>
+		  </div>
+		    </div>
+			<div class="modal-footer"></div>
+			</div>
+		</div>
+	</div>
+	<!-- FIN DE MODAL -->
+
+
+
+
+
+
+
+
+<style>
+.oval-thought {
+    position: relative;
+    width: 269px;
+    padding: 76px 40px;
+    margin: 1em auto 80px;
+    text-align: center;
+    color: #fff;
+    background: #075698;
+    -webkit-border-top-left-radius: 220px 120px;
+    -webkit-border-top-right-radius: 220px 120px;
+    -webkit-border-bottom-right-radius: 220px 120px;
+    -webkit-border-bottom-left-radius: 220px 120px;
+    -moz-border-radius: 220px / 120px;
+    border-radius: 220px / 120px;
+    background: -webkit-gradient(linear, left top, left bottom, from(#2e88c4), to(#075698));
+    background: -moz-linear-gradient(top, #2e88c4, #075698);
+    background: -o-linear-gradient(top, #2e88c4, #075698);
+}
+<style>
+
+<style>
+
+*{
+  margin:0px;
+  padding:0px;
+}
+
+.circular-sb {
+  width: 250px;
+  border: 5px solid #00bfb6;
+  padding: 80px 0px;
+  margin: 30px auto;
+  border-radius: 50%;
+  text-align: center;
+  font-size: 24px;
+  font-weight: 900;
+  font-family: arial;
+  position: relative;
+  color: #00bfb6;
+}
+
+
+/*left circle shape speech bubble*/
+
+.circle3 {
+    /* border: 5px solid #00bfb6; */
+    position: absolute;
+    width: 17px;
+    padding: 17px;
+    border-radius: 50%;
+    left: -9px;
+    bottom: 10px;
+}
+
+.circle3:before {
+    content: "";
+    position: inherit;
+    width: 25px;
+    padding: 22px;
+    border-radius: 50%;
+    right: 15px;
+    bottom: 0px;
+    background: #fff;
+    background: -webkit-gradient(linear, left top, left bottom, from(#2e88c4), to(#075698));
+}
+
+.circle4 {
+    /* border: 5px solid #00bfb6; */
+    position: absolute;
+    width: 6px;
+    padding: 15px 15px;
+    border-radius: 60%;
+    left: -65px;
+    bottom: -1px;
+    background: -webkit-gradient(linear, left top, left bottom, from(#2e88c4), to(#075698));
+}
+</style>
 
 
 <script>
 
 
 function reiniciar(val)
-{	
+{
 	num=val
 	alertify.confirm( 'Reiniciar actividad', function (e) {
 	    if (e) {
@@ -250,10 +380,10 @@ function reiniciar(val)
 	    } else {
 	    	alertify.error('Cancelado');
 	    }
-	});    
+	});
 }
 
-            document.getElementById("inicio").disabled = true;             
+            document.getElementById("inicio").disabled = true;
             $(document).ready(function() {
                 $('#zctb').DataTable( {
                     "aaSorting": [[ 4, "desc" ]]
@@ -294,13 +424,13 @@ $initialDate = $row ['fecha_inicio'];
 				<!-- Custom tabs (Charts with tabs)-->
 
 
-				<!-- Tabs within a box -->		
-			
-			
+				<!-- Tabs within a box -->
+
+
 					<?php
 					if ($registros == 0) {
 						?>
-			
+
 						<!-- EPACIO DE BOTONES E INPUTS -->
 
 
@@ -337,7 +467,7 @@ $initialDate = $row ['fecha_inicio'];
 
 									<div class="btns">
 										<button type="button" class="btn btn-success waves-effect"
-										
+
 												class="boton" id="inicio1" onclick="empezar(1);inserta_actividad('<?php echo $user_id ?>');">
 
 											<i class="fa fa-play" aria-hidden="true"></i>
@@ -394,10 +524,10 @@ $initialDate = $row ['fecha_inicio'];
 						</div>
 					</div>
 				</div>
-				
-				
+
+
 				<!-- RELOJ FIN NEW #2 -->
-				
+
 				<div id="n2">
 					<div class="col-md-4">
 						<div class="form-group">
@@ -429,7 +559,7 @@ $initialDate = $row ['fecha_inicio'];
 
 										<div class="btns">
 											<button type="button" class="btn btn-success waves-effect"
-											
+
 													class="boton" id="inicio2" onclick="empezar(2);inserta_actividad('<?php echo $user_id ?>');">
 
 												<i class="fa fa-play" aria-hidden="true"></i>
@@ -481,19 +611,19 @@ $initialDate = $row ['fecha_inicio'];
 				</div>
 
 
-				
 
-				
 
-							
-							
-									
+
+
+
+
+
 
 
 				<!-- FIN RELOJ NEW #2 -->
-				
-				
-				
+
+
+
 				<div id="n3">
 					<div class="col-md-4">
 						<div class="form-group">
@@ -522,11 +652,11 @@ $initialDate = $row ['fecha_inicio'];
 											<span id="segundos3">00</span>
 										</div>
 									</div>
-									
+
 									<div class="btns">
 
 											<button type="button" class="btn btn-success waves-effect"
-											
+
 													class="boton" id="inicio3" onclick="empezar(3);inserta_actividad('<?php echo $user_id ?>');">
 
 												<i class="fa fa-play" aria-hidden="true"></i>
@@ -558,7 +688,7 @@ $initialDate = $row ['fecha_inicio'];
 												class="boton" id="btn6" disabled>2</button>
 										</div>
 
-										
+
 									<div id="resultado"></div>
 									<div id="naziv"></div>
 
@@ -572,22 +702,22 @@ $initialDate = $row ['fecha_inicio'];
 						</div>
 					</div>
 				</div>
-				
-				
-				
-				
-				
-				
-				
+
+
+
+
+
+
+
 
 
 
 
 				<!-- RELOJ NEW #3 -->
 
-				<div></div>				
+				<div></div>
 				<div> </div>
-				<div> 								
+				<div>
 
 
 					<!-- FIN RELOJ NEW #3 -->
@@ -603,15 +733,15 @@ $initialDate = $row ['fecha_inicio'];
 
 					<div style="text-align: center;">
 
-						<?php if($userinfo->area==23){?>							
+						<?php if($userinfo->area==23){?>
 							<a href="index.php?page=046&e=F" class="btn btn-app" id="e"   > 								<i class="fa fa-plane"></i> Registro Actividad
 							</a>
 								<?php }?>
 
 
-                                                               
-<?php if($userinfo->area!=23){?>	
-<a href="index.php?page=046" class="btn btn-app"  > 
+
+<?php if($userinfo->area!=23){?>
+<a href="index.php?page=046" class="btn btn-app"  >
 <i class="fa fa-edit"></i> Registro por Demanda
 </a>
 
@@ -622,7 +752,7 @@ $tiempo_pendiente=$wish->conexion->query("select v.selected_date as fecha,(selec
 registro_actividad where cedula = $userinfo->user_id and DATE_FORMAT(fecha_inicio,'%Y-%m-%d') = v.selected_date ) as tiempo
 from (select fecha as selected_date from fecha_control)v where YEAR(v.selected_date) = YEAR(CURRENT_DATE - INTERVAL 1 MONTH)
 AND MONTH(v.selected_date) = MONTH(CURRENT_DATE - INTERVAL 1 MONTH) and DATE_FORMAT(v.selected_date,'%w') <> 0 and
-DATE_FORMAT(v.selected_date,'%w') <> 6 
+DATE_FORMAT(v.selected_date,'%w') <> 6
 and DATE_FORMAT(v.selected_date,'%Y-%m-%d') <> '$dias[0]'
 and DATE_FORMAT(v.selected_date,'%Y-%m-%d') <> '$dias[1]'
 and DATE_FORMAT(v.selected_date,'%Y-%m-%d') <> '$dias[2]'
@@ -633,7 +763,7 @@ and DATE_FORMAT(v.selected_date,'%Y-%m-%d') <> '$dias[6]'
 and DATE_FORMAT(v.selected_date,'%Y-%m-%d') <> '$dias[7]'
 and DATE_FORMAT(v.selected_date,'%Y-%m-%d') <> '$dias[8]'
 and DATE_FORMAT(v.selected_date,'%Y-%m-%d') <> '$dias[9]'
-and DATE_FORMAT(v.selected_date,'%Y-%m-%d') <> '$dias[10]' 
+and DATE_FORMAT(v.selected_date,'%Y-%m-%d') <> '$dias[10]'
 and DATE_FORMAT(v.selected_date,'%Y-%m-%d') <> '$dias[11]'
 and DATE_FORMAT(v.selected_date,'%Y-%m-%d') <> '$dias[12]'
 and DATE_FORMAT(v.selected_date,'%Y-%m-%d') <> '$dias[13]'
@@ -645,7 +775,7 @@ $tiempo_pendiente1=$wish->conexion->query("select v.selected_date as fecha,(sele
 registro_actividad where cedula = $userinfo->user_id and DATE_FORMAT(fecha_inicio,'%Y-%m-%d') = v.selected_date ) as tiempo
 from (select fecha as selected_date from fecha_control)v where YEAR(v.selected_date) = YEAR(CURRENT_DATE - INTERVAL 1 MONTH)
 AND MONTH(v.selected_date) = MONTH(CURRENT_DATE - INTERVAL 1 MONTH) and DATE_FORMAT(v.selected_date,'%w') <> 0 and
-DATE_FORMAT(v.selected_date,'%w') <> 6 
+DATE_FORMAT(v.selected_date,'%w') <> 6
 and DATE_FORMAT(v.selected_date,'%Y-%m-%d') <> '$dias[0]'
 and DATE_FORMAT(v.selected_date,'%Y-%m-%d') <> '$dias[1]'
 and DATE_FORMAT(v.selected_date,'%Y-%m-%d') <> '$dias[2]'
@@ -656,7 +786,7 @@ and DATE_FORMAT(v.selected_date,'%Y-%m-%d') <> '$dias[6]'
 and DATE_FORMAT(v.selected_date,'%Y-%m-%d') <> '$dias[7]'
 and DATE_FORMAT(v.selected_date,'%Y-%m-%d') <> '$dias[8]'
 and DATE_FORMAT(v.selected_date,'%Y-%m-%d') <> '$dias[9]'
-and DATE_FORMAT(v.selected_date,'%Y-%m-%d') <> '$dias[10]' 
+and DATE_FORMAT(v.selected_date,'%Y-%m-%d') <> '$dias[10]'
 and DATE_FORMAT(v.selected_date,'%Y-%m-%d') <> '$dias[11]'
 and DATE_FORMAT(v.selected_date,'%Y-%m-%d') <> '$dias[12]'
 and DATE_FORMAT(v.selected_date,'%Y-%m-%d') <> '$dias[13]'
@@ -668,17 +798,17 @@ $fecha_control_usuario=$wish->conexion->query("select  Date_format(fecha_control
 $f_control=$fecha_control_usuario->fetch_assoc();
 
 
- //año y mes actual
+ //aÃ±o y mes actual
 $fecha = date('Y-m');
 
- 
+
 $aux=0;
 
 if($fecha != $f_control["fecha"]){
 while($datos=$tiempo_pendiente->fetch_array()){
-    
+
     if(($datos["fecha"] < "2018-02-09") && ($datos[1]==0 || $datos[1] < 8.50 || $datos[1]=="") ){
-        
+
         $aux=1;
     }else{
 
@@ -693,174 +823,194 @@ if($aux != 0){
    	<a class="btn btn-app"  > <i
 							class="fa fa-clock-o" title="Consulta el tiempo registrado en el mes anterior" id="consultar_tiempo"></i> <b><font color="red">Consultar tiempo pendiente</font></b>
 						</a>
-  
+
    <?php
 }
 
 ?>
-                                                                
+
 							<a href="index.php?page=014" class="btn btn-app"  > <i
 							class="fa fa-plane"></i> Registro de ausentismo
 						</a>
-						
-					</div>
-					
-	<?php 
-	
 
-	
+					</div>
+
+	<?php
+
+
+
 	?>
-	
+
 	<table id="tiempo_pendiente" style="display: none;">
 	<thead>
 	<tr>
 	<td><b>FECHA</b></td>
-	<td><b>TIEMPO REGISTRADO POR DÍA</b></td>
+	<td><b>TIEMPO REGISTRADO POR DÃA</b></td>
 	<td><b>TIEMPO PENDIENTE EN MINUTOS</b></td>
 	</tr>
-	
+
 	</thead>
 	 <tbody>
 	<?php while($row=$tiempo_pendiente1->fetch_assoc()){
-	    
-	    
+
+
 	    ?>
-	   
-	        
-	         
-	         <?php 
+
+
+
+	         <?php
 
 if($row["fecha"] < "2018-02-09"){?>
-    
-    
+
+
            <tr>
-  
+
 	           <td><?php echo $row["fecha"]?></td>
-	           
+
 	           <td>
-	           <?php      
+	           <?php
 	           if($row["tiempo"]=="" || $row["tiempo"]< "8.50"){
-	               
+
 	               //echo "<font color='red'>PENDIENTE</font><br>";
 	               $valor=$row["tiempo"];
 	               echo "<b><font color='red'>".$valor."</font></b>";
 	               if($row["tiempo"]==""){
 	                   echo "<b><font color='red'> 0 </font></b>";
 	               }
-	             
+
 	           }else{
-	               
+
 	               echo $row["tiempo"];
-	               
-	               
+
+
 	           }
-	           
+
 	           ?>
 	           </td>
-	               
+
 	           <td>
-	          <?php  
+	          <?php
 	           if($row["tiempo"]< "8.50"){
 	               //echo 8.5-$row["tiempo"];
 	               $valor=8.5-$row["tiempo"];
 	               $final= (($valor*30)/0.5)." min";
-	            
-	                   
+
+
 	               echo "<b><font color='red'>".$final."</font></b>";
-       
+
 	           }else{
-	               
+
 	               echo "<b><font color='green'>COMPLETADO</font></b>";
 	           }
-	               
-	               
+
+
 	           ?>
 	           </td>
-	         
-	         
+
+
 	         </tr>
-	    
-    
-    
-	<?php }else {?>         
+
+
+
+	<?php }else {?>
 
    <tr>
-  
+
 	           <td><?php echo $row["fecha"]?></td>
-	           
+
 	           <td>
-	           <?php      
+	           <?php
 	           if($row["tiempo"]=="" || $row["tiempo"]< "9.50"){
-	               
+
 	               //echo "<font color='red'>PENDIENTE</font><br>";
 	               $valor=$row["tiempo"];
 	               echo "<b><font color='red'>".$valor."</font></b>";
 	               if($row["tiempo"]==""){
 	                   echo "<b><font color='red'> 0 </font></b>";
 	               }
-	             
+
 	           }else{
-	               
+
 	               echo $row["tiempo"];
-	               
-	               
+
+
 	           }
-	           
+
 	           ?>
 	           </td>
-	               
+
 	           <td>
-	          <?php  
+	          <?php
 	           if($row["tiempo"]< "9.50"){
 	               //echo 8.5-$row["tiempo"];
 	               $valor=9.5-$row["tiempo"];
 	               $final= (($valor*30)/0.5)." min";
-	            
-	                   
+
+
 	               echo "<b><font color='red'>".$final."</font></b>";
-       
+
 	           }else{
-	               
+
 	               echo "<b><font color='green'>COMPLETADO</font></b>";
 	           }
-	               
-	               
+
+
 	           ?>
 	           </td>
-	         
-	         
+
+
 	         </tr>
-         
-	
+
+
 	<?php }?>
-	
+
 	<?php }
-	
-	?>				
+
+	?>
 	   </tbody>
-	    
-	    </table>					
-			
+
+	    </table>
+
 			<?php
 					} else {
 						?>
 						<br>
 					<div class="row">
+
+
 						<div class="col-md-10 col-md-offset-1">
-							<div class="callout callout-danger">
+
+
+
+<div class="row" >
+
+    <div class="col-md-3"><img src="dist/img/PATI-08.png"></div>
+
+    <div class="col-md-9">
+    <div id="oval_txt" class="oval-thought">
+
+
+
+
+<textarea id="area" disabled="disabled" readonly></textarea>
+
+</div>
+</div>
+</div>
+
+							<!--  <div class="callout callout-danger">
 								<h3>Alerta!</h3>
 								<p>
-									El cronómetro no se activará hasta que se complete el tiempo
-									diario necesario, el cual es de mínimo 8 horas y 30 minutos, en
+									El cronÃ³metro no se activarÃ¡ hasta que se complete el tiempo
+									diario necesario, el cual es de mÃ­nimo 8 horas y 30 minutos, en
 									caso de ausentismos (vacaciones, permisos, incapacidades), por
-									favor registrarlo en la sección de ausentismos, de lo contrario
+									favor registrarlo en la secciÃ³n de ausentismos, de lo contrario
 									usar el registro por demanda para completar las horas
 									pendientes. <br>
 								</p>
-							</div>
+							</div> -->
 
-
-							<div class="pad">
+				<div class="pad">
 								<!-- Map will be created here -->
 								<h3 class="box-title">Registros Pendientes</h3>
 								<table id="pendientes"
@@ -896,13 +1046,13 @@ if($row["fecha"] < "2018-02-09"){?>
 									</a> <a href="index.php?page=014" class="btn btn-app"> <i
 										class="fa fa-plane"></i> Registro de ausentismo
 									</a>
-									
+
 								</div>
 							</div>
 						</div>
 					</div>
- 			
- 			
+
+
 			<?php }?>
 		</div>
 
@@ -910,7 +1060,7 @@ if($row["fecha"] < "2018-02-09"){?>
 
 
 				<script>
-    
+
     $('.count').each(function () {
     $(this).prop('Counter',0).animate({
         Counter: $(this).text()
@@ -922,7 +1072,7 @@ if($row["fecha"] < "2018-02-09"){?>
         }
     });
 });
-    
+
     </script>
 
 
@@ -935,12 +1085,12 @@ if($row["fecha"] < "2018-02-09"){?>
         var date = new Date(d.substr(0, 4), d.substr(5, 2) - 1, d.substr(8, 2), d.substr(11, 2), d.substr(14, 2), d.substr(17, 2));
         console.log("date: "+date);
         inicioAutomatico(date);*/
-        
+
     </script>
     <?php
 				}
-				?>		
-			
+				?>
+
 			</section>
 
 		</div>
@@ -950,7 +1100,7 @@ if($row["fecha"] < "2018-02-09"){?>
 
 	$(document).ready(function(){
 	    	 $("#n2").find("input,select,button").prop("disabled",true);
-			 $("#n3").find("input,select,button").prop("disabled",true); 
+			 $("#n3").find("input,select,button").prop("disabled",true);
 	    	});
 
 	$("#btn1").on("click", function(){
@@ -982,20 +1132,20 @@ if($row["fecha"] < "2018-02-09"){?>
 		$("#n1").find("input, button").prop("disabled",true);
 		$("#n3").find("input, button").prop("disabled",true);
 	});
-	
-	
+
+
 	$("#parar1").on("click", function(){
 		document.getElementById("btn1").disabled = false;
 		document.getElementById("btn2").disabled = false;
-		document.getElementById("guardar1").disabled = false;		
+		document.getElementById("guardar1").disabled = false;
 	});
-	
+
 	$("#parar2").on("click", function(){
 		document.getElementById("btn3").disabled = false;
 		document.getElementById("btn4").disabled = false;
 		document.getElementById("guardar2").disabled = false;
 	});
-	
+
 	$("#parar3").on("click", function(){
 		document.getElementById("btn5").disabled = false;
 		document.getElementById("btn6").disabled = false;
@@ -1007,7 +1157,7 @@ if($row["fecha"] < "2018-02-09"){?>
 	$("#consultar_tiempo").click(function(){
 		  $("#tiempo_pendiente").table2excel({
 		    filename: "Tiempo pendiente"
-		  }); 
+		  });
 		});
 
 

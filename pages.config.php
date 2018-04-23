@@ -454,8 +454,8 @@ $_PAGE_CONFIG = array(
 				"show" => true,
 				"isSubmenu" => true,
 				"big" => "Administración",
-				"small" => "Actualizar Usuarios",
-				"menu" => "Actualizar Usuarios",
+				"small" => "Actualizar Usuario",
+				"menu" => "Actualizar Usuario",
 				"link" => 'pages/administracion/actualizar_usuarios/body.php',
 				"menu_css_class" => "fa-user-plus"
 		),
