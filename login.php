@@ -51,8 +51,8 @@ if (isset ( $_SESSION ['authenticated'] )) {
 	<div class="w3ls-header">
 		<h1 id="title_login">PLATAFORMA ADMINISTRACION DE T.I</h1>
 		<div class="header-main">
-			<img id="logoPati" src="dist\img\PATI_POSICION.png" alt="Smiley face" height="100" width="100";
-			style="margin-left: -117px; margin-left: 0px; width: 190px; height: 242px; margin-top: -130px; margin-bottom: -20px;">
+			<img id="logoPati" src="dist\img\PATI - SOLUCIONES-07.png" alt="Smiley face" height="100" width="100";
+			style="margin-left: -117px; margin-left: 0px; width: 224px; height: 202px; margin-top: -103px; margin-bottom: -20px;">
 
 
 			<div class="header-bottom">

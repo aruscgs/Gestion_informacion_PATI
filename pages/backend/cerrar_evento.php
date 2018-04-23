@@ -124,55 +124,55 @@ $cedula=$algo[2];
 
 
 if($mas=='ind'){
-    
-    
+
+
     $query=$con->conexion->query("select id,estado from incidentecop where id='$id'");
     $row=$query->fetch_assoc();
-    
+
     if($row['estado']=='P'){
         ?>
          <button id='show' style="margin: 25px;" class="btn btn-success pull-left">Cerrar
-					evento</button><br> 
-					
-					
+					evento</button><br>
+
+
 		<div class="callout">
 								<h4>Importante!</h4>
-						
+
 									<b>Usar éste formulario únicamente para cerrar<br>eventos en estado "Pendiente" que ya se hayan
 					solucionado</b>
-								
-							</div>			
-        <?php 
-        
+
+							</div>
+        <?php
+
         $id_evento=$row['id'];
     }
-    
+
 }else{
     $query=$con->conexion->query("SELECT distinct id_evento,estado FROM registro_masivo where id_evento='$id'");
     $row=$query->fetch_assoc();
-    
-    
+
+
     if($row['estado']=='P'){
         ?>
 
        <button id='show' style="margin: 25px;" class="btn btn-success pull-left">Cerrar
-					evento</button><br> 
-					
-					
+					evento</button><br>
+
+
 		<div class="callout">
 								<h4>Importante!</h4>
-						
+
 									<b>Usar éste formulario únicamente para cerrar<br>eventos en estado "Pendiente" que ya se hayan
 					solucionado</b>
-								
-							</div>	
-        <?php 
-        
-        
+
+							</div>
+        <?php
+
+
        $id_evento=$row['id_evento'];
- 
+
     }
-    
+
 }
 
 ?>
@@ -189,21 +189,21 @@ td {
 </style>
 
 <div id="element" style="display: none;">
-  
-  
+
+
   <form name='formulario' id='formulario' action="" onSubmit="inserta_solucion(); return false" >
 
     <table id="tabla_cierre" >
 
-    <tr> 
+    <tr>
     <td><label><B>ID DEL EVENTO:<B></label></td>
     <td><input type="text" readonly="readonly" value="<?php echo $id_evento?>" class="form-control" name="id_evento"></td>
     </tr>
      <tr>
-     <td><label>NÚMERO DE TIQUET:</label></td>
-     <td><input type='text' class="form-control" name="tiquet"></input></td>
+     <td><label>NÚMERO DE TICKET:</label></td>
+     <td><input type='text' class="form-control" name="ticket"></input></td>
      </tr>
-     
+
          <tr>
      <td><label>TIPO:</label></td>
      <td><select required class="form-control" name="tipo">
@@ -212,13 +212,13 @@ td {
        <option>incidente</option>
      </select></td>
      </tr>
-     
-     
+
+
         <tr>
      <td><label>HUBO CAMBIO:</label></td>
      <td>			<ul class="buttons">
-					<li><input id="cambio_si" class="radiobtn"  name="rbtncambio" type="radio" value="si" tabindex="1"> <span></span> 
-					<label for="cambio_si" id="r1">Si</label> 
+					<li><input id="cambio_si" class="radiobtn"  name="rbtncambio" type="radio" value="si" tabindex="1"> <span></span>
+					<label for="cambio_si" id="r1">Si</label>
 					<input id="cambio_no" class="radiobtn" name="rbtncambio" type="radio" value="no" tabindex="2" > <span></span> <label for="cambio_no" id="r2">No</label><br>
 						<label>NUM RFC</label> <input type="number" name="rfc" id="rfc"
 						class="form-control" readonly name='rfc'></li>
@@ -227,50 +227,50 @@ td {
 				</ul></td>
 
      </tr>
-        
+
      <?php
      setlocale (LC_TIME, 'es_ES.utf8','esp');
      date_default_timezone_set ('America/Bogota');
      $fecha=strftime("%Y-%m-%d %H:%M:%S");
      ?>
-     
-  
-                 
-     
+
+
+
+
      <tr>
        <td><label>FECHA Y HORA DE CIERRE:</label></td>
        <td>     <div class="input-group">
                         <div class="input-group-addon">
                             <i class="fa fa-calendar"></i>
                         </div>
-                        <input id="fecha_fin" name="fecha_fin"  class="form-control" value="<?php echo $fecha;?>" required>		
+                        <input id="fecha_fin" name="fecha_fin"  class="form-control" value="<?php echo $fecha;?>" required>
                     </div></td>
      </tr>
-     
+
       <tr>
        <td><label>DETALLES:</label></td>
        <td><textarea name="detalles" class="form-control" required></textarea></td>
      </tr>
-     
+
      <tr>
-    
+
        <td> <div id="close"><button style="margin: 25px;" class="btn btn-danger pull-right" onclick="recarga()">Cancelar</button></div></td>
-       <td>  <button type="submit" style="margin: 25px;" class="btn btn-success pull-right">Aceptar</button></td>    
+       <td>  <button type="submit" style="margin: 25px;" class="btn btn-success pull-right">Aceptar</button></td>
      </tr>
-     
-     
+
+
      </table>
-   
+
    <input type="hidden" name='cedula' value="<?php echo $cedula?>">
    <input type="hidden" name='tipo_evento' value="<?php echo $mas?>">
-   
+
    </form>
 
     </div>
-    
+
     <div id='res'></div>
- 
-    	
+
+
 <script type="text/javascript">
 $(document).ready(function(){
   $("#hide").click(function(){
@@ -281,22 +281,22 @@ $(document).ready(function(){
   });
 });
 </script>
-    
-    
+
+
     <!--SCRIPT PARA HABILITAR Y DESHABLITAR-->
 <script>
 $("#cambio_si").on("click", function(){
   var x = document.getElementById("rfc");
-  
+
   $('#rfc').removeAttr("readOnly");
-});  
+});
 
 $("#cambio_no").on("click", function(){
   var x = document.getElementById("rfc");
 
   $('#rfc').attr('readOnly','readOnly ');
 
-}); 
+});
 
 
 
@@ -306,11 +306,11 @@ function inserta_solucion()
 {
 
 	$.ajax({
-        
+
 		type:  'POST',
-		
+
 		url:   'pages/backend/includes/cierra_evento.php',
-		
+
         data: $("#formulario").serialize(),
      	success: function (response) {
             $("#res").html(response);
@@ -334,5 +334,3 @@ function recarga(){
 	window.setTimeout('location.reload()');
 }
 </script>
-
-
