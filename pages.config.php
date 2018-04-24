@@ -666,6 +666,17 @@ $_PAGE_CONFIG = array(
 						                        "link" => 'pages/components/detalles_evento_ci.php'
 						                            ),
 
+                                        "065" => array(
+                           "show" => true,
+                           "isSubmenu" => true,
+                           "big" => "Gestión de eventos",
+                           "small" => "Mis eventos cerrados",
+                           "menu" => "Mis eventos cerrados",
+                           "menu_css_class" => "fa-file-pdf-o",
+
+                           "link" => 'pages/components/eventos_cerrados_analista.php'
+                               ),
+
 
 
 

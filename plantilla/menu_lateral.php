@@ -1,4 +1,87 @@
-<link rel="stylesheet" href="plantilla/styles/menu_lateral.css">
+<style type="text/css">
+.skin-blue .sidebar-menu>li.header {
+		white-space: nowrap;
+		overflow: hidden;
+		background: -webkit-linear-gradient(top, #333333 0%,#0B0B0B 100%);
+		background: -o-linear-gradient(top, #333333 0%,#0B0B0B 100%);
+		background: -ms-linear-gradient(top, #333333 0%,#0B0B0B 100%);
+		/* color: #4b646f; */
+		/* background: -webkit-linear-gradient(top, #333333 0%,#0B0B0B 100%); */
+		background: -o-linear-gradient(top, #333333 0%,#0B0B0B 100%);
+		background: -ms-linear-gradient(top, #333333 0%,#0B0B0B 100%);
+		color: white;
+		/* background: #1a2226; */
+}
+
+
+
+.skin-blue .wrapper, .skin-blue .main-sidebar, .skin-blue .left-side {
+		background-color: #202021;
+		font-style: italic;
+}
+
+.bg-light-blue, .label-primary, .modal-primary .modal-body {
+		background-color: #184ca7 !important;
+}
+
+.sidebar-menu .treeview-menu>li>a {
+		padding: 5px 5px 5px 15px;
+		display: block;
+		font-size: 14px;
+		background-color: black;
+}
+
+.sidebar-menu .treeview-menu>li>a {
+		padding: 5px 5px 5px 15px;
+		display: block;
+		font-size: 14px;
+		background-color: #363c42;
+		color: snow;
+}
+
+.user-panel {
+		position: relative;
+		width: 100%;
+		padding: 10px;
+		overflow: hidden;
+		white-space: nowrap;
+		overflow: hidden;
+		background: -webkit-linear-gradient(top, rgba(0, 0, 0, 0) 0%,#4589cd 100%);
+		background: -o-linear-gradient(top, #333333 0%,#0B0B0B 100%);
+		background: -ms-linear-gradient(top, #333333 0%,#0B0B0B 100%);
+}
+
+.user-panel>.image>img {
+		width: 100%;
+		max-width: 172px;
+		height: auto;
+}
+
+
+
+
+.skin-blue .sidebar-menu>li:hover>a, .skin-blue .sidebar-menu>li.active>a {
+		color: #fff;
+		font-style: italic;
+		font-size: 14px;
+		font-style: italic;
+		font-size: 14px;
+		/* font-family: -webkit-pictograph; */
+		background: #000000;
+		border-left-color: #ffffff;
+		white-space: nowrap;
+		overflow: hidden;
+		/* background: -webkit-linear-gradient(top, #332cd8 0%,#191727 100%); */
+		background: -webkit-linear-gradient(top, #333333 0%,#0B0B0B 100%);
+		background: -o-linear-gradient(top, #333333 0%,#0B0B0B 100%);
+		background: -ms-linear-gradient(top, #333333 0%,#0B0B0B 100%);
+}
+
+
+.skin-blue .sidebar a {
+		color: #ffffff;
+}
+</style>
 <!-- Left side column. contains the logo and sidebar -->
 <aside class="main-sidebar">
 	<!-- sidebar: style can be found in sidebar.less -->
@@ -116,7 +199,7 @@
 
 
 
-			<li><a href="https://gticonocimiento.arus.com.co/"   target="_blank"  ><i class="fa fa-file-text" aria-hidden="true"></i> <span>Gestión del conocimiento</span></a></li>
+			<li><a href="https://gticonocimiento.arus.com.co/"   target="_blank"  ><i class="fa fa-file-text" aria-hidden="true"></i> <span>Gestión del Conocimiento</span></a></li>
 
 
  <li><a href="http://gticursos.arus.com.co/wp-login.php?loggedout=true"   target="_blank"  ><i class="fa fa-file-text" aria-hidden="true"></i> <span>GTI Cursos</span></a></li>

@@ -3,7 +3,7 @@
 header("Content-Type: text/html;charset=utf-8");
 session_start ();
 if ($_SESSION ['authenticated'] == 1) {
-	
+
 include_once 'modelo/conexion.php';
 
 include_once 'seguridad/userinfo.class.php';
@@ -28,7 +28,7 @@ $userinfo->correo_user =$_SESSION['correo'];
 
 //echo $lider_id;
 include_once 'plantilla/vista.class.php';
-include_once 'pages.config.php'; 
+include_once 'pages.config.php';
 
 if(isset($_GET["page"])){
 	$page = $_GET["page"];
@@ -39,6 +39,7 @@ if(isset($_GET["page"])){
 $vista = new Vista ( $page , $_PAGE_CONFIG, $_PAGE_PERMISSIONS );
 ?>
 <html>
+
 <?php
 include 'plantilla/header.php';
 ?>
@@ -54,16 +55,16 @@ include 'plantilla/menu_lateral.php';
 			<!-- Content Wrapper. Contains page content -->
 			<div class="content-wrapper">
 				<!-- Content Header (Page header) -->
-				
+
 				<?php
 				echo $vista->breadcrumb;
 				?>
-	
+
 				<!-- Main content -->
 				<section class="content">
-				
-					<?php 
-						
+
+					<?php
+
 						try {
 							include 'controlador.php';
 						} catch (Exception $e) {
@@ -71,10 +72,10 @@ include 'plantilla/menu_lateral.php';
 							<script type="text/javascript">
 								window.location = "index.php?page=500";
 							</script>
-							<?php 
+							<?php
 						}
 						?>
-					
+
 				</section>
 				<!-- /.content -->
 			</div>

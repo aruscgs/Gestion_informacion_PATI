@@ -1,12 +1,83 @@
 <link rel="stylesheet" href="plugins/select2/select2.min.css"/>
 <link rel="stylesheet" href="plugins/multiselect/multipleSelect.css">
-<link rel="stylesheet" href="pages/components/styles/detalle.css">
 <script src="plugins/jQuery/jquery-2.2.3.min.js"></script>
 <script src="plugins/alertify.min.js"></script>
 
 	<div id="resultado1"></div>
 
+<style type="text/css">
+.select2-container--default .select2-selection--single, .w3-input
+{
+	padding: 5px;
+		display: block;
+		border: none;
+		border-bottom: 1px solid #ccc;
+}
 
+#patinotify{
+		margin-left: -261px;
+		width: 336px;
+		height: 297px;
+		margin-top: -9px;
+}
+
+.ms-options ms-active
+{
+	min-height: 100px;
+	max-height: 100px;
+}
+
+.btn-success{
+background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #25a068), color-stop(1, #00cc0b) );
+
+}
+
+.ms-drop.bottom
+{
+	width: 310px;
+
+}
+
+#search {
+	float: right;
+	margin-top: 9px;
+	width: 250px;
+}
+
+.search {
+	padding: 5px 0;
+	width: 230px;
+	height: 30px;
+	position: relative;
+	left: 10px;
+	float: left;
+	line-height: 22px;
+}
+
+	.search input {
+			position: absolute;
+			float: Left;
+
+
+			height: 30px;
+			line-height: 18px;
+			padding: 0 2px 0 2px;
+			border-radius:1px;
+	}
+
+			.search:hover input, .search input:focus {
+					width: 200px;
+					margin-left: 0px;
+			}
+
+#btn_search {
+	height: 30px;
+	position: absolute;
+	right: 0;
+	top: 5px;
+	border-radius:1px;
+}
+</style>
 <?php
 
 error_reporting(E_ALL ^ E_NOTICE);
@@ -416,94 +487,101 @@ $nomc = $nom->fetch_assoc();
 		<div class="box-body">
 
         <label style="font-size: 22px;">Actualizar</label> <br><br>
+				<div class="row">
+					<div class="col-md-1">
+						<img id="patinotify" src="dist\img\PATI-08.png" alt="">
+					</div>
+					<div class="col-md-11">
+						<form id="formupd" name="formupd" action="" onSubmit="verifica_datos_mod_sub(); return false" >
 
-        <form id="formupd" name="formupd" action="" onSubmit="verifica_datos_mod_sub(); return false" >
-
-      	<div class="col-md-6">
-       	<div class="form-group">
-
-
-        <input id="cedula_usuario" type="hidden" value="<?php echo $userinfo->user_id?>" name="cedula">
-        <input id="nombre_ci" type="hidden" value="<?php echo $nomc['nombre'];?>" name="nombre_host">
-        <input id="nom_contrato" type="hidden" value="<?php echo $contra['nombre'];?>" name="contrato">
-
-       	<label>Delay</label>
-        <input id="Udelay" name="Udelay" class="w3-input war" type="number" min="0" max="100">
-     	  <label>Tiempo de chequeo (min)</label>
-       	<input id="Ucheck" name="Ucheck" class="w3-input war" type="text">
-       	<label>Warning</label>
-       	<input id="Uwar" name="Uwar"  class="w3-input war" type="text" >
-       	<label>Critical</label>
-       	<input id="Ucri" name="Ucri"  class="w3-input war" type="text" >
-       	<!--  <label>Puerto</label>
-       	<input id="Upuerto" name="Upuerto" class="w3-input war" type="text">-->
-       	<label>Acción Crítica</label>
-       	<textarea id="Uaccion" name="Uaccion" class="w3-input war" required></textarea>
-       	</div>
-       	</div>
-
-		<div class="col-md-6">
-       	<div class="form-group">
-
-       		<!-- <label>Disponibilidad</label><br>
-       	<select id="Udispo" name="Udispo" class="w3-input war" style="width: 70%;" required>
-       			<option value="-" disabled selected>Dispon.</option>
-				<option value="0"> Down </option>
-				<option value="1"> Up </option>
-			</select><br><br> -->
-       	     	<input id="Uservicio" name="Uservicio"  type="hidden" >
-       	<label>Tipo Umbral</label><br>
-       	<select id="Utipo_umbral" name="Utipo_umbral"  class="w3-input war" style="width: 70%;" required>
-       		                 	<option value="" disabled selected>T. Umbral</option>
-			                    <option value="1-Porcentaje"> Porcentaje </option>
-                                <option value="2-sesiones"> sesiones </option>
-                                <option value="3-segundos"> segundos </option>
-                                <option value="5-MB"> MB </option>
-                                <option value="6-unidades"> unidades </option>
-                                <option value="7-down"> down </option>
-                                <option value="8-ping"> ping </option>
-                                <option value="9-GB"> GB </option>
-                                <option value="10-minutos"> minutos </option>
-                                <option value="11-estado"> estado </option>
-                                <option value="12-milisegundos"> milisengundos </option>
-                                <option value="13-C°"> C° </option>
+						<div class="col-md-6">
+						<div class="form-group">
 
 
+						<input id="cedula_usuario" type="hidden" value="<?php echo $userinfo->user_id?>" name="cedula">
+						<input id="nombre_ci" type="hidden" value="<?php echo $nomc['nombre'];?>" name="nombre_host">
+						<input id="nom_contrato" type="hidden" value="<?php echo $contra['nombre'];?>" name="contrato">
+
+						<label>Delay</label>
+						<input id="Udelay" name="Udelay" class="w3-input war" type="number" min="0" max="100">
+						<label>Tiempo de chequeo (min)</label>
+						<input id="Ucheck" name="Ucheck" class="w3-input war" type="text">
+						<label>Warning</label>
+						<input id="Uwar" name="Uwar"  class="w3-input war" type="text" >
+						<label>Critical</label>
+						<input id="Ucri" name="Ucri"  class="w3-input war" type="text" >
+						<!--  <label>Puerto</label>
+						<input id="Upuerto" name="Upuerto" class="w3-input war" type="text">-->
+						<label>Acción Crítica</label>
+						<textarea id="Uaccion" name="Uaccion" class="w3-input war" required></textarea>
+						</div>
+						</div>
+
+						<div class="col-md-6">
+						<div class="form-group">
+
+							<!-- <label>Disponibilidad</label><br>
+						<select id="Udispo" name="Udispo" class="w3-input war" style="width: 70%;" required>
+								<option value="-" disabled selected>Dispon.</option>
+						<option value="0"> Down </option>
+						<option value="1"> Up </option>
+						</select><br><br> -->
+									<input id="Uservicio" name="Uservicio"  type="hidden" >
+						<label>Tipo Umbral</label><br>
+						<select id="Utipo_umbral" name="Utipo_umbral"  class="w3-input war" style="width: 70%;" required>
+																<option value="" disabled selected>T. Umbral</option>
+															<option value="1-Porcentaje"> Porcentaje </option>
+																		<option value="2-sesiones"> sesiones </option>
+																		<option value="3-segundos"> segundos </option>
+																		<option value="5-MB"> MB </option>
+																		<option value="6-unidades"> unidades </option>
+																		<option value="7-down"> down </option>
+																		<option value="8-ping"> ping </option>
+																		<option value="9-GB"> GB </option>
+																		<option value="10-minutos"> minutos </option>
+																		<option value="11-estado"> estado </option>
+																		<option value="12-milisegundos"> milisengundos </option>
+																		<option value="13-C°"> C° </option>
 
 
-                        </select><br><br>
 
-       	<label>Responsable</label><br>
-       	<select id="Uresponsable" name="Uresponsable[]"  class="respon" style="width:100px;" multiple required>
-       	<!-- OPTIONS -->
 
-       	<?php
-			while($rowesc2 = $escala->fetch_assoc())
-			{
-			?>
-				<option value="<?php echo $rowesc2['cedula'];?>"> <?php echo $rowesc2['nombre'];?> </option>
-				<?php }?>
+														</select><br><br>
 
-			</select>
+						<label>Responsable</label><br>
+						<select id="Uresponsable" name="Uresponsable[]"  class="respon" style="width:100px;" multiple required>
+						<!-- OPTIONS -->
 
-		<br><br>
-       	<label>Horario</label><br>
-      <select id="Uhorario_op" name="Uhorario" class="w3-input war" style="width:70%" required>
-				<option value=""></option>
-				<option value="7x24">7x24</option>
-				<option value="5x12">5x12</option>
-				<option value="habil">Hábil</option>
-				<option value="habil">Lunes - Sábado 6:00 a.m a 5:00 p.m</option>
+						<?php
+						while($rowesc2 = $escala->fetch_assoc())
+						{
+						?>
+						<option value="<?php echo $rowesc2['cedula'];?>"> <?php echo $rowesc2['nombre'];?> </option>
+						<?php }?>
 
-			</select><br><br>
+						</select>
 
-       	<input type="hidden" id="id_detalles" name="id_detalles">
-       	</div>
-       	</div>
+						<br><br>
+						<label>Horario</label><br>
+						<select id="Uhorario_op" name="Uhorario" class="w3-input war" style="width:70%" required>
+						<option value=""></option>
+						<option value="7x24">7x24</option>
+						<option value="5x12">5x12</option>
+						<option value="habil">Hábil</option>
+						<option value="habil">Lunes - Sábado 6:00 a.m a 5:00 p.m</option>
 
-		<button type="submit" class="btn btn-success">Aceptar</button>
-		<button type="button" class="btn btn-danger pull-right" data-dismiss="modal" aria-hidden="true">Cancelar</button>
-		</form>
+						</select><br><br>
+
+						<input type="hidden" id="id_detalles" name="id_detalles">
+						</div>
+						</div>
+
+						<button type="submit" class="btn btn-success">Aceptar</button>
+						<button type="button" class="btn btn-danger pull-right" data-dismiss="modal" aria-hidden="true">Cancelar</button>
+						</form>
+					</div>
+				</div>
+
 
 		</div>
 		 </div>

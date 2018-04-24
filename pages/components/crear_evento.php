@@ -2,13 +2,6 @@
 <script src="plugins/jquery.table2excel.js"></script>
 
 <style>
-
-.btn-success {
-    background-color: #00a65a;
-    border-color: #008d4c;
-    margin-left: 1%;
-}
-
 .scrollbar {
 	margin-left: 30px;
 	float: left;
@@ -182,13 +175,13 @@ function crea_caracterizacion(id) {
 							<label>Selecciona CI</label> <select id="ci" required name="sci"
 								class="form-control" style="width: 100%;"></select> <label>IP</label>
 							<input id="ip" class="form-control" name="ip"
-								style="width: 100%;" readonly required> 
-                            
+								style="width: 100%;" readonly required>
+
                                                          <label>Servicio Negocio
 							</label><br> <input type="text" id="sn" name="sn"
 								class="form-control" style="width: 100%;" disabled>
-  
- 
+
+
                                                               <label>Servicio Administrado </label><br>
 							<input type="text" id="sa" name="sa" class="form-control"
 								style="width: 100%;" disabled>

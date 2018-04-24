@@ -1,6 +1,15 @@
 
   <link rel="stylesheet" href="plugins/select2/select2.min.css"/>
-  <link rel="stylesheet" href="pages/components/styles/reportes.css">
+
+<style type="text/css">
+#logoPati{
+    margin-left: -261px;
+    width: 336px;
+    height: 297px;
+    margin-top: -9px;
+
+}
+</style>
 
   <script>
 <?php

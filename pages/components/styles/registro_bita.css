@@ -170,7 +170,8 @@ h2 {
     border-color: transparent;
     resize: none;
     overflow: -webkit-paged-x;
-    font-family: cursive;
+    font-family: Lato,'Helvetica Neue',Arial,Helvetica,sans-serif;
+    text-transform: uppercase;
     letter-spacing: 2px;
 }
 
