@@ -1,6 +1,27 @@
 <link rel="stylesheet" href="plugins/select2/select2.min.css"/>
 <style>
+.btn-success{
+background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #25a068), color-stop(1, #00cc0b) );
+}
 
+.btn-success:hover{
+	background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #408163), color-stop(1, #18a11f) );
+}
+
+.btn-danger{
+			background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #b70e0e), color-stop(1, #d26060) );
+	    border-color: #d73925;
+}
+.btn-danger:hover{
+	background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #8f0b0b), color-stop(1, #8f5151) );
+	border-color: #861709;
+}
+.btn-primary{
+	background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #006699), color-stop(1, #008FD6) );
+}
+.btn-primary:hover{
+	background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #07496a), color-stop(1, #397999) );
+}
 .select2-container--default .select2-selection--single
 {
 	border-radius: 0;
@@ -19,7 +40,7 @@
 }
 
 .input__row{
- margin-top: 10px;  
+ margin-top: 10px;
 }
 /* Radio button */
 .radiobtn {
@@ -68,7 +89,7 @@
 		.lwms-main .lwms-left, .lwms-main .lwms-right, lwms-filterhead
 		{
 			width: 160px;
-		}		
+		}
 	}
 </style>
 <?php
@@ -83,7 +104,7 @@ $contrato=$_POST['conmasivo'];
 $ci = $oe->conexion->query("select id, nombre, ip from hosts where id_contrato='$contrato'");
 $query2 = $oe->conexion->query("SELECT id_evento FROM registro_masivo ORDER BY id_evento desc LIMIT 1");
 $escala = $oe->conexion->query("SELECT distinct a.nombre, a.correo, a.celular, b.area, c.id, c.contacto, a.cedula FROM new_personas a,
-								areas b, sub_grupo c, new_usuario d WHERE c.cedula=a.cedula and a.cedula=d.cedula 
+								areas b, sub_grupo c, new_usuario d WHERE c.cedula=a.cedula and a.cedula=d.cedula
 								and b.id=d.area");
 $conn = $oe->conexion->query("SELECT nombre FROM new_proyectos where codigo='$contrato'");
 $row4=$conn->fetch_row();
@@ -105,22 +126,22 @@ $row2 = $query2->fetch_assoc();
 
 
     <select id="cis" name="cis[]" multiple>
-    <?php 
+    <?php
     while($row=$ci->fetch_assoc())
     {
     	echo '<option value="'.$row['id'].'">'.$row['nombre']." ---> " . $row['ip'].'</option>';
     }
     ?>
     </select>
-    
+
     <br>
     <label>Descripción</label>
 	<textarea class="form-control" name="desc"></textarea>
-	
+
 	<label>Responsable</label><br>
 	<select class="form-control" required name="respo" id="responsable" style="width: 100%;">
 	<option value="" disabled selected> Seleccione un responsable </option>
-	 <?php 
+	 <?php
 	 while ($row3 = $escala->fetch_row())
     {
     	echo '<option value="'.$row3[1]."-".$row3[6]."-".$row3[0].'">'.ucwords(strtolower($row3[0]))." ---> " . $row3[3].'</option>';
@@ -131,20 +152,20 @@ $row2 = $query2->fetch_assoc();
 		<option value="prueba3">NOC</option>
 		<option value="prueba4">SOC</option>
 	 -->
-		
+
 	</select>
-	
+
 	</div>
 	</div>
 	</div>
 	<div class="col-md-6">
 	<div class="form-group">
 	<p id="event"><strong>Evento: </strong><?php echo $row2['id_evento']+1;?></p>
-	
-	
+
+
 	<label>Mesa</label>
       <select name="mesa"  class="form-control" required>
-	 
+
                         </option></option>
                         <option value="marco@arus.com.co">Marco</option>
                         <option value="servicios@gco.com.co">Servicio GCO</option>
@@ -161,9 +182,9 @@ $row2 = $query2->fetch_assoc();
 
 
 
-        </select> 
-	
-	
+        </select>
+
+
 	<div class="form-group">
 		<label>Fecha Inicio</label>
 		<div class="input-group">
@@ -173,26 +194,26 @@ $row2 = $query2->fetch_assoc();
 			<input id="f_inicio" name="f_inicio" class="form-control" value="<?php echo $fecha;?>">
 		</div>
 	</div>
-	
-	
-	
+
+
+
 	<label>Causa del Evento</label>
 	<select class="form-control" name="c_evento">
 		<option></option>
 		<option value="disponibilidad">Disponibilidad</option>
 		<option value="capacidad">Capacidad</option>
 	</select>
-	
+
 	<label>Tipo de Evento</label>
 	<select class="form-control" name="t_evento">
 		<option></option>
 		<option value="critical">Critical</option>
 		<option value="warning">Warning</option>
 	</select>
-	
+
 	<label>Minutos de actividad</label>
     <input type="number" name="h_actividad" id="txtHoraActividad" class="form-control" value="0" required readonly>
-                        
+
     <label>Tipo de actividad</label>
     <div class="input__row">
 	    <ul class="buttons">
@@ -208,10 +229,10 @@ $row2 = $query2->fetch_assoc();
 			</li>
 		</ul>
 	</div>
-	
+
 	</div>
 	</div>
-	
+
 	<input type="hidden" name="contrato" value="<?php echo $row4[0];?>">
 	<input type="hidden" name="event" value="<?php echo $row2['id_evento']+1;?>">
 	<button type="submit" class="btn btn-success">Enviar</button>
@@ -235,11 +256,11 @@ $row2 = $query2->fetch_assoc();
 		<div class="modal-body">
 		<div class="col-md-13">
 		<div class="box box-info">
-        
+
         <label style="font-size: 22px;">Escalamiento</label> <br><br>
-        
-       <?php 
-       	
+
+       <?php
+
        echo"
 			<div style=' width: 101.5%; height:320px; overflow: scroll;'>
 			<table class='table table-bordered table-striped table-hover'>
@@ -264,8 +285,8 @@ $row2 = $query2->fetch_assoc();
 		}
 		echo "</table></div>"
        ?>
-		
-		</div>							
+
+		</div>
 		 </div>
 		  </div>
 		    </div>
@@ -308,20 +329,18 @@ $( "#cis option:checked" ).val();
 //Script para Habilitar y Deshabilitar
 $("#radiobtn_1").on("click", function(){
   var x = document.getElementById("txtHoraActividad");
-  
+
   $('#txtHoraActividad').removeAttr("readOnly");
-});  
+});
 
 $("#radiobtn_2").on("click", function(){
   var x = document.getElementById("txtHoraActividad");
 
   $('#txtHoraActividad').attr('readOnly','readOnly ');
   $('#txtHoraActividad').val('0');
-}); 
+});
 
 $("#btnesc").on("click", function(){
 		$("#myModal").modal('show');
 		});
 </script>
-
-

@@ -3,6 +3,30 @@
 
 
 <style>
+.btn-success{
+background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #25a068), color-stop(1, #00cc0b) );
+margin-right: 10px;
+}
+
+.btn-success:hover{
+	background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #408163), color-stop(1, #18a11f) );
+}
+
+.btn-danger{
+			background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #b70e0e), color-stop(1, #d26060) );
+	    border-color: #d73925;
+}
+.btn-danger:hover{
+	background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #8f0b0b), color-stop(1, #8f5151) );
+	border-color: #861709;
+}
+.btn-primary{
+	background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #006699), color-stop(1, #008FD6) );
+}
+.btn-primary:hover{
+	background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #07496a), color-stop(1, #397999) );
+}
+
 #table{
     margin-top: 12px;
 }
@@ -88,24 +112,24 @@
 
     	  $("#conmasivo").val(id);
     	 //var opt = $('option[value="'+$(this).val()+'"]');
-    	 //var id = opt.attr('id'); 		
+    	 //var id = opt.attr('id');
     	 $.get("pages/backend/includes/ci.php", { param_id: id}, function(data){
-         
+
 	     $("#ci").html(data);
-	     
+
 	     $("#tipo_ci").val();
-	     
+
       });
    })
-   
-   
-      
-     
+
+
+
+
    });*/
 
 
 
-   
+
 </script>
 
 
@@ -128,7 +152,7 @@
 					name="rbtnBusqueda" type="radio" value="recuperar_ci" tabindex="2"
 					onclick="ci_lista_recuperar()"> <span></span> <label for="recuperar" id="r2">Recuperar
 						CI</label><br>
-			
+
 			</ul>
 
 			<div class="box-body">
@@ -138,18 +162,18 @@
 					<div class="col-md-6">
 						<div class="form-group">
 
-							<label>Contrato <font color="red">*</font></label> <select id="contra" 
+							<label>Contrato <font color="red">*</font></label> <select id="contra"
 								name="contrato" class="form-control" style="width: 100%;"
 								disabled onchange = "valida_opcion()"></select>
 
                      			<table id="table">
 						<tr>
-						
+
 						<td>
-						
+
 						<button id="btn_elimina" class="btn btn-success pull"
 							onclick="elimina_ci()" style="display: none;">Eliminar CI</button>
-							
+
 							<button id="btn_recupera" class="btn btn-success pull"
 							onclick="recupera_ci()" style="display: none;">Recuperar CI</button>
 							</td>
@@ -162,8 +186,8 @@
 
 
 						</div>
-						
-						
+
+
 
 					</div>
 
@@ -172,7 +196,7 @@
 						<div class="form-group">
 
 
-							<label>Selecciona CI <font color="red">*</font></label> <select disabled id="ci" 
+							<label>Selecciona CI <font color="red">*</font></label> <select disabled id="ci"
 								name="sci" class="form-control" style="width: 100%;"></select>
 
                             <input type="hidden" name="cedula" id="id_persona" value="<?php echo $userinfo->user_id?>">
@@ -212,17 +236,17 @@ function valida_opcion() {
     var contrato=document.getElementById("contra").value;
    if(valor_opcion=="eliminar_ci"){
     $.get("pages/backend/includes/ci.php", { param_id: contrato}, function(data){
-                 
+
 	     $("#ci").html(data);
     });
    }else{
 	   $.get("pages/backend/includes/ci_eliminados.php", { param_id: contrato}, function(data){
-           
+
 		     $("#ci").html(data);
 
 		   });
    }
-	
+
 }
 
 	function elimina_ci(valor_opcion){
@@ -231,7 +255,7 @@ function valida_opcion() {
       var  valor =  $('input[name="rbtnBusqueda"]:checked').val();
       var cedula=document.getElementById("id_persona").value;
 
-       
+
       if(contrato==0 || ci==0){
 
 
@@ -241,9 +265,9 @@ function valida_opcion() {
 
         		alertify.confirm( 'Desea eliminar el CI seleccionado?', function (e) {
         		    if (e) {
-        		  
+
         		        var parametros = {
-        	                      "contrato": contrato,     
+        	                      "contrato": contrato,
         	                      "ci": ci,
         	                      "valor": valor,
         	                      "cedula":cedula
@@ -252,24 +276,24 @@ function valida_opcion() {
         	                      data: parametros,
         	                      url: 'pages/backend/eliminar_restaurar_ci.php',
         	                      type: 'post',
-        	                     
+
         	                      success: function (response) {
         	                          $("#resultado").html(response);
         	                         // location.reload(true);
         		                      setTimeout('document.location.reload()',5000);
-          	                          
-        	                          
+
+
         	                      }
         	                  });
 
-        		    	
+
         		    } else {
         		    	alertify.error('Cancelado');
         		    }
-        		});   
+        		});
 
-        	  
-       
+
+
 
 
               }
@@ -283,7 +307,7 @@ function valida_opcion() {
 	      var ci=document.getElementById("ci").value;
 	      var  valor =  $('input[name="rbtnBusqueda"]:checked').val();
               var cedula=document.getElementById("id_persona").value;
-	     
+
           if(contrato==0 || ci==0){
 
 
@@ -293,9 +317,9 @@ function valida_opcion() {
 
 	        		alertify.confirm( 'Desea recuperar el CI seleccionado?', function (e) {
 	        		    if (e) {
-	        		  
+
 	        		        var parametros = {
-	        	                      "contrato": contrato,     
+	        	                      "contrato": contrato,
 	        	                      "ci": ci,
 	        	                      "valor": valor,
 	        	                      "cedula":cedula
@@ -304,28 +328,28 @@ function valida_opcion() {
 	        	                      data: parametros,
 	        	                      url: 'pages/backend/eliminar_restaurar_ci.php',
 	        	                      type: 'post',
-	        	                     
+
 	        	                      success: function (response) {
 	        	                          $("#resultado").html(response);
 	        	                          //location.reload(true);
 	        		                        setTimeout('document.location.reload()',5000);
-		        	                          
+
 	        	                      }
 	        	                  });
 
-	        		    	
+
 	        		    } else {
 	        		    	alertify.error('Cancelado');
 	        		    }
-	        		});   
+	        		});
 
-	        	  
-	       
+
+
 
 
 	              }
-			
-		
+
+
 	}
 
 
@@ -339,18 +363,18 @@ function valida_opcion() {
 		$("#contra").load("pages/backend/includes/contrato.php");
 }
 
-	
+
     $("#eliminar").on("click", function(){
       //var x = document.getElementById("responsable");
-       
+
   	  $('#contra').removeAttr('disabled');
   	  $('#ci').removeAttr('disabled');
       document.getElementById('btn_elimina').style.display = 'block';
       document.getElementById('cancelar').style.display = 'block';
       document.getElementById('btn_recupera').style.display = 'none';
-      
- 
-   });  
+
+
+   });
 
     $("#recuperar").on("click", function(){
         //var x = document.getElementById("responsable");
@@ -361,9 +385,9 @@ function valida_opcion() {
       document.getElementById('btn_recupera').style.display = 'block';
 
       document.getElementById("contra").value = "fmrjfnrjnfjn";
-      
-      
-    	   });  
 
-	
+
+    	   });
+
+
   </script>

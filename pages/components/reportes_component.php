@@ -16,17 +16,40 @@
 <link href="plugins/responsive-tables.min.css" rel="stylesheet">
 <script src="plugins/responsive-tables.min.js"></script>
 
+<style type="text/css">
+.btn-success{
+background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #25a068), color-stop(1, #00cc0b) );
+}
+
+.btn-success:hover{
+	background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #408163), color-stop(1, #18a11f) );
+}
+
+.btn-danger{
+			background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #b70e0e), color-stop(1, #d26060) );
+			border-color: #d73925;
+}
+.btn-danger:hover{
+	background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #8f0b0b), color-stop(1, #8f5151) );
+	border-color: #861709;
+}
+.btn-primary{
+	background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #006699), color-stop(1, #008FD6) );
+}
+.btn-primary:hover{
+	background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #07496a), color-stop(1, #397999) );
+}
+</style>
 
 
-
-<?php 
+<?php
 include 'pages/components/reportes_filtros.php';
 ?>
 
 <script>
 
-	document.getElementById("inicio").disabled = true;       
-                  
+	document.getElementById("inicio").disabled = true;
+
             $(document).ready(function() {
                 $('#zctb').DataTable( {
                     "aaSorting": [[ 1, "desc" ]]
@@ -55,27 +78,27 @@ include 'pages/components/reportes_filtros.php';
 													if ($filtros != false) {
 														printFilterModal ( $filtros, $page, $wish);
 													}
-													
+
 													?>
-          
+
                 <?php
-																
+
 																	if (isset ( $_POST ["filtered"] ) || $filtros == false) {
 																		?>
             	<?php $query = applyFilters($query,$filtros); ?>
-            	
-            	
-         
+
+
+
 				<div class="box-body">
-				
+
 				   <div style=" width: 100.5%; height:280px; overflow-y: scroll;">
-				   
+
 					<table id="dataTable-<?php echo $report;?>"
 						class="table table-bordered table-striped">
 						<thead>
 							<tr>
 							                <?php
-																		
+
 																		foreach ( $columns as $col => $show_col ) {
 																			?>
 							<th><?php printf($show_col)?></th>
@@ -86,22 +109,22 @@ include 'pages/components/reportes_filtros.php';
 						</thead>
 						<tbody>
 							                <?php
-																		
+
 																		if ($consulta = $wish->conexion->query ( $query )) {
-																			while ( $arr = $consulta->fetch_array () ) 
+																			while ( $arr = $consulta->fetch_array () )
 
 																			{
 																				?>
 							<tr>
 								<?php
-																				
+
 																				foreach ( $columns as $col => $show_col ) {
 																					?>
 							<td><?php printf($arr[$col])?></td>
 							<?php
 																				}
 																				?>
-								 
+
 							</tr>
 							<?php
 																			}
@@ -114,7 +137,7 @@ include 'pages/components/reportes_filtros.php';
 					</div>
 				</div>
 				<?php
-																	
+
 																}
 																?>
 			</div>
@@ -161,11 +184,5 @@ include 'pages/components/reportes_filtros.php';
                 ]
             } );
         } );
-        
+
     </script>
-
-
-
-
-
-

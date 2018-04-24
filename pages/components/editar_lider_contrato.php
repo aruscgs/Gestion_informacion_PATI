@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 
 		$titulo = "Contratos Activos";
@@ -23,9 +23,32 @@
 	href="https://cdn.datatables.net/1.10.12/css/dataTables.semanticui.min.css"
 	rel="stylesheet" />
 
+<style type="text/css">
+.btn-success{
+background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #25a068), color-stop(1, #00cc0b) );
+}
 
+.btn-success:hover{
+	background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #408163), color-stop(1, #18a11f) );
+}
+
+.btn-danger{
+			background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #b70e0e), color-stop(1, #d26060) );
+			border-color: #d73925;
+}
+.btn-danger:hover{
+	background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #8f0b0b), color-stop(1, #8f5151) );
+	border-color: #861709;
+}
+.btn-primary{
+	background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #006699), color-stop(1, #008FD6) );
+}
+.btn-primary:hover{
+	background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #07496a), color-stop(1, #397999) );
+}
+</style>
 <script>
-            document.getElementById("inicio").disabled = true;             
+            document.getElementById("inicio").disabled = true;
             $(document).ready(function() {
                 $('#zctb').DataTable( {
                     "aaSorting": [[ 1, "desc" ]]
@@ -38,7 +61,7 @@
                 $('html,body').scrollTop(0);
             }
 
-      
+
 
             function desactivar(codigo,lider){
             	console.log("metodo");
@@ -60,12 +83,12 @@
                 });
             }
 
-            
+
         </script>
 
 
 
-                   
+
 
 <div class="panel-body">
 	<div class="row">
@@ -80,7 +103,7 @@
 						<thead>
 							<tr>
                 <?php
-																
+
 foreach ( $columns as $col => $show_col ) {
 																	?>
 														<th><?php printf($show_col)?></th>
@@ -92,30 +115,30 @@ foreach ( $columns as $col => $show_col ) {
 						</thead>
 						<tbody>
                 <?php
-																
+
 																if ($consulta = $wish->conexion->query ( $query )) {
-																	while ( $arr = $consulta->fetch_array () ) 
+																	while ( $arr = $consulta->fetch_array () )
 
 																	{
 																		?>
 												<tr>
 													<?php
-																		
+
 foreach ( $columns as $col => $show_col ) {
 																			?>
 														<td><?php printf($arr[$col])?></td>
 													<?php
 																		}
 																		?>
-															<td><a><input onclick="desactivar('<?php printf($arr["codigo"]);?>','<?php echo $user_id;?>')" type="image" src="dist/img/cross.svg"></a></td>		 
+															<td><a><input onclick="desactivar('<?php printf($arr["codigo"]);?>','<?php echo $user_id;?>')" type="image" src="dist/img/cross.svg"></a></td>
 												</tr>
 												<?php
-																	
+
 }
 																	$consulta->close ();
 																}
 																?>
-											
+
                 </tbody>
 
 					</table>
@@ -164,8 +187,5 @@ foreach ( $columns as $col => $show_col ) {
                 ]
             } );
         } );
-        
+
     </script>
-
-
-

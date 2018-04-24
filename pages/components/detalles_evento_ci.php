@@ -5,12 +5,28 @@
 
 <style>
 
-.btn-success {
-    background-color: #00a65a;
-    border-color: #008d4c;
-    margin-left: 1%;
+.btn-success{
+background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #25a068), color-stop(1, #00cc0b) );
 }
 
+.btn-success:hover{
+	background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #408163), color-stop(1, #18a11f) );
+}
+
+.btn-danger{
+			background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #b70e0e), color-stop(1, #d26060) );
+	    border-color: #d73925;
+}
+.btn-danger:hover{
+	background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #8f0b0b), color-stop(1, #8f5151) );
+	border-color: #861709;
+}
+.btn-primary{
+	background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #006699), color-stop(1, #008FD6) );
+}
+.btn-primary:hover{
+	background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #07496a), color-stop(1, #397999) );
+}
 
 
 .scrollbar {
@@ -53,7 +69,7 @@
 
 
         $("#contra").change(function (oe) {
-    	 
+
         	 $('#fecha_inicio_detalle').removeAttr("disabled")
 
       });
@@ -61,13 +77,13 @@
       $("#fecha_inicio_detalle").change(function () {
 
      	 $('#fecha_fin_detalle').removeAttr("disabled")
-     	  
+
      });
 
         $("#fecha_fin_detalle").change(function () {
 
      	 $('#generar').removeAttr("disabled")
-     	  
+
      })
 
    });
@@ -81,7 +97,7 @@ var f_fin=document.getElementById("fecha_fin_detalle").value;
 
 
 var parametros = {
-        "contrato": contrato,     
+        "contrato": contrato,
         "f_ini": f_ini,
         "f_fin": f_fin
     };
@@ -89,7 +105,7 @@ var parametros = {
         data: parametros,
         url: 'pages/backend/detalle_evento_ci_contra.php',
         type: 'post',
-   
+
         success: function (response) {
             $("#resultado1").html(response);
         }
@@ -104,7 +120,7 @@ var parametros = {
 <div class="box box-default">
 	<div class="box-header with-border">
 		<h3 class="box-title">Eventos por CI</h3>
-	
+
 
 		<div class="box-body">
 			<div class="row">
@@ -121,28 +137,28 @@ var parametros = {
                         <div class="input-group-addon">
                             <i class="fa fa-calendar"></i>
                         </div>
-                        <input id="fecha_inicio_detalle" name="fecha_inicio"  class="form-control" type="date" required disabled="disabled">		
+                        <input id="fecha_inicio_detalle" name="fecha_inicio"  class="form-control" type="date" required disabled="disabled">
                     </div>
-                    
-                    
+
+
                        <label>Fecha de finalización </label>
                     <div class="input-group">
                         <div class="input-group-addon">
                             <i class="fa fa-calendar"></i>
                         </div>
-                        <input id="fecha_fin_detalle" name="fecha_inicio"  class="form-control"  type="date"  required disabled="disabled">		
+                        <input id="fecha_fin_detalle" name="fecha_inicio"  class="form-control"  type="date"  required disabled="disabled">
                     </div>
-		
-							
+
+
 
 						</div>
-						
-	        <button id="generar" onclick="genera_reporte()" class="btn btn-primary pull-left" disabled="disabled">Generar reporte</button><br><br><br><br>
-	        
-	        
-	 
 
-	        
+	        <button id="generar" onclick="genera_reporte()" class="btn btn-primary pull-left" disabled="disabled">Generar reporte</button><br><br><br><br>
+
+
+
+
+
 				</div>
 
 
@@ -153,13 +169,13 @@ var parametros = {
 
 
 						      <div id='resultado1'></div>
-							
+
 
 						</div>
 					</div>
 
 
-		
+
 
 			</div>
 
@@ -175,14 +191,3 @@ var parametros = {
     	$("select").select2();
      });
     </script>
-
-
-
-
-
-
-
-
-
-
-

@@ -37,6 +37,28 @@ if (isset ( $_GET ['e'] )) {
 
 <link rel="stylesheet" href="plugins/select2/select2.min.css"/>
 <style>
+.btn-success{
+background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #25a068), color-stop(1, #00cc0b) );
+}
+
+.btn-success:hover{
+	background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #408163), color-stop(1, #18a11f) );
+}
+
+.btn-danger{
+			background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #b70e0e), color-stop(1, #d26060) );
+	    border-color: #d73925;
+}
+.btn-danger:hover{
+	background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #8f0b0b), color-stop(1, #8f5151) );
+	border-color: #861709;
+}
+.btn-primary{
+	background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #006699), color-stop(1, #008FD6) );
+}
+.btn-primary:hover{
+	background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #07496a), color-stop(1, #397999) );
+}
     .scrollbar
     {
         margin-left: 30px;
@@ -61,7 +83,7 @@ if (isset ( $_GET ['e'] )) {
 		<div class="box-body">
 			<form action="pages/backend/registrar_demanda.php"
 				method="POST" onsubmit="return validacion(this)">
-				
+
 				<div class="row">
 					<div class="col-md-6">
 						<div class="form-group">
@@ -79,7 +101,7 @@ if (isset ( $_GET ['e'] )) {
 						</div>
 						<input type="hidden" id="areaa" name="areaa" value="<?php echo $userinfo->area;?>">
 						<!-- /.form-group -->
-						
+
 						<label>Tiempo Real (Minutos)</label>
 							<input id="tiempoReal" name="tiempoReal" required type="number" class="form-control"><br>
 
@@ -89,7 +111,7 @@ if (isset ( $_GET ['e'] )) {
 								class="form-control" rows="5" placeholder="Descripción" required></textarea>
 						</div>
 
-						
+
 						<!-- /.form-group -->
 					</div>
 					<!-- /.col -->
@@ -100,12 +122,12 @@ if (isset ( $_GET ['e'] )) {
 								style="width: 100%;" onchange="queryActividad();" required>
 								<option value="" id=""></option>
                  <?php
-																	
+
 																	while ( $row = $re->fetch_object () ) {
 																		$row->id;
 																		?>
                     <option value="<?php echo $row->id; ?>"><?php echo $row->id; ?></option>
-                    <?php } ?>  
+                    <?php } ?>
                 </select>
 
 						</div>
@@ -116,40 +138,40 @@ if (isset ( $_GET ['e'] )) {
 								name="numerotiquete" class="form-control">
 						</div>
 
-						
+
 						<div class="form-group">
-							<label>Contrato</label> 
+							<label>Contrato</label>
 							<select id="id_contrato" name="id_contrato" class="form-control" style="width: 100%;" required>
-								<option value="" id=""></option>            
+								<option value="" id=""></option>
                   <?php
 																		while ( $row = $rContratos->fetch_object () ) {
 																			?>
 
                     <option id="<?php echo $row->codigo; ?>"
 									value="<?php echo $row->codigo; ?>"><?php echo $row->alias;?></option>
-                    <?php } ?>  
+                    <?php } ?>
                 </select>
 						</div>
-						
-  
+
+
 						<div class="form-group">
-						
+
 							<label>Fecha y hora de inicio</label>
-							
+
 							<div class='input-group date' id='datetimepicker2'>
 							 <input id="fecha_inicio" name="dato" type="text" class="form-control" required>
-							 
+
 							 <span class="input-group-addon">
 	                        <span class="glyphicon glyphicon-calendar"></span>
 		                    </span>
 		                    </div>
 						</div>
-						
+
 						<div class="form-group">
 							<label>Horario no hábil</label> <br> <input name="horaExtra"
 								id='horaExtra' type="checkbox" value="Si">
 						</div>
-						
+
 
 						<br>
 						<button type="submit" class="btn btn-success"
@@ -172,7 +194,7 @@ if (isset ( $_GET ['e'] )) {
         });
     });
 
-    
+
 	     $(function () {
 	    $("#id_contrato").select2();
 	     });

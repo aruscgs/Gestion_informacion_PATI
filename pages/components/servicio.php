@@ -1,4 +1,26 @@
 <style>
+.btn-success{
+background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #25a068), color-stop(1, #00cc0b) );
+}
+
+.btn-success:hover{
+	background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #408163), color-stop(1, #18a11f) );
+}
+
+.btn-danger{
+			background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #b70e0e), color-stop(1, #d26060) );
+	    border-color: #d73925;
+}
+.btn-danger:hover{
+	background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #8f0b0b), color-stop(1, #8f5151) );
+	border-color: #861709;
+}
+.btn-primary{
+	background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #006699), color-stop(1, #008FD6) );
+}
+.btn-primary:hover{
+	background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #07496a), color-stop(1, #397999) );
+}
 td
 {
 	padding: 5px;
@@ -7,12 +29,12 @@ td
 }
 table
 {
-	margin: auto;	
+	margin: auto;
 }
 </style>
-<!-- 
-<script type="text/javascript">   
-    window.setTimeout('location.reload()', 6000); carga toda la página cada X segundos       
+<!--
+<script type="text/javascript">
+    window.setTimeout('location.reload()', 6000); carga toda la página cada X segundos
 </script>
  -->
 
@@ -36,7 +58,7 @@ echo $cont;
 	<div class="row">
 	<input type="hidden" name="sci" value="<?php echo $id?>">
 
-	<table id="tabla" class="table table-bordered table-striped">	
+	<table id="tabla" class="table table-bordered table-striped">
 		<tr>
 			<td>
 				<button id="btn" type="button" title="Agregar un Servicio" class="btn btn-default pull-center">+</button>
@@ -46,13 +68,13 @@ echo $cont;
 			</td>
 			<td>
 				<h4>Descripción</h4>
-			</td>		
+			</td>
 		</tr>
-		
-		<?php		
+
+		<?php
 		while($row = $conn->fetch_assoc())
 		{		$id_host= $row['id_host'];
-				
+
 		?>
 		<tr>
 			<td>
@@ -67,17 +89,17 @@ echo $cont;
 		</tr>
 		<?php }
 		?>
-		
-		<tr>		
+
+		<tr>
 			<td>
 				<button id="act" type="button" class="btn btn-default pull-center">Refresh</button>
-			</td>	
-			<td colspan="2">			
-				<input type="submit"class="btn btn-success pull-center">				
-			</td>				
-		</tr>	
+			</td>
+			<td colspan="2">
+				<input type="submit"class="btn btn-success pull-center">
+			</td>
+		</tr>
 	</table>
-	
+
 	</div>
 	</div>
 	</div>
@@ -102,51 +124,51 @@ echo $cont;
 			<div class="modal-body">
 			 <div class="col-md-13">
 			  <div class="box box-info">
-				<div class="box-body">				
-	
+				<div class="box-body">
+
 	<form name="formulario" action="" onSubmit="enviarDatos(); return false" >
 	   <div class="col-md-6">
        <div class="form-group">
 
         <label>Tipo</label>
         <select  name="tipo" required class="form-control">
-        <?php		
+        <?php
         while($row = $ser->fetch_assoc())
         {
         	echo '<option value="'.$row['id'].'">'.$row['tipo'].'</option>';
         }
-		?>       
-		
+		?>
+
 		</select>
-		
-        <label>Nombre</label> 
-        <input required name="nombre" class="form-control">     
+
+        <label>Nombre</label>
+        <input required name="nombre" class="form-control">
 
         <label>Descripción</label>
-        <textarea class="form-control"  name="descripcion" cols="100" style="resize: none;"></textarea>   
-        
+        <textarea class="form-control"  name="descripcion" cols="100" style="resize: none;"></textarea>
+
         <input type="hidden" name="id_host" value="<?php echo $id; ?>">
         </div>
         </div>
-        
+
         <div class="col-md-6">
         <div class="form-group">
-        
+
         <label>Acción Crítica</label>
-        <textarea class="form-control" name="accion"> </textarea>   
-        
+        <textarea class="form-control" name="accion"> </textarea>
+
         <label>Tiempo Máximo de Contacto</label>
-        <input class="form-control" name="tiempo">     
+        <input class="form-control" name="tiempo">
         </div>
         </div>
 		&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-		<div class="form-group">		
+		<div class="form-group">
 		<button type="submit"  id="btn2" class="btn btn-success">Aceptar</button>
 		<button type="button" class="btn btn-danger pull-right" data-dismiss="modal" aria-hidden="true">Cancelar</button>
 		</div>
 	</form>
-	
-		</div>							
+
+		</div>
 		 </div>
 		  </div>
 		    </div>
@@ -183,19 +205,19 @@ function enviarDatos()
 	descripcion = document.formulario.descripcion.value;
 	id_host = document.formulario.id_host.value;
 	accion = document.formulario.accion.value;
-	tiempo = document.formulario.tiempo.value;	
-	
+	tiempo = document.formulario.tiempo.value;
+
 	ajax = objetoAjax();
-	ajax.open("POST", "pages/backend/registro_servicio.php", true); 
-	ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded"); 
-	ajax.send("&tipo="+tipo+"&nombre="+nombre+"&descripcion="+descripcion+"&id_host="+id_host+"&accion="+accion+"&tiempo="+tiempo) 
-}	
+	ajax.open("POST", "pages/backend/registro_servicio.php", true);
+	ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+	ajax.send("&tipo="+tipo+"&nombre="+nombre+"&descripcion="+descripcion+"&id_host="+id_host+"&accion="+accion+"&tiempo="+tiempo)
+}
 </script>
 
 <script type="text/javascript">
-        $('#act').click(function() {            
+        $('#act').click(function() {
         	window.setTimeout('location.reload()');
-        });    
+        });
 </script>
 
 <script type="text/javascript">
@@ -207,4 +229,3 @@ $("#btn2").click(function(){
 $("#myModal").modal("hide");
 });
 </script>
-

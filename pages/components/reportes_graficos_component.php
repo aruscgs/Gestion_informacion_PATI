@@ -1,12 +1,35 @@
 <script type="text/javascript"
 	src="https://www.gstatic.com/charts/loader.js"></script>
+<style type="text/css">
+.btn-success{
+background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #25a068), color-stop(1, #00cc0b) );
+}
 
+.btn-success:hover{
+	background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #408163), color-stop(1, #18a11f) );
+}
+
+.btn-danger{
+			background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #b70e0e), color-stop(1, #d26060) );
+			border-color: #d73925;
+}
+.btn-danger:hover{
+	background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #8f0b0b), color-stop(1, #8f5151) );
+	border-color: #861709;
+}
+.btn-primary{
+	background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #006699), color-stop(1, #008FD6) );
+}
+.btn-primary:hover{
+	background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #07496a), color-stop(1, #397999) );
+}
+</style>
 <?php
 
 include 'pages/components/reportes_filtros.php';
 if (isset ( $_POST ["filtered"] ) && $filtros != false) {
 	$query = applyFilters ( $query, $filtros );
-	$query = preg_replace('/\s+/', ' ', trim($query));	
+	$query = preg_replace('/\s+/', ' ', trim($query));
 	?>
 <script type='text/javascript'>
         $(document).ready(function(){
@@ -18,43 +41,43 @@ if (isset ( $_POST ["filtered"] ) && $filtros != false) {
                     dataType:'JSON',
                     success: function(result_<?php echo $report;?>){
                         google.charts.load('current', {'packages':['corechart']});
-                          google.charts.setOnLoadCallback(function(){   
+                          google.charts.setOnLoadCallback(function(){
                           drawChartpie_<?php echo $report;?>(result_<?php echo $report;?>);
                         });
                     }
-            }); 
+            });
 
             function drawChartpie_<?php echo $report;?>(result_<?php echo $report;?>){
 
                 var data_<?php echo $report;?> = new google.visualization.DataTable();
                 data_<?php echo $report;?>.addColumn('string','columna');
-                data_<?php echo $report;?>.addColumn('number','Disponibilidad');  
-                data_<?php echo $report;?>.addColumn('number','Capacidad');                
+                data_<?php echo $report;?>.addColumn('number','Disponibilidad');
+                data_<?php echo $report;?>.addColumn('number','Capacidad');
                 var dataArray_<?php echo $report;?> = [];
                 $.each(result_<?php echo $report;?>, function(i, obj_<?php echo $report;?>) {
                     dataArray_<?php echo $report;?>.push([obj_<?php echo $report;?>.columna, parseInt(obj_<?php echo $report;?>.valores),parseInt(obj_<?php echo $report;?>.valores1) ]);
                 });
-                
+
                 data_<?php echo $report;?>.addRows(dataArray_<?php echo $report;?>);
 
                 var piechart_options_<?php echo $report;?> ={
                    // width: 1000,
                     height: 500,
                    // 'chartArea': {'width': '130%', 'height': '130%'},
-                    bars: 'horizontal', 
+                    bars: 'horizontal',
                     series: {
                         0: { axis: 'columna' }, // Bind series 0 to an axis named 'distance'.
                         1: { axis: 'valores' }, // Bind series 1 to an axis named 'brightness'.
-                        2: { axis: 'valores1' }, 
+                        2: { axis: 'valores1' },
                          },
                       axes: {
                           x: {
                             distance: {label: 'parsecs'}, // Bottom x-axis.
                             brightness: {side: 'top', label: 'apparent magnitude'} // Top x-axis.
                           }
-                        }, 
+                        },
                     is3D: true};
-                <?php 
+                <?php
                 if($grafico == "pie"){
                 ?>
                 	var piechart_<?php echo $report;?> = new google.visualization.PieChart(document.getElementById('piechart_<?php echo $report;?>_div'));
@@ -66,29 +89,29 @@ if (isset ( $_POST ["filtered"] ) && $filtros != false) {
 	                ?>
 	                	var piechart_<?php echo $report;?> = new google.visualization.ColumnChart(document.getElementById('piechart_<?php echo $report;?>_div'));
 				<?php }?>
-				
-				
+
+
                 piechart_<?php echo $report;?>.draw(data_<?php echo $report;?>, piechart_options_<?php echo $report;?>);
                 }
 
         });
     </script>
- 
-<?php }?> 
- 
-<!-- /.box --> 
+
+<?php }?>
+
+<!-- /.box -->
 
 <div class='box box-success'>
 	<div class='box-header with-border'>
 		<h3 class='box-title'><?php echo $titulo;
 		?></h3>
-	
-                
+
+
 		<?php
 		if ($filtros != false) {
 			printFilterModal ( $filtros, $page, $wish );
 		}
-		
+
 		?>
 		<div class='box-tools pull-right'>
 			<button type='button' class='btn btn-box-tool' data-widget='collapse'>
@@ -108,4 +131,3 @@ if (isset ( $_POST ["filtered"] ) && $filtros != false) {
 		</div>
 	</div>
 </div>
-

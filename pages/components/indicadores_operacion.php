@@ -36,7 +36,7 @@ $hoy =date("Y-m-d");
 if($user_num == '0'){
 
     ?>
-    
+
                 <script>
 
     alertify.alert("<b>No estás autorizado para ingresar a ésta página", function () {
@@ -50,15 +50,15 @@ if($user_num == '0'){
 
 
 }else{
-    
+
     if($hoy>$fecha_fin_crear){
-        
+
         $conexion->cambia_estado_crear_indicador($userinfo->user_id);
-        
+
         $estado_crear=$conexion->conexion->query("select crear from permiso_indicador where cedula='$userinfo->user_id'");
         $est_crea=$estado_crear->fetch_assoc();
         //echo $est_crea["crear"];
-        
+
     }else{
         $estado_crear=$conexion->conexion->query("select crear from permiso_indicador where cedula='$userinfo->user_id'");
         $est_crea=$estado_crear->fetch_assoc();
@@ -77,6 +77,29 @@ if($user_num == '0'){
 <link rel="stylesheet" href="plugins/select2/select2.min.css"/>
 
 <style>
+.btn-success{
+background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #25a068), color-stop(1, #00cc0b) );
+}
+
+.btn-success:hover{
+	background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #408163), color-stop(1, #18a11f) );
+}
+
+.btn-danger{
+			background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #b70e0e), color-stop(1, #d26060) );
+	    border-color: #d73925;
+}
+.btn-danger:hover{
+	background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #8f0b0b), color-stop(1, #8f5151) );
+	border-color: #861709;
+}
+.btn-primary{
+	background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #006699), color-stop(1, #008FD6) );
+}
+.btn-primary:hover{
+	background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #07496a), color-stop(1, #397999) );
+}
+
 .input__row {
 	margin-top: 10px;
 }

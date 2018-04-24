@@ -28,7 +28,7 @@ $id_persona=$_POST['otro'];
 
 //echo $cont;
 
-// Aprovechar el ID DETALLE para sacar el HOST y la IP Para el envío del correo 
+// Aprovechar el ID DETALLE para sacar el HOST y la IP Para el envío del correo
 
 
 
@@ -36,7 +36,7 @@ $id_persona=$_POST['otro'];
 
 
 
-$conn = $oe->conexion->query("select a.id_detalle, b.nombre, b.ip, b.id as id_host, c.tipo, c.id as id_tipo from detalle_servicio a, hosts b, tipo_servicios c where 
+$conn = $oe->conexion->query("select a.id_detalle, b.nombre, b.ip, b.id as id_host, c.tipo, c.id as id_tipo from detalle_servicio a, hosts b, tipo_servicios c where
 a.id_host=b.id and a.id_tipo_servicio=c.id and id_detalle='$id_detalle'");
 
 $num_evento = $oe->conexion->query("SELECT (max(id)+1) as Numero_de_evento FROM incidentecop");
@@ -60,13 +60,35 @@ $posicion_coincidencia = strpos($cadena_de_texto, $cadena_buscada);
 if ($posicion_coincidencia === false) {
 $aux=0;
 } else {
-       
+
 $aux=1;
 }
 
-?> 
+?>
 
 <style>
+.btn-success{
+background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #25a068), color-stop(1, #00cc0b) );
+}
+
+.btn-success:hover{
+	background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #408163), color-stop(1, #18a11f) );
+}
+
+.btn-danger{
+			background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #b70e0e), color-stop(1, #d26060) );
+	    border-color: #d73925;
+}
+.btn-danger:hover{
+	background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #8f0b0b), color-stop(1, #8f5151) );
+	border-color: #861709;
+}
+.btn-primary{
+	background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #006699), color-stop(1, #008FD6) );
+}
+.btn-primary:hover{
+	background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #07496a), color-stop(1, #397999) );
+}
 
 .select2-container--default .select2-selection--single {
 	border-radius: 0;
@@ -77,7 +99,7 @@ $aux=1;
 
 
 .input__row{
- margin-top: 10px;  
+ margin-top: 10px;
 }
 /* Radio button */
 .radiobtn {
@@ -128,19 +150,19 @@ $aux=1;
         <h3 class="box-title">Registro</h3>
         <!-- Barra de progreso -->
         <div class="progress progress-sm active">
-            <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 95%">                  
-            </div> 
-        </div>      
- 
+            <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 95%">
+            </div>
+        </div>
+
         <p id="event"><strong>Evento: </strong><?php echo $evento['Numero_de_evento'];?></p>
 
-        
+
         <form method="post" action="pages/backend/nuevo_incidente.php">
             <div class="col-md-23">
-				
+
 				    <!--ENVIAMOS EL NOMBRE DEL CONTRATO OCULTO -->
                 <input name="aux" type="hidden"  id="aux" value="<?php echo $aux;?>">
-              
+
                 <input name="contrato" type="hidden"  value="<?php echo $cont;?>">
 				<input name="nombre_host" type="hidden"  value="<?php echo $row['nombre'];?>" class="form-control" required>
 				<input name="ip" type="hidden"  value="<?php echo $row['ip'];?>" class="form-control" required>
@@ -150,14 +172,14 @@ $aux=1;
 
                 <div class="col-md-6">
                     <div class="form-group">
-					
+
 					<label >Servicio afectado</label>
 					<input class="form-control" value="<?php echo $row['tipo'];?>" readonly required>
-        			<input type="hidden" name="servicio" class="form-control" value="<?php echo $row['id_tipo'];?>" readonly required> 
-                      
-                        
+        			<input type="hidden" name="servicio" class="form-control" value="<?php echo $row['id_tipo'];?>" readonly required>
+
+
 		 <input type="hidden" name="nomservicio" class="form-control" value="<?php echo $row['tipo'];?>" readonly required>
-        
+
 				<label>Tipo de evento</label>
                         <select id="evento" required name="evento" class="form-control"  style="width: 100%;">
                     	<option disabled selected ></option>
@@ -169,12 +191,12 @@ $aux=1;
                         <select id="causa_evento" required name="causa_evento" class="form-control"  style="width: 100%;" >
                     	<option disabled selected ></option>
                             <option>Disponibilidad</option>
-                            <option>Capacidad</option>      
+                            <option>Capacidad</option>
                         </select>
 
                         <label>Minutos de actividad</label>
                         <input type="number" name="hrs_actividad" id="txtHoraActividad" class="form-control" value="0" required readonly>
-                        
+
                         <label>Tipo de actividad</label>
                         <div class="input__row">
                        <ul class="buttons">
@@ -191,8 +213,8 @@ $aux=1;
 						 </ul>
 						</div>
                     </div>
-                </div> 
-            </div>  
+                </div>
+            </div>
             <div class="col-md-6">
                 <div class="form-group">
 
@@ -207,12 +229,12 @@ $aux=1;
                         <option value="cielo.figueroa@arus.com.co">Cielo figueroa - GDO</option>
                         <option value="CA_CSM_PROCAPS@mail-prod3.serviceaide.com">CSM Procaps - Requerimientos</option>
                         <option value="CA_CSM_PROCAPS-INC@mail-prod3.serviceaide.com">CSM Procaps - Incidentes</option>
-                        <option value="soportecnicoempresarial@tigoune.com">Soporte técnico - Confiar</option> 
+                        <option value="soportecnicoempresarial@tigoune.com">Soporte técnico - Confiar</option>
                         <option value="sos@grupoargos.com">SOS - Argos</option>
                         <option value="soporteit@continentalgold.com">Soporte IT - Continental</option>
                         <option value="maya@acuacar.com">CSM - Acuacar</option>
                         <option value="N/A">Otro</option>
-                   </select> 
+                   </select>
 
 
                     <label>Responsable</label>
@@ -227,9 +249,9 @@ $aux=1;
 
 
                     <input type="hidden" name="idresponsable" value="<?php echo $id_persona;?>" id="txtResponsable" class="form-control" readonly>
-  
+
                     <label>Persona que reporta</label><br>
-                    <input name="nombre_reporta" value="<?php echo $userinfo->user_name = ucwords(strtolower($_SESSION['user_name']));?>" class="form-control" required readonly> 
+                    <input name="nombre_reporta" value="<?php echo $userinfo->user_name = ucwords(strtolower($_SESSION['user_name']));?>" class="form-control" required readonly>
 
 
                     <label>Fecha y hora de inicio </label>
@@ -237,7 +259,7 @@ $aux=1;
                         <div class="input-group-addon">
                             <i class="fa fa-calendar"></i>
                         </div>
-                        <input id="fecha_inicio" name="fecha_inicio"  class="form-control" value="<?php echo $fecha;?>" required>		
+                        <input id="fecha_inicio" name="fecha_inicio"  class="form-control" value="<?php echo $fecha;?>" required>
                     </div>
                             <label> Observaciones </label>
                          <textarea class="form-control" name="observaciones"></textarea>
@@ -263,13 +285,13 @@ $aux=1;
       <div class="modal-content">
          <div class="modal-header">
             <h3 style="text-align: center;">Elige el disponible actual del grupo seleccionado.</h3>
-     
+
      </div>
          <div class="modal-body">
 
-<?php 
+<?php
 
-$responsables=$oe->conexion->query("select cedula,nombre,correo,celular 
+$responsables=$oe->conexion->query("select cedula,nombre,correo,celular
 from new_personas where nombre not like '%disponible%' order by nombre asc");
 
 ?>
@@ -280,30 +302,30 @@ from new_personas where nombre not like '%disponible%' order by nombre asc");
 <input type="hidden" value="<?php echo $id_detalle?>" id="id_detalle">
 
       <select class="form-control" id="respo_disponible"  style="width: 100%;">
-      
+
       <option disabled selected></option>
-      <?php 
-      
+      <?php
+
       while($resultado=$responsables->fetch_assoc()){ ?>
-          
+
          <option value="<?php echo $resultado["cedula"]."-".$resultado["correo"]?>"><?php echo $resultado["nombre"]?></option>
-          
-          
-     <?php } ?> 
+
+
+     <?php } ?>
 
       </select><br><br>
-      
+
       <div>
-      
+
            <button id="validar" onclick="valida()" class="btn btn-success pull-left">Asignar evento</button>
           <button  style="margin-left: 1%;" class="btn btn-danger" onclick="redireccionar();">Cerrar</button>
-        
+
 
       </div>
            </div>
          <div class="modal-footer">
-        
-        
+
+
      </div>
       </div>
    </div>
@@ -315,16 +337,16 @@ from new_personas where nombre not like '%disponible%' order by nombre asc");
 //Script para Habilitar y Deshabilitar
 $("#radiobtn_1").on("click", function(){
   var x = document.getElementById("txtHoraActividad");
-  
+
   $('#txtHoraActividad').removeAttr("readOnly");
-});  
+});
 
 $("#radiobtn_2").on("click", function(){
   var x = document.getElementById("txtHoraActividad");
 
   $('#txtHoraActividad').attr('readOnly','readOnly ');
   $('#txtHoraActividad').val('0');
-}); 
+});
 
 
 
@@ -343,7 +365,7 @@ function valida() {
 	var responsable=document.getElementById("respo_disponible").value;
     //id detalle
 	var id_detalle=document.getElementById("id_detalle").value;
-	
+
 	//correod el grupo
 	var responsable_correo=document.getElementById("txtResponsable_correo").value;
 
@@ -351,13 +373,13 @@ function valida() {
 		alertify.alert('<b>Debes elegir un reponsable<br><font color="red">Inténtalo de nuevo</font></b>');
            return;
 		}
-	
+
  	$('#txtResponsable_correo_responsable').val(responsable);
  	//cierra modal
     $("#mostrarmodal").modal("hide");
 
- 	
-	
+
+
 }
 
 

@@ -5,6 +5,28 @@
 <link rel="stylesheet" href="plugins/select2/select2.min.css"/>
 
 <style>
+.btn-success{
+background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #25a068), color-stop(1, #00cc0b) );
+}
+
+.btn-success:hover{
+	background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #408163), color-stop(1, #18a11f) );
+}
+
+.btn-danger{
+			background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #b70e0e), color-stop(1, #d26060) );
+	    border-color: #d73925;
+}
+.btn-danger:hover{
+	background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #8f0b0b), color-stop(1, #8f5151) );
+	border-color: #861709;
+}
+.btn-primary{
+	background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #006699), color-stop(1, #008FD6) );
+}
+.btn-primary:hover{
+	background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #07496a), color-stop(1, #397999) );
+}
 .input__row {
 	margin-top: 10px;
 
@@ -91,7 +113,7 @@ width: 40px;
 
 </style>
 
-<?php 
+<?php
 
 
 $conexion=new conexion();
@@ -117,24 +139,24 @@ if($log['cantidad'] != '0'){
 ?>
 
  <div class="box box-default">
- 
+
           <div class="box-header with-border">
             <h3 class="box-title">Indicadores de operación</h3>
               <!-- Barra de progreso -->
               <div class="progress progress-sm active">
-                <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 40%">                  
-                
+                <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
+
                 </div>
-              </div>              
-               
-               
+              </div>
+
+
    <form name="formulario" id="formulario" action="" onSubmit=" mostrar_indicadores(); return false" >
-               
+
 						<ul class="buttons">
-							<li><input required id="general" class="radiobtn"  name="rbtnBusqueda" type="radio" value="general" tabindex="1" onclick="cerrar()"> <span></span> 
-							<label for="general" id="r1">General</label> 
+							<li><input required id="general" class="radiobtn"  name="rbtnBusqueda" type="radio" value="general" tabindex="1" onclick="cerrar()"> <span></span>
+							<label for="general" id="r1">General</label>
 							<input required id="cliente" class="radiobtn" name="rbtnBusqueda" type="radio" value="cliente" tabindex="2" onclick="cerrar()" > <span></span> <label for="cliente" id="r2">Cliente</label><br>
-								
+
 
 						</ul>
 
@@ -142,35 +164,35 @@ if($log['cantidad'] != '0'){
        <div class="col-md-6">
        <div class="form-group">
 
-   
-   
+
+
     <!-- SELECCIONA EL CLIENTE -->
         <label>Cliente</label>
- 
+
          <select  disabled id="clientes"  name="clientes"  class="form-control" style=" width: 100%;">
                  <option value="0"></option>
-              
+
               <?php while($cli=$clientes->fetch_assoc()){?>
-              	
+
               	 <option value="<?php echo $cli['id_cliente'] ?>"><?php echo $cli['cliente'] ?></option>
-              	
-              	
+
+
              <?php }?>
-                
-          
+
+
         </select>
-		
+
         </div><button id="ver" type="submit" class="btn btn-success pull-right" onclick="mostrar()">Consultar Indicadores</button> </div>
-        
+
         <div class="col-md-6">
         <div class="form-group">
-        
-        
-        
+
+
+
           <!-- SELECCIONA A�O-->
-        
+
                 <label>AÑO</label>
- 
+
          <select required disabled id="year"  name="years"  class="form-control" style=" width: 100%;">
          <option value="0"></option>
 
@@ -179,10 +201,10 @@ for ($i = 2017; $i <= 2040; $i ++) {
     echo "<option value='$i'>$i</option>";
 }
 ?>
-                
-          
+
+
         </select>
-        
+
 
 
 
@@ -190,84 +212,84 @@ for ($i = 2017; $i <= 2040; $i ++) {
 
 
            <label>MES</label>
- 
+
          <select required disabled id="month"  name="months"  class="form-control" style=" width: 100%;">
          							<option value="0"></option>
-       
+
        <?php while($mes=$meses->fetch_assoc()){?>
-            
+
             <option
 								value="<?php echo $mes["id_mes"]?>.'-'.<?php echo $mes["descripcion"]?>"><?php echo $mes["descripcion"]?></option>
-            
+
             <?php }?>
-          
-        </select>      
-        
-						
+
+        </select>
+
+
         <!-- ENVIAMOS LA CEDULA OCULTA DEL USUARIO -->
-	    <input type="hidden" name="cedula" value="<?php echo $userinfo->user_id?>">	
-        
+	    <input type="hidden" name="cedula" value="<?php echo $userinfo->user_id?>">
+
         </div>
-           
-        </div>  
-        
+
+        </div>
+
         </form>
-        
-     
-       
-        </div> 
-        
+
+
+
         </div>
-       <!-- TABLA DE REGISTROS PARA LOS INDICADORES --> 
+
+        </div>
+       <!-- TABLA DE REGISTROS PARA LOS INDICADORES -->
         <div id=tabla>
         </div>
-          
-       
-        
-          
+
+
+
+
         </div>
-     
-     
-        
+
+
+
         </div>
-        
-        
-        
-        
+
+
+
+
         <?php }else{?>
-        
-        
-                    <script> 
+
+
+                    <script>
 
 //alert("nada");
     alertify.alert("<b>No estás autorizado para ingresar a ésta página", function () {
 	 location.href="index.php";
     });
 
-     
+
  </script>
-        
+
         <?php }?>
-         
-        
+
+
         <script>
-        
-  
+
+
 
           function mostrar_indicadores()
           {
               var cliente=document.getElementById("clientes").value;
               var  activoFijo = $('input[name="rbtnBusqueda"]:checked').val();
 
-         if(activoFijo=='cliente'){                   
+         if(activoFijo=='cliente'){
             if(cliente != ""){
-              
+
           	$.ajax({
-                  
+
           		type:  'POST',
-          		
+
           		url:   'pages/backend/consultar_indicadores.php',
-          		
+
                 data: $("#formulario").serialize(),
 
             	success: function (response) {
@@ -278,14 +300,14 @@ for ($i = 2017; $i <= 2040; $i ++) {
 
             	alertify.alert('<b>TODOS LOS CAMPOS SON<BR><font color=\"red\">OBLIGATORIOS</font>');
                 }
-          
+
           }else{
           	$.ajax({
-                
+
           		type:  'POST',
-          		
+
           		url:   'pages/backend/consultar_indicadores.php',
-          		
+
                 data: $("#formulario").serialize(),
 
             	success: function (response) {
@@ -295,54 +317,54 @@ for ($i = 2017; $i <= 2040; $i ++) {
               }
           }
         	</script>
-        	
-        
+
+
      <script src="plugins/select2/select2.full.min.js"></script>
     <script>
 	     $(function () {
 	    $("select").select2();
 	     });
     </script>
-        	
-   
-    
+
+
+
 
           <!--SCRIPT PARA HABILITAR Y DESHABLITAR-->
           <script>
           $("#general").on("click", function(){
             //var x = document.getElementById("responsable");
                document.getElementById('tabla').innerHTML='';
-             
+
         	  $('#month').removeAttr('disabled');
         	  $('#year').removeAttr('disabled');
         	  $('#clientes').val('');
         	  $('#clientes').attr('disabled','disabled');
         	  //$('#clientes').attr('selected','selected');
         	  //$('#clientes').val("");
-               //$('#clientes').val($('#clientes > option:first').val());        	 // document.getElementById("clientes").value="fmnfrfnn"; 
-          });  
+               //$('#clientes').val($('#clientes > option:first').val());        	 // document.getElementById("clientes").value="fmnfrfnn";
+          });
 
           $("#cliente").on("click", function(){
               //var x = document.getElementById("responsable");
                document.getElementById('tabla').innerHTML='';
               $('#clientes').val('');
         	  $('#clientes').removeAttr('disabled');
-              
+
           	  $('#year').removeAttr('disabled');
-          	  
+
           	  $('#month').removeAttr('disabled');
-            });  
+            });
 
 
 
 
-          
+
           function mostrar() {
-   
+
               div = document.getElementById('tabla');
               div.style.display = '';
-              
-           
+
+
           }
 
           function cerrar() {
@@ -351,8 +373,5 @@ for ($i = 2017; $i <= 2040; $i ++) {
           }
 
 
-          
-          </script>
 
-        
-  
+          </script>

@@ -1,9 +1,32 @@
 <script src="dist/js/pages/registro_actividad.js"></script>
-<script src="dist/js/pages/jquery.js"></script> 
+<script src="dist/js/pages/jquery.js"></script>
 <script src="dist/js/pages/operaciones.js"></script>
 <link rel="stylesheet" href="plugins/select2/select2.min.css"/>
 
 <style>
+.btn-success{
+background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #25a068), color-stop(1, #00cc0b) );
+}
+
+.btn-success:hover{
+	background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #408163), color-stop(1, #18a11f) );
+}
+
+.btn-danger{
+			background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #b70e0e), color-stop(1, #d26060) );
+	    border-color: #d73925;
+}
+.btn-danger:hover{
+	background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #8f0b0b), color-stop(1, #8f5151) );
+	border-color: #861709;
+}
+.btn-primary{
+	background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #006699), color-stop(1, #008FD6) );
+}
+.btn-primary:hover{
+	background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #07496a), color-stop(1, #397999) );
+}
+
 	.select2-container--default .select2-selection--single
 {
 	border-radius: 0;
@@ -18,14 +41,14 @@
 				$('#zctb').DataTable();
 			} );
 			function select(link){
-				var id = link.id; 
+				var id = link.id;
        			document.getElementById("id_actividad").value = id;
-				$('html,body').scrollTop(0); 
+				$('html,body').scrollTop(0);
                 queryActividad();
-                
+
 			}
 </script>
-    
+
 
 
 <?php
@@ -54,7 +77,7 @@ if($editar){
 	$id_contrato = $row_editar->id_contrato;
 	$tiempoReal = $row_editar->tiempoReal;
 	$fecha_inicio = $row_editar->fecha_inicio;
-						
+
 							?>
 						<script>
                                      document.getElementById("id_actividad").value="<?php echo $id_actividad;  ?>";
@@ -64,18 +87,18 @@ if($editar){
                                      document.getElementById("descripcion").value="<?php echo $descripcion;  ?>";
                                      document.getElementById("<?php echo $id_contrato; ?>").selected = true;
                                      document.getElementById("tiempoReal").value="<?php echo $tiempoReal;  ?>";
-                        </script>       
+                        </script>
 							<?php
                             }
                         ?>
-                            
-        
+
+
 
 
       <div class="row">
         <div class="col-md-12">
 
-          
+
           <!-- /.box -->
 
           <div class="box box-info">
@@ -89,17 +112,17 @@ if($editar){
 													<th>ID</th>
 													<th>Plataforma</th>
 													<th>Categoria</th>
-													<th>Actividad</th> 
-												</tr>  
+													<th>Actividad</th>
+												</tr>
 											</thead>
 											<tbody>
-												<?php												
+												<?php
 
 
 
 
 
-                        
+
                          if($consulta = $wish->conexion->query($consulta))
                         {
                           while($obj = $consulta->fetch_object())
@@ -109,25 +132,25 @@ if($editar){
                           <td><a href="#" onclick="select(this)" id="<?php printf($obj->id);?>"><?php printf($obj->id);?></a></td>
                           <td><?php printf($obj->plataforma);?></td>
                           <td><?php printf($obj->categoria);?></td>
-                          <td><?php printf($obj->actividad);?></td>  
-                        </tr> 
+                          <td><?php printf($obj->actividad);?></td>
+                        </tr>
                         <?php }}
                           $consulta->close();
                         ?>
-                                                
-											</tbody>								
-										</table>   
-                
-              
-              
-             
-            </div>           
+
+											</tbody>
+										</table>
+
+
+
+
+            </div>
           </div>
-        </div>              
+        </div>
       </div>
 
   <!-- /.content-wrapper -->
-  
+
 
   <!-- Control Sidebar -->
   <aside class="control-sidebar control-sidebar-dark">
@@ -140,9 +163,9 @@ if($editar){
     <div class="tab-content">
       <!-- Home tab content -->
       <div class="tab-pane" id="control-sidebar-home-tab">
-        
-        
-      
+
+
+
 
       </div>
       <!-- /.tab-pane -->
@@ -151,7 +174,7 @@ if($editar){
       <!-- /.tab-pane -->
       <!-- Settings tab content -->
       <div class="tab-pane" id="control-sidebar-settings-tab">
-        
+
       </div>
       <!-- /.tab-pane -->
     </div>
@@ -164,15 +187,15 @@ if($editar){
 <!-- ./wrapper -->
 
 
-   
+
      <!-- DataTables -->
 <script src="plugins/datatables/jquery.dataTables.min.js"></script>
 <script src="plugins/datatables/dataTables.bootstrap.min.js"></script>
 <script src="plugins/select2/select2.full.min.js"></script>
-  
+
 
 <script type="text/javascript">
 $(function () {
    $("#id_contrato").select2();
     });
-</script>    
+</script>

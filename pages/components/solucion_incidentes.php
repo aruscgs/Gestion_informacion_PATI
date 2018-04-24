@@ -16,7 +16,7 @@
                         $.get("pages/backend/includes/detalles_evento.php", {param_id: id}, function (data) {
                             $("#info_evento").html(data)
                         });
-                    }) 
+                    })
                 })
 
                 $("#info_evento").change(function () {
@@ -55,23 +55,23 @@
                 })
             });
         </script>
-        
+
 <!--SCRIPT PARA CONSULTA SOLUCION-->
-   
+
 <script type="text/javascript">
 
         function indivi(data, numero)
         {
 
-			
+
 		var valor=data, cedula=numero;
-		
+
         	$.ajax({
-                
+
         		type:  'POST',
-        		
+
         		url:   'pages/backend/includes/consulta_solucion.php',
-        		
+
                 data: { individual: valor, cedula: numero},
 
                 success: function(data)
@@ -102,8 +102,37 @@
 
 <style>
 
+.btn-success{
+background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #25a068), color-stop(1, #00cc0b) );
+}
 
-   
+.btn-success:hover{
+	background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #408163), color-stop(1, #18a11f) );
+}
+
+.btn-danger{
+			background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #b70e0e), color-stop(1, #d26060) );
+	    border-color: #d73925;
+}
+.btn-danger:hover{
+	background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #8f0b0b), color-stop(1, #8f5151) );
+	border-color: #861709;
+}
+.btn-primary{
+	background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #006699), color-stop(1, #008FD6) );
+}
+.btn-primary:hover{
+	background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #07496a), color-stop(1, #397999) );
+}
+.btn-info {
+    background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #0b98de), color-stop(1, #06a6f5) );
+    border-color: #00acd6;
+}
+.btn-info:hover {
+    background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #2996cc), color-stop(1, #73b9db) );
+    border-color: #00acd6;
+}
+
 input, select {
 	max-width: 400px;
 	margin: auto;
@@ -188,11 +217,11 @@ textarea.foo {
         -moz-opacity: 0.75;
         filter: alpha(opacity=75);
     }
-    
+
     #content{
         width: 67%;
-        
-   
+
+
     }
     /* estilo para lo q este dentro de la ventana modal */
    #aceptar {
@@ -266,50 +295,50 @@ $escala = $oe->conexion->query("SELECT distinct a.nombre, a.correo, a.celular, b
 
 	<div class="box-body">
 		<h3 class="box-title">Solución de incidentes</h3>
-		<br> 
+		<br>
 		<!-- Barra de progreso -->
 
 			<div class="col-md-5">
-			
+
 				<div class="form-group">
 
-					<LABEL>TIPO DE EVENTO</LABEL><br> 
+					<LABEL>TIPO DE EVENTO</LABEL><br>
 
 					<div class="input__row">
-					 
+
 						<ul class="buttons">
 							<li>
 							<input id="mostrar_evento" onclick="indivi('individual',<?php echo $userinfo->user_id?>);" class="radiobtn" name="evento" type="radio" value="individual" tabindex="1"> <span></span> <label
 								for="mostrar_evento"  id="r1">Evento</label>
-							
-							
+
+
 								<input id="mostrar_evento_masivo" onclick="indivi('masivo',<?php echo $userinfo->user_id?>);" class="radiobtn" name="evento" type="radio" value="masivo" tabindex="2"> <span></span> <label
 								for="mostrar_evento_masivo" id="r2">Evento masivo</label></li>
 						</ul>
 					</div>
 
-					<label>ID DEL EVENTO</label> 
+					<label>ID DEL EVENTO</label>
 					<select class="form-control select2" name="id_evento" id="evento" style=" width: 100%;" required>
-					
+
 					</select>
-                            
+
                    <label>NÚMERO DEL TICKET</label>
 
-					<input type="text" name="ticket" class="form-control"  style="max-width: 600px;" id="tiquet"> 
-					<label>TIPO</label> 
-					
+					<input type="text" name="ticket" class="form-control"  style="max-width: 600px;" id="tiquet">
+					<label>TIPO</label>
+
 						<select class="form-control" id="tipo" name="tipo" required="required" style="width: 100%;" required>
 						<option></option>
 						<option>Requerimiento</option>
 						<option>Incidente</option>
-					
-					
+
+
 					</select><br> <LABEL>HUBO CAMBIO</LABEL><br>
 
 					<div class="input__row">
 						<ul class="buttons">
-							<li><input id="cambio_si" class="radiobtn"  name="rbtncambio" type="radio" value="si" tabindex="1"> <span></span> 
-							<label for="cambio_si" id="r1">Si</label> 
+							<li><input id="cambio_si" class="radiobtn"  name="rbtncambio" type="radio" value="si" tabindex="1"> <span></span>
+							<label for="cambio_si" id="r1">Si</label>
 							<input id="cambio_no" class="radiobtn" name="rbtncambio" type="radio" value="no" tabindex="2" > <span></span> <label for="cambio_no" id="r2">No</label><br>
 								<label>NUM RFC</label> <input type="number" name="rfc_num" id="rfc"
 								class="form-control" readonly></li>
@@ -317,44 +346,44 @@ $escala = $oe->conexion->query("SELECT distinct a.nombre, a.correo, a.celular, b
 
 						</ul>
 
-					
+
 					<hr>
 	<div class="col-md-6" style="width: 100%;">
 		<div class="form-group" >
 			<div class="input-group">
-			
+
 			<select class="form-control" disabled id="responsable" style="width: 100%;">
 						<option value="" disabled selected> Cambiar el responsable </option>
-							<?php 
+							<?php
 							 while ($row3 = $escala->fetch_row())
 						    {
 						    	echo '<option value="'.$row3[6].'">'.ucwords(strtolower($row3[0]))." ---> " . $row3[3].'</option>';
 						    }
     					?>
 					</select>
-					
-					
+
+
 				<div class="input-group-addon " style=" padding: 0px;">
 						<button id="ver" data-toggle="modal" data-target="#myModal" class="btn btn-info pull-left" style="height: 32px; padding: 7px;" type="button" title="Ver Información">Info</button>
-				</div>	
-				
-				
+				</div>
+
+
 				<!-- SEN ENVIA OCULTO LA CEDULA DEL USUARIO -->
 				<input type="hidden" id="usuario" name="usuario" value="<?php echo $userinfo->user_name;?>">
 				<input type="hidden" id="usuario_cedula" name="id_usuario" value="<?php echo $userinfo->user_id;?>">
-				
+
 				<div class="input-group-addon" style=" padding: 0px;">
 						<button id="btnenviar" disabled class="btn btn-primary pull-right" style="height: 32px; padding: 7px;" type="button" title="Transferir">Enviar</button>
 				</div>
 			</div><textarea class="form-control" placeholder="Para Transferir el evento debe revisar la información" disabled id="nota" name="nota" required></textarea>
 		</div>
 	</div>
-					
-					
-					
-					
-					
-					
+
+
+
+
+
+
 					</div>
 				</div>
 			</div>
@@ -364,18 +393,18 @@ $escala = $oe->conexion->query("SELECT distinct a.nombre, a.correo, a.celular, b
 			<div class="col-md-6">
 				<div class="form-group">
 
-					
+
 					<label id="info_evento"
-						class="foo"  style="width: 50%;"> 
-						
+						class="foo"  style="width: 50%;">
+
 					</label> <br>
-					
-					<br> <br> <label>FECHA Y HORA DE CIERRE DEL EVENTO</label><br> 
-					
+
+					<br> <br> <label>FECHA Y HORA DE CIERRE DEL EVENTO</label><br>
+
 					<input
 						type="datetime-local" style="max-width: 600px;" name="fecha_fin" class="form-control" id="fecha_fin" required>
-						
-						
+
+
 						<label>DETALLES</label><br>
 
 					<textarea id="detalles_evento" class="form-control" rows="4"  name="detalles" style="resize: none" ></textarea>
@@ -384,17 +413,17 @@ $escala = $oe->conexion->query("SELECT distinct a.nombre, a.correo, a.celular, b
 
 
 				</div>
-				
+
 			</div>
-			
-		
+
+
 	</div>
 <a href="index.php"><button type="button" style="margin: 25px;" class="btn btn-danger">Cancelar</button></a>
 				<button  style="margin: 25px;" class="btn btn-success pull-right" data-target="#myModal_info" data-toggle="modal" onclick="datos_modal()" id="btnRegistrar">Registrar
 					evento</button>
 					<hr>
-	
-</div> 
+
+</div>
 
 
 <!-- INICIO DE MODAL  -->
@@ -408,18 +437,18 @@ $escala = $oe->conexion->query("SELECT distinct a.nombre, a.correo, a.celular, b
 		<div class="col-md-13">
 		<div class="box box-info">
 		<div class="box-body">
-        
+
         <label style="font-size: 20px;">Transferencia de un Evento Masivo</label> <br><br>
-        
+
         <div id="resultado">
-        
-        	<p>Para transferir un evento a otra persona debe poner el descarte que se hizo y el porqué lo transfiere. 
-        
+
+        	<p>Para transferir un evento a otra persona debe poner el descarte que se hizo y el porqué lo transfiere.
+
         	</p>
-		</div> 
+		</div>
 		<!-- <button type="button" class="btn btn-danger pull-right butt" data-dismiss="modal" aria-hidden="true">Cerrar</button> -->
-		
-		</div>							
+
+		</div>
 		 </div>
 		  </div>
 		    </div>
@@ -444,7 +473,7 @@ $("#btnenviar").on("click", function(){
 	var x=$("#responsable").val();
 	var y=$("#evento").val();
 	var z=$("#nota").val();
-	
+
 	window.location.href = 'pages/backend/rotar_escala.php?valor='+x+'&id_even='+y+'&nota='+z+'&usuario='+w+'';
 
 	});
@@ -478,12 +507,12 @@ $("#btnenviar").on("click", function(){
   $('#responsable').attr('disabled','disabled');
   $('#btnenviar').attr('disabled','disabled');
   $('#nota').attr('disabled','disabled');
-}); */ 
+}); */
 
 $("#ver").on("click", function(){
 
 	  $('#btnenviar').removeAttr('disabled');
-	}); 
+	});
 
 //al precionar el radio boton de evento masivo se habilita el reescalamiento
 $("#mostrar_evento_masivo").on("click", function(){
@@ -492,7 +521,7 @@ $("#mostrar_evento_masivo").on("click", function(){
   $('#responsable').removeAttr('disabled');
   //$('#btnenviar').removeAttr('disabled');
   $('#nota').removeAttr('disabled');
-}); 
+});
 
 
 //al precionar el radio boton de evento  se habilita el reescalamiento
@@ -502,44 +531,44 @@ $("#mostrar_evento").on("click", function(){
 	  $('#responsable').removeAttr('disabled');
 	  //$('#btnenviar').removeAttr('disabled');
 	  $('#nota').removeAttr('disabled');
-	}); 
+	});
 </script>
 
 <!--SCRIPT PARA HABILITAR Y DESHABLITAR-->
 <script>
 $("#cambio_si").on("click", function(){
   var x = document.getElementById("rfc");
-  
+
   $('#rfc').removeAttr("readOnly");
-});  
+});
 
 $("#cambio_no").on("click", function(){
   var x = document.getElementById("rfc");
 
   $('#rfc').attr('readOnly','readOnly ');
 
-}); 
+});
 </script>
 
 <script>
    function datos_modal()
 	     {
-	   var id=document.getElementById("evento").value;   	
+	   var id=document.getElementById("evento").value;
 	   var tipo=document.getElementById("tipo").value;
 	   var fecha=document.getElementById("fecha_fin").value;
 	   var valor=document.getElementById("detalles_evento").value;
-	   
+
        if((id=="")||(tipo=="")||(fecha=="")||(valor=="")){
 
     	   alert("DEBES DE DILIGENCIAR CORRECTAMENTE LOS CAMPOS REQUERIDOS!");
     	   javascript:history.go(0);
            }else{
 
-	   var ticket=document.getElementById("tiquet").value;  
+	   var ticket=document.getElementById("tiquet").value;
 	   var rfc=document.getElementById("rfc").value;
 
        var cedula=document.getElementById("usuario_cedula").value;
-      
+
 	   var id_compo = id.split("-");
 
 	   var id_evento = id_compo[0];
@@ -548,21 +577,21 @@ $("#cambio_no").on("click", function(){
 	   if(tipo_evento=='ind'){
          tipo_evento='Individual';
 		   }else{
-           tipo_evento='Masivo'; 
+           tipo_evento='Masivo';
 			    }
 
 	   $('#tipo_evento').val(tipo_evento);
 	   $('#id_evento').val(id_evento);
 	   $('#ticket').val(ticket);
 	   $('#tipo_incidente').val(tipo);
-	   $('#detalle').val(valor);   
+	   $('#detalle').val(valor);
 	   $('#rfc_number').val(rfc);
 	   $('#fecha_final').val(fecha);
 	   $('#cedula').val(cedula);
 
 	   addVal(tipo_evento,id_evento,ticket,tipo,valor,rfc,fecha,cedula);
            }
-	  
+
 	     }
 
 </script>
@@ -573,7 +602,7 @@ $("#cambio_no").on("click", function(){
 
 
 
- 
+
 <!-- Modal -->
   <div class="modal fade" id="myModal_info" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog modal-sm">
@@ -583,42 +612,42 @@ $("#cambio_no").on("click", function(){
           <h4 class="modal-title">INFORMACIÓN GENERAL DE LA SOLUCIÓN</h4>
         </div>
         <div class="modal-body" >
-  
+
   <textarea id="content" readonly style="resize:none;"> </textarea>
-  
-      <form method="post" action="pages/backend/solucion_incidentes.php">	
+
+      <form method="post" action="pages/backend/solucion_incidentes.php">
        	<table>
        	<tr>
        	<!--<td><label>TIPO DE EVENTO:</label></td>  -->
        	<td><input id="tipo_evento" name="tipo_evento"  class="form-control" type="hidden" required readonly></td>
        	</tr>
-       
+
        	<tr>
-       	<!--<td><label>ID DEL EVENTO:</label></td>-->  
+       	<!--<td><label>ID DEL EVENTO:</label></td>-->
        	<td><input id="id_evento" name="id_evento"  class="form-control" type="hidden" required readonly></td>
        	</tr>
-       	
+
        	<tr>
-       <!--<td><label>TICKET:</label></td>  -->	
+       <!--<td><label>TICKET:</label></td>  -->
        	<td><input id="ticket" name="ticket"  class="form-control" type="hidden" required readonly></td>
        	</tr>
-       	
+
        	<tr>
        	<!-- <td><label>TIPO DE INCIDENTE:</label></td> -->
        	<td><input id="tipo_incidente" name="tipo_incidente"  class="form-control" type="hidden" required readonly></td>
         </tr>
-       
- 
+
+
         <tr>
        	<!-- <td><label>NUM RFC:</label></td> -->
        	<td><input id="rfc_number" name="rfc_number"  class="form-control" type="hidden" readonly></std>
         </tr>
-       
-        <tr>       
+
+        <tr>
        	<!-- <td><label>FECHA Y HORA DE CIERRE:</label></td> -->
        	<td><input id="fecha_final" name="fecha_final"  class="form-control" type="datetime-local"  style="display:none" required readonly></td>
         </tr>
-        
+
          <tr>
        	<!-- <td><label>DETALLES:</label></td> -->
        	<td><textarea style="visibility:hidden;" id="detalle" name="detalle" class="form-control" required readonly></textarea></td>
@@ -631,21 +660,21 @@ $("#cambio_no").on("click", function(){
         </table>
 
 
-        
-      
+
+
     <input type="hidden" id="cedula" name="cedula_usuario">
- 
+
         </div>
         <div class="modal-footer">
-    
+
 
     </form>
-    
-    
-    
-    
+
+
+
+
         <script>
-       
+
         var signature = document.getElementById("tipo_evento").value;
         function addVal(tipo_evento,id_evento,ticket,tipo,valor,rfc,fecha,cedula){
 
@@ -653,13 +682,13 @@ $("#cambio_no").on("click", function(){
 
             document.getElementById('content').value ="Tipo de evento: "+tipo_evento +"\nId del evento: "+ id_evento+"\nTicket: "
             +ticket+"\nTipo : "+tipo+"\nNúmero de RFC: "+rfc+"\nFecha y hora de cierre: "+fecha_fin+"\nDetalles: "+valor
-           
+
         }
 
         </script>
-         
-       
-         
+
+
+
         </div>
       </div>
     </div>
@@ -668,5 +697,3 @@ $("#cambio_no").on("click", function(){
 
 </body>
 </html>
-
-

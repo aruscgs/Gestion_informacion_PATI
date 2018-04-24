@@ -2,6 +2,31 @@
 <link rel="stylesheet" href="plugins/alertify.core.css">
 <script src="plugins/alertify.min.js"></script>
 
+<style type="text/css">
+.btn-success{
+background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #25a068), color-stop(1, #00cc0b) );
+}
+
+.btn-success:hover{
+  background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #408163), color-stop(1, #18a11f) );
+}
+
+.btn-danger{
+      background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #b70e0e), color-stop(1, #d26060) );
+      border-color: #d73925;
+}
+.btn-danger:hover{
+  background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #8f0b0b), color-stop(1, #8f5151) );
+  border-color: #861709;
+}
+.btn-primary{
+  background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #006699), color-stop(1, #008FD6) );
+}
+.btn-primary:hover{
+  background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #07496a), color-stop(1, #397999) );
+}
+</style>
+
 <?php
 $con = new conexion();
 $meses = $con->conexion->query("select * from mes");
@@ -43,18 +68,18 @@ if ($permisos != 0){
 
 
 
-						<label>MES</label> 
-						
+						<label>MES</label>
+
 						<select class="form-control" id="meses"
 							onchange="validar()" name="mes" required>
 
 							<option value="0"></option>
-       
+
        <?php while($mes=$meses->fetch_assoc()){?>
-            
+
             <option
 								value="<?php echo $mes["id_mes"]?>.'-'.<?php echo $mes["descripcion"]?>"><?php echo $mes["descripcion"]?></option>
-            
+
             <?php }?>
      </select> <br> <br>
 
@@ -73,8 +98,8 @@ if ($permisos != 0){
 					<div class="form-group">
 
 
-						<label>AÑO</label> 
-						
+						<label>AÑO</label>
+
 						<select class="form-control" id="anos"
 							onchange="validar()" name="ano" required>
 
@@ -113,13 +138,13 @@ for ($i = 2017; $i <= 2040; $i ++) {
 
 <?php }else{?>
 
-            <script> 
+            <script>
 
     alertify.alert("<b>No estás autorizado para ingresar a ésta página", function () {
 	 location.href="index.php";
     });
 
-     
+
  </script>
 
 
@@ -127,20 +152,20 @@ for ($i = 2017; $i <= 2040; $i ++) {
 
 <script>
        function consulta_promedio()
-{ 
+{
 
     	   var mes=document.getElementById("meses").value;
-    	   
+
     	   var ano=document.getElementById("anos").value;
-    	   
+
     	   if((mes != '0') && (ano != '0')){
 
 	$.ajax({
-        
+
 		type:  'POST',
-		
+
 		url:   'pages/backend/promedio_indicadores.php',
-		
+
         data: $("#formulario").serialize(),
 
     	success: function (response) {
@@ -150,9 +175,9 @@ for ($i = 2017; $i <= 2040; $i ++) {
     	   }else{
 
     		   alertify.alert("<b>LOS CAMPOS MES Y AÑO SON <BR><font color=\"red\">OBLIGATORIOS</font>");
-               
+
         	   }
-	
+
 	//window.setTimeout('location.reload()');
 }
        </script>
@@ -167,5 +192,3 @@ for ($i = 2017; $i <= 2040; $i ++) {
 
 
 </div>
-
-

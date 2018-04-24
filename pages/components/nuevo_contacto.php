@@ -3,7 +3,30 @@
 <link href="plugins/datetimepicker/css/bootstrap.min.css" rel="stylesheet" media="screen">
 <link href="plugins/datetimepicker/css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen">
 
+<style type="text/css">
+.btn-success{
+background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #25a068), color-stop(1, #00cc0b) );
+}
 
+.btn-success:hover{
+	background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #408163), color-stop(1, #18a11f) );
+}
+
+.btn-danger{
+			background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #b70e0e), color-stop(1, #d26060) );
+			border-color: #d73925;
+}
+.btn-danger:hover{
+	background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #8f0b0b), color-stop(1, #8f5151) );
+	border-color: #861709;
+}
+.btn-primary{
+	background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #006699), color-stop(1, #008FD6) );
+}
+.btn-primary:hover{
+	background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #07496a), color-stop(1, #397999) );
+}
+</style>
 
 <form method="post" action="pages/backend/nuevo_contacto.php">
 
@@ -22,7 +45,7 @@
 					<br>
 				</div>
 				<div class="box-body">
-				
+
 				<div class="form-group">
 						<label>Nombre</label>
 						<div class="input-group">
@@ -32,7 +55,7 @@
 						<input type="text" class="form-control select2" name="nombre" style="width: 100%;" required>
 						</div>
 					</div>
-					
+
 					<div class="form-group">
 						<label>Celular</label>
 						<div class="input-group">
@@ -42,7 +65,7 @@
 						<input type="number" class="form-control select2" name="celular" style="width: 100%;" required>
 						</div>
 					</div>
-					
+
 					<div class="form-group">
 						<label>Correo</label>
 						<div class="input-group">
@@ -52,8 +75,8 @@
 						<input type="text" class="form-control select2" name="correo" style="width: 100%;" required>
 						</div>
 					</div>
-				
-				
+
+
 					<div class="form-group">
 						<label>Tipo</label>
 						<div class="input-group">
@@ -68,7 +91,7 @@
 						</div>
 					</div>
 
-				
+
 					<div class="form-group">
 						<label>Descripción</label>
 						<div class="input-group">
@@ -92,5 +115,3 @@
 		<!-- /.box -->
 	</div>
 </form>
-
-

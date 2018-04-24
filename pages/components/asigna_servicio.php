@@ -3,10 +3,31 @@
 
 
 <style>
+.btn-success{
+background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #25a068), color-stop(1, #00cc0b) );
+}
 
+.btn-success:hover{
+	background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #408163), color-stop(1, #18a11f) );
+}
+
+.btn-danger{
+			background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #b70e0e), color-stop(1, #d26060) );
+	    border-color: #d73925;
+}
+.btn-danger:hover{
+	background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #8f0b0b), color-stop(1, #8f5151) );
+	border-color: #861709;
+}
+.btn-primary{
+	background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #006699), color-stop(1, #008FD6) );
+}
+.btn-primary:hover{
+	background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #07496a), color-stop(1, #397999) );
+}
 .select2-container--default .select2-selection--single
 {
-	
+
 	border-radius: 0;
     border-color: #d2d6de;
     width: 100%;
@@ -23,7 +44,7 @@
 }
 
 .input__row{
- margin-top: 10px;  
+ margin-top: 10px;
 }
 /* Radio button */
 .radiobtn {
@@ -72,7 +93,7 @@
 		.lwms-main .lwms-left, .lwms-main .lwms-right, lwms-filterhead
 		{
 			width: 160px;
-		}		
+		}
 	}
 </style>
 <?php
@@ -135,9 +156,9 @@ function validar(){
 		 $('#buscador').show();
 		 $('#titulo_busca').show();
 		 $('#titulo').show();
-		 
 
-		 
+
+
 		}
 
 }
@@ -162,24 +183,24 @@ function insertar_datos(){
 
 
 	$.ajax({
-	       
+
 		type:  'POST',
 
 		url:   'pages/backend/asignar_servicio.php',
 
 		       data: $("#formulario").serialize(),
 
-		       success:  function (data) 
-               { 
-	               
+		       success:  function (data)
+               {
+
                   $("#resultado").html(data);
 
                   var servicios=document.getElementById("resultado").innerHTML;
-              
+
                }
 		});
 
-	
+
 		//window.setTimeout('location.reload()');
 
 }
@@ -193,74 +214,74 @@ function insertar_datos(){
 
 <div class="box box-default">
           <div class="box-header with-border">
-            
-            
-            <br> 
-              <!-- Barra de progreso -->
-                    
-               
-                  <div class="box-body">       
 
-     
+
+            <br>
+              <!-- Barra de progreso -->
+
+
+                  <div class="box-body">
+
+
        <div class="col-md-6">
-     
+
        <div class="form-group">
-       
+
 
    <form name="formulario" id="formulario" method="POST" action="#" onSubmit="insertar_datos(); return false">
 
         <label>Nombre del Cliente</label>
-        
+
      <select class="form-control" id="clientes" onchange="validar()" name="cliente">
-     
+
      <option value="0"></option>
-     <?php 
-     
+     <?php
+
      while($clientes=$cliente->fetch_assoc()){
         ?>
-        
-        <option value="<?php echo $clientes["id_cliente"] ?>"><?php echo $clientes["cliente"]?></option> 
-         
-         
-    <?php }
-     
-     ?>
-     
-     </select>
-       
 
-       
+        <option value="<?php echo $clientes["id_cliente"] ?>"><?php echo $clientes["cliente"]?></option>
+
+
+    <?php }
+
+     ?>
+
+     </select>
+
+
+
 	    <br>
-	    
+
 
 	     <button id="guardar_asignacion"  class="btn btn-success" style="width: 150px;"  disabled type="submit">Guardar</button>
 
-	     <a href="index.php"><button id="cancelar_asignacion" type="button" class="btn btn-danger" style="width: 150px;" disabled>Cancelar</button></a>         
-		
+	     <a href="index.php"><button id="cancelar_asignacion" type="button" class="btn btn-danger" style="width: 150px;" disabled>Cancelar</button></a>
+
 
         </div>
-        
+
         <div id="resultado" > </div>
-        
+
         </div>
-        
 
 
 
 
 
 
-     
+
+
       <div class="col-md-6">
           <!-- INICIO COLUMNA -->
                <div class="col-md-6">
-        
+
 
         <div class="form-group">
 
         <div class="input__row" style="width: 1074px;">
-        
-   			 
+
+
 <div class="row" style="display: none;" id="servicios">
 
   <div class="col-xs-5">
@@ -270,72 +291,72 @@ function insertar_datos(){
 
     <select id="cis" name="cis[]" multiple class="form-control" required>
      <?php while($servicios=$servicio->fetch_assoc()){?>
-                    
+
            <option value="<?php echo $servicios["id_servicio"]?>"><?php echo $servicios["nombre"]?></option>
-           
+
 
         <?php } ?>
     </select>
-    
+
 
   </div>
 
 
 </div>
 
-    
-        </div>           
+
+        </div>
         </div>
 
-        
-        </div> 
+
+        </div>
     <!-- FIN COLUMNA  -->
-        
+
            </div>
 
 
-        
+
         </div>
-         
-  
-         
+
+
+
         </div>
-        
-        
+
+
         </div>
-        
+
 
         </form>
-        
-      
-           
+
+
+
   <?php }else {?>
-      
-      
-                  <script> 
+
+
+                  <script>
 
     alertify.alert("<b>No estás autorizado para ingresar a ésta página", function () {
 	 location.href="index.php";
     });
 
-     
+
  </script>
-      
+
   <?php }?>
-           
+
    <script>
 
 
 
-   
-   
+
+
    $('#multiselect').multiselect();
 
    $('#multiselect option').tooltip();
 
- 
-   </script>   
-   
+
+   </script>
+
 
 
 
@@ -347,10 +368,10 @@ function insertar_datos(){
 	 function inserta_datos() {
 
 		 $("#myModal").modal("show");
-			
+
 	}
 
-		
+
     $(document).ready(function () {
         (function ($) {
             $('#buscador').keyup(function () {
@@ -363,7 +384,7 @@ function insertar_datos(){
         }(jQuery));
     });
 
-	
+
 	$('#cis').lwMultiSelect({
   	addAllText:"Seleccionar",
     removeAllText:"Removerlos",

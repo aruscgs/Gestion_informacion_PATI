@@ -1,3 +1,38 @@
+<style type="text/css">
+.btn-success{
+background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #25a068), color-stop(1, #00cc0b) );
+margin-right: 10px;
+}
+
+.btn-info {
+    background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #0b98de), color-stop(1, #06a6f5) );
+    border-color: #00acd6;
+}
+.btn-info:hover {
+    background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #2996cc), color-stop(1, #73b9db) );
+    border-color: #00acd6;
+}
+
+.btn-success:hover{
+	background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #408163), color-stop(1, #18a11f) );
+}
+
+.btn-danger{
+			background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #b70e0e), color-stop(1, #d26060) );
+	    border-color: #d73925;
+}
+.btn-danger:hover{
+	background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #8f0b0b), color-stop(1, #8f5151) );
+	border-color: #861709;
+}
+.btn-primary{
+	background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #006699), color-stop(1, #008FD6) );
+}
+.btn-primary:hover{
+	background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #07496a), color-stop(1, #397999) );
+}
+
+</style>
 <?php
 $query = "SELECT correo FROM new_personas where cedula='$userinfo->user_id'";
 $mail = $wish->conexion->query ( $query );
@@ -31,42 +66,42 @@ $rContratos = $wish->conexion->query ( $queryContratos );
 
 					<div class="col-md-4">
 						<div class="form-group">
-							<label>Contrato</label> 
+							<label>Contrato</label>
 							<select id="id_contrato" 	name="id_contrato" style="width: 100%"
 								class="form-control select2" required>
-								<option value="" id=""></option>            
+								<option value="" id=""></option>
                   <?php
 																		while ( $row = $rContratos->fetch_object () ) {
 																			?>
 
                     <option id="<?php echo $row->codigo; ?>"
 									value="<?php echo $row->codigo; ?>"><?php echo $row->alias;?></option>
-                    <?php } ?>  
+                    <?php } ?>
                 </select> <label>Fecha inicio y Fecha fin</label> <input
 								type="text" class="form-control" style="width: 100%"
 								name="horainiciohorafin" id='horainiciohorafin'
 								value="01/01/2017 1:30 PM - 01/01/2017 2:00 PM" />
 						</div>
 					</div>
-					<div class="col-md-7"> 
+					<div class="col-md-7">
 					<div class="form-group">
 						<label>Dispositivos</label>
 						<textarea id="textarea" id="dispositivos" style="width: 100%;height: 90px" name="dispositivos"
 							required class="form-control">
-                
+
                     </textarea>
 
 
 					</div>
 					</div>
-					<div class="col-md-12"> 
+					<div class="col-md-12">
 					 <div class="form-group">
 						<label>Descripción</label>
 						<textarea id="compose-textarea" id="mensaje" name="mensaje"
 							required class="form-control" style="height: 250px">
-                
+
                     </textarea>
-					</div> 
+					</div>
 					</div>
 				</div>
 
@@ -115,5 +150,3 @@ $(function() {
     $("#compose-textarea").wysihtml5();
   });
 </script>
-
-
