@@ -1,5 +1,12 @@
-<link rel="stylesheet" href="pages/components/styles/metricas_ing.css">
-
+<link rel="stylesheet" href="pages/components/styles/metricas">
+<style media="screen">
+.info-box .content .text {
+    font-size: 15px;
+    margin-top: 8px;
+    color: rgba(84, 83, 83, 0.95);
+    font-weight: bold;
+}
+</style>
 <?php
 /*
  $query = $wish->getActiveTaskForUser ( $user_id );
@@ -10,10 +17,13 @@
  */
 // Actividades del mes
 
+
+
 $actividadesdelmes = $wish->getActividadesMesAnalista($userinfo->user_id);
 $eventosAbiertos=$wish->getEventosAbiertos($userinfo->user_id);
 $eventosMasivosAbiertos=$wish->getEventosMasivosAbiertos($userinfo->user_id);
 $productividad = $wish->getProductividad($userinfo->user_id);
+$eventos_cerrados=$wish->numero_eventos_cerrados($userinfo->user_id);
 
 
 
@@ -25,17 +35,17 @@ $productividad = $wish->getProductividad($userinfo->user_id);
         	<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
 		<div class="info-box hover-zoom-effect">
 			<div class="icon bg-blue">
-				<i class="fa fa-bookmark" aria-hidden="true"></i>
+				<i class="fa fa-check-square-o" aria-hidden="true"></i>
 			</div>
 
 			<div class="content">
-				<div class="text">Eventos Masivos</div><br>
+				<div class="text">Mis Eventos Cerrados</div><br>
 				<div class="number">
-					<a href="index.php?page=028"  >
+					<a href="index.php?page=065"  >
 					<span class="count"><?php
 
 
-					while ( $row2 = $eventosMasivosAbiertos->fetch_array ( MYSQLI_NUM ) ) {
+					while ( $row2 = $eventos_cerrados->fetch_array ( MYSQLI_NUM ) ) {
 						echo $row2[0] . "<br/>\n";
 					}
 
@@ -56,7 +66,7 @@ $productividad = $wish->getProductividad($userinfo->user_id);
 			</div>
 
 			<div class="content">
-				<div class="text">Eventos </div><br>
+				<div class="text">Mis Eventos Pendientes</div><br>
 				<div class="number">
 					<a href="index.php?page=028"  >
 					<span class="count"><?php

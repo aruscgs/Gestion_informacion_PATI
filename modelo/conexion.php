@@ -704,7 +704,22 @@ public function modificar_ci($id_ci, $ip,$nombre_ci,$horario_noti, $ambiente, $t
 	}
 
 
+	public function numero_eventos_cerrados($cedula){
 
+	    $query =" select count(a.id_evento) as num from (select a.id_evento from (select id as 'id_evento',tipo_evento,fecha,observaciones from
+incidentecop where responsable='$cedula' and estado='S' and fecha between
+date_format((now() - interval (day(now())-1) day),'%Y-%m-%d') and date_format(now(),'%Y-%m-%d') order by
+id_evento asc)a
+left join solucion_incidente b on a.id_evento=b.id_evento
+union
+select a.id_evento  from (select distinct id_evento,tipo_evento,descripcion as 'observaciones',f_inicio as
+'fecha'  from registro_masivo where responsable='$cedula' and f_inicio between
+date_format((now() - interval (day(now())-1) day),'%Y-%m-%d') and date_format(now(),'%Y-%m-%d') and estado='S')a
+ left join
+solucion_incidente b on a.id_evento=b.id_evento and b.tipo='masivo' order by id_evento asc)a";
+	    $eventos_cerrados=$this->conexion->query($query);
+	    return $eventos_cerrados;
+	}
 
 }
 ?>
