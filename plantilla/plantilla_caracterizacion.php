@@ -47,7 +47,7 @@ $contrato=$_POST["contrato"];
 
 
 $consulta1 = $conexion->conexion->query("SELECT a.id_detalle ,a.id_tipo_servicio,a.id,a.nombre,a.tipo_dispo,a.ip,a.servicio_negocio,a.servicio_administrado,
-a.tipo_servicio,a.val_war,a.val_cri,a.tipo_umbral,a.horario,a.accion_critico
+a.ambiente, a.plataforma, a.tipo_servicio,a.val_war,a.val_cri,a.tipo_umbral,a.horario,a.accion_critico
 from (select a.*,b.*,c.tipo as 'tipo_dispo',d.tipo as 'tipo_servicio',e.nombre as 'tipo_umbral' from
  (select * from hosts where id_contrato='$contrato' and estado='A')a,
 (select id_detalle,puerto,val_war,val_cri,id_tipo_umbral,horario,accion_critico,id_host,
@@ -85,7 +85,7 @@ if (PHP_SAPI == 'cli')
 
 
     $objPHPExcel->getActiveSheet()
-    ->getStyle('A8:O8')
+    ->getStyle('A8:Q8')
     ->getFill()
     ->setFillType(PHPExcel_Style_Fill::FILL_SOLID)
     ->getStartColor()
@@ -94,7 +94,7 @@ if (PHP_SAPI == 'cli')
 
 
     $objPHPExcel->getActiveSheet()
-    ->getStyle('A7:O7')
+    ->getStyle('A7:Q7')
     ->getFill()
     ->setFillType(PHPExcel_Style_Fill::FILL_SOLID)
     ->getStartColor()
@@ -119,7 +119,7 @@ if (PHP_SAPI == 'cli')
             'color' => array('rgb' => '380DD5'),
         ));
 
-    $objPHPExcel->getActiveSheet()->getStyle('A8:O8')->applyFromArray($colorfontescala);
+    $objPHPExcel->getActiveSheet()->getStyle('A8:Q8')->applyFromArray($colorfontescala);
 
     $colorfont = array(
         'font'  => array(
@@ -129,7 +129,7 @@ if (PHP_SAPI == 'cli')
             'name'  => 'Verdana'
         ));
 
-    $objPHPExcel->getActiveSheet()->getStyle('A8:O8')->applyFromArray($colorfont);
+    $objPHPExcel->getActiveSheet()->getStyle('A8:Q8')->applyFromArray($colorfont);
 
     $aliniarCell = array(
         'alignment' => array(
@@ -139,9 +139,9 @@ if (PHP_SAPI == 'cli')
     );
 
     $objPHPExcel->getActiveSheet()->getStyle("A1")->applyFromArray($aliniarCell);
-    $objPHPExcel->getActiveSheet()->getStyle("O1")->applyFromArray($aliniarCell);
-    $objPHPExcel->getActiveSheet()->getStyle("O4")->applyFromArray($aliniarCell);
-    $objPHPExcel->getActiveSheet()->getStyle("A8:O8")->applyFromArray($aliniarCell);
+    $objPHPExcel->getActiveSheet()->getStyle("Q1")->applyFromArray($aliniarCell);
+    $objPHPExcel->getActiveSheet()->getStyle("Q4")->applyFromArray($aliniarCell);
+    $objPHPExcel->getActiveSheet()->getStyle("A8:Q8")->applyFromArray($aliniarCell);
 
 
     $objPHPExcel->getActiveSheet()->getStyle("I")->applyFromArray($aliniarCell);
@@ -152,27 +152,29 @@ if (PHP_SAPI == 'cli')
 
     // Add some data
     $objPHPExcel->setActiveSheetIndex(0)
-    ->mergeCells('A1:N6')
-    ->mergeCells('O1:O3')
-    ->mergeCells('O4:O6')
+    ->mergeCells('A1:P6')
+    ->mergeCells('Q1:Q3')
+    ->mergeCells('Q4:Q6')
     ->setCellValue('A1', 'CARACTERIZACIÓN Y MODELO DE EVENTOS')
-    ->setCellValue('O1', 'V1')
-    ->setCellValue('O4', 'Acceso Restringido')
+    ->setCellValue('Q1', 'V1')
+    ->setCellValue('Q4', 'Acceso Restringido')
     ->setCellValue('A8', 'Nombre de CI')
     ->setCellValue('B8', 'Tipo dispositivo')
     ->setCellValue('C8', 'IP')
     ->setCellValue('D8', 'Servicio Negocio')
     ->setCellValue('E8', 'Servicio Administrado')
-    ->setCellValue('F8', 'Subcomponentes')
-    ->setCellValue('G8', 'Puerto')
-    ->setCellValue('H8', 'Valor Warning')
-    ->setCellValue('I8', 'Valor Critical')
-    ->setCellValue('J8', 'Tipo de umbral')
-    ->setCellValue('K8', 'Horario de operación')
-    ->setCellValue('L8', 'Accion critica')
-    ->setCellValue('M8', 'Escalamiento 1')
-    ->setCellValue('N8', 'Escalamiento 2')
-    ->setCellValue('O8', 'Escalamiento 3');
+    ->setCellValue('F8', 'Plataforma')
+    ->setCellValue('G8', 'Ambiente')
+    ->setCellValue('H8', 'Subcomponentes')
+    ->setCellValue('I8', 'Puerto')
+    ->setCellValue('J8', 'Valor Warning')
+    ->setCellValue('K8', 'Valor Critical')
+    ->setCellValue('L8', 'Tipo de umbral')
+    ->setCellValue('M8', 'Horario de operación')
+    ->setCellValue('N8', 'Accion critica')
+    ->setCellValue('O8', 'Escalamiento 1')
+    ->setCellValue('P8', 'Escalamiento 2')
+    ->setCellValue('Q8', 'Escalamiento 3');
 
     // $conexion_caracteriza=$conexion_caracteriza->enviar_caracterizacion();
 
@@ -197,12 +199,14 @@ if (PHP_SAPI == 'cli')
         ->setCellValue('C'.$i, $res["ip"])
         ->setCellValue('D'.$i, $res["servicio_negocio"])
         ->setCellValue('E'.$i, $res["servicio_administrado"])
-        ->setCellValue('F'.$i, $res["tipo_servicio"])
-        ->setCellValue('H'.$i, $res["val_war"])
-        ->setCellValue('I'.$i, $res["val_cri"])
-        ->setCellValue('J'.$i, $res["tipo_umbral"])
-        ->setCellValue('K'.$i, $res["horario"])
-        ->setCellValue('L'.$i, $res["accion_critico"]);
+        ->setCellValue('F'.$i, $res["plataforma"])
+        ->setCellValue('G'.$i, $res["ambiente"])
+        ->setCellValue('H'.$i, $res["tipo_servicio"])
+        ->setCellValue('J'.$i, $res["val_war"])
+        ->setCellValue('K'.$i, $res["val_cri"])
+        ->setCellValue('L'.$i, $res["tipo_umbral"])
+        ->setCellValue('M'.$i, $res["horario"])
+        ->setCellValue('N'.$i, $res["accion_critico"]);
 
         $id_detalles=$res["id_detalle"];
         $id_serv=$res["id_tipo_servicio"];
@@ -210,9 +214,9 @@ if (PHP_SAPI == 'cli')
 
 
 
-        $objPHPExcel->getActiveSheet()->getStyle("M")->getAlignment()->setWrapText(true);
-        $objPHPExcel->getActiveSheet()->getStyle("N")->getAlignment()->setWrapText(true);
         $objPHPExcel->getActiveSheet()->getStyle("O")->getAlignment()->setWrapText(true);
+        $objPHPExcel->getActiveSheet()->getStyle("P")->getAlignment()->setWrapText(true);
+        $objPHPExcel->getActiveSheet()->getStyle("Q")->getAlignment()->setWrapText(true);
 
 
                 $consulta_escala_1=$conexion->conexion->query("SELECT b.nombre, b.celular, b.correo FROM
@@ -243,13 +247,13 @@ if (PHP_SAPI == 'cli')
 
         if($personas_esc_1 == ""){
             $objPHPExcel->setActiveSheetIndex(0)
-            ->setCellValue("M$aux_esc_1","No diligenciado");
+            ->setCellValue("O$aux_esc_1","No diligenciado");
 
-            $objPHPExcel->getActiveSheet()->getStyle("M$aux_esc_1")->applyFromArray($colorfontescala);
+            $objPHPExcel->getActiveSheet()->getStyle("O$aux_esc_1")->applyFromArray($colorfontescala);
 
         }else{
         $objPHPExcel->setActiveSheetIndex(0)
-        ->setCellValue("M$aux_esc_1",$personas_esc_1);
+        ->setCellValue("O$aux_esc_1",$personas_esc_1);
         }
 
         while($escala_2=$consulta_escala_2->fetch_assoc()){
@@ -262,13 +266,13 @@ if (PHP_SAPI == 'cli')
 
         if($personas_esc_2 == ""){
             $objPHPExcel->setActiveSheetIndex(0)
-            ->setCellValue("N$aux_esc_2","No diligenciado");
+            ->setCellValue("P$aux_esc_2","No diligenciado");
 
-            $objPHPExcel->getActiveSheet()->getStyle("N$aux_esc_2")->applyFromArray($colorfontescala);
+            $objPHPExcel->getActiveSheet()->getStyle("P$aux_esc_2")->applyFromArray($colorfontescala);
 
         }else{
             $objPHPExcel->setActiveSheetIndex(0)
-            ->setCellValue("N$aux_esc_2",$personas_esc_2);
+            ->setCellValue("P$aux_esc_2",$personas_esc_2);
 
         }
 
@@ -284,13 +288,13 @@ if (PHP_SAPI == 'cli')
 
         if($personas_esc_3 == ""){
             $objPHPExcel->setActiveSheetIndex(0)
-            ->setCellValue("O$aux_esc_3","No diligenciado");
+            ->setCellValue("Q$aux_esc_3","No diligenciado");
 
-            $objPHPExcel->getActiveSheet()->getStyle("O$aux_esc_3")->applyFromArray($colorfontescala);
+            $objPHPExcel->getActiveSheet()->getStyle("Q$aux_esc_3")->applyFromArray($colorfontescala);
 
         }else{
             $objPHPExcel->setActiveSheetIndex(0)
-            ->setCellValue("O$aux_esc_3",$personas_esc_3);
+            ->setCellValue("Q$aux_esc_3",$personas_esc_3);
 
         }
 
@@ -323,9 +327,11 @@ if (PHP_SAPI == 'cli')
       ->mergeCells("B$Y:B$auxres")
       ->mergeCells("C$Y:C$auxres")
       ->mergeCells("D$Y:D$auxres")
-      ->mergeCells("E$Y:E$auxres");
-      $objPHPExcel->getActiveSheet()->getStyle("A$Y:E$auxres")->applyFromArray($aliniarCell);
-      $objPHPExcel->getActiveSheet()->getStyle("A$Y:E$auxres")->getAlignment()->setWrapText(true);
+      ->mergeCells("E$Y:E$auxres")
+      ->mergeCells("F$Y:F$auxres")
+      ->mergeCells("G$Y:G$auxres");
+      $objPHPExcel->getActiveSheet()->getStyle("A$Y:G$auxres")->applyFromArray($aliniarCell);
+      $objPHPExcel->getActiveSheet()->getStyle("A$Y:G$auxres")->getAlignment()->setWrapText(true);
       $Y = $aux;
 
     }
@@ -337,20 +343,24 @@ if (PHP_SAPI == 'cli')
 
     //$objPHPExcel -> getActiveSheet()->getColumnDimension("A")->setAutoSize(true);
     $objPHPExcel -> getActiveSheet()->getColumnDimension("B")->setAutoSize(true);
-    $objPHPExcel -> getActiveSheet()->getColumnDimension("F")->setAutoSize(true);
-    $objPHPExcel -> getActiveSheet()->getColumnDimension("N")->setAutoSize(true);
-    $objPHPExcel -> getActiveSheet()->getColumnDimension("E")->setAutoSize(true);
+    $objPHPExcel -> getActiveSheet()->getColumnDimension("C")->setWidth(20);
     $objPHPExcel -> getActiveSheet()->getColumnDimension("D")->setAutoSize(true);
-    $objPHPExcel -> getActiveSheet()->getColumnDimension("L")->setAutoSize(true);
+    $objPHPExcel -> getActiveSheet()->getColumnDimension("E")->setAutoSize(true);
+    $objPHPExcel -> getActiveSheet()->getColumnDimension("F")->setWidth(13);
+    $objPHPExcel -> getActiveSheet()->getColumnDimension("G")->setWidth(13);
     $objPHPExcel -> getActiveSheet()->getColumnDimension("H")->setAutoSize(true);
     $objPHPExcel -> getActiveSheet()->getColumnDimension("I")->setAutoSize(true);
 
     $objPHPExcel -> getActiveSheet()->getColumnDimension("J")->setAutoSize(true);
     $objPHPExcel -> getActiveSheet()->getColumnDimension("K")->setAutoSize(true);
 
+    $objPHPExcel -> getActiveSheet()->getColumnDimension("L")->setAutoSize(true);
     $objPHPExcel -> getActiveSheet()->getColumnDimension("M")->setAutoSize(true);
+    $objPHPExcel -> getActiveSheet()->getColumnDimension("N")->setAutoSize(true);
     $objPHPExcel -> getActiveSheet()->getColumnDimension("O")->setAutoSize(true);
-    $objPHPExcel->getActiveSheet()->getColumnDimension('A')->setWidth(20);
+    $objPHPExcel -> getActiveSheet()->getColumnDimension("P")->setAutoSize(true);
+    $objPHPExcel -> getActiveSheet()->getColumnDimension("Q")->setAutoSize(true);
+    $objPHPExcel->getActiveSheet()->getColumnDimension('A')->setWidth(25);
 
 
 
