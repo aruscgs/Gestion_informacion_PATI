@@ -136,7 +136,7 @@ img {
     position: relative;
     z-index: 999;
     padding: 12em 4em 2.5em;
-    max-width: 100%;       
+    max-width: 100%;
      margin: -48px auto;
 	}
 
@@ -194,11 +194,11 @@ img {
 	<!-- main -->
 	<div class="w3ls-header">
 	<div style="background: white;
-	
+
     height: 250px;" class="form-control">
-    <img id="img_cab" src="dist\img\cabezote-01.png" class="form-control">
-    </div>			
-	
+    <img id="img_cab" src="dist\img\cabezotelogin.png" class="form-control">
+    </div>
+
 		<div class="header-main">
 						<img id="logo_arus" src="dist/img/unnamed.png">
 
