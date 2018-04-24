@@ -448,6 +448,8 @@ $_PAGE_CONFIG = array(
 						"1" => "018",
             "2" => "054",
             "3" => "070",
+            "4" => "007",
+
 				)
 		),
 		"018" => array(
@@ -479,15 +481,6 @@ $_PAGE_CONFIG = array(
         "menu_css_class" => "fa-users"
     ),
 
-		"007" => array(
-				"show" => true,
-				"isSubmenu" => false,
-				"big" => "GTI",
-				"small" => "Cambiar Contraseña",
-				"menu" => "Cambiar Contraseña",
-				"link" => 'pages/cambiar_contrasena/body.php',
-				"menu_css_class" => "fa-key"
-		),
 		"001" => array(
 				"show" => true,
 				"isSubmenu" => false,
@@ -637,7 +630,15 @@ $_PAGE_CONFIG = array(
 						            "link" => 'pages/components/gestionar_permisos.php'
 						                ),
 
-
+                            "007" => array(
+                                "show" => true,
+                                "isSubmenu" => true,
+                                "big" => "GTI",
+                                "small" => "Cambiar Contraseña",
+                                "menu" => "Cambiar Contraseña",
+                                "link" => 'pages/cambiar_contrasena/body.php',
+                                "menu_css_class" => "fa-key"
+                            ),
 
 
                                                         "062" => array(
