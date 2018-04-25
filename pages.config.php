@@ -795,13 +795,13 @@ $_PAGE_CONFIG = array(
 
 
 
-                      "046" => array(
-                              "show" => false,
-                              "isSubmenu" => false,
-                              "big" => "GTI",
-                              "small" => "Registro por Demanda",
-                              "link" => 'pages/bitacora_operacion/registro/registro_demanda.php'
-                              ),
+        "046" => array(
+                "show" => false,
+                "isSubmenu" => false,
+                "big" => "GTI",
+                "small" => "Registro por Demanda",
+                "link" => 'pages/bitacora_operacion/registro/registro_demanda.php'
+                ),
 
 
                        "047" => array(
@@ -940,20 +940,20 @@ $_PAGE_CONFIG = array(
 		"038" => array(
 				"show" => true,
 				"isSubmenu" => true,
-				"big" => "Gráfico Eventos por Contrato",
+				"big" => "Eventos por Contrato",
 				"small" => "Gráfico Eventos por Contrato",
-				"menu" => "Gráfico Eventos por Contrato",
-				"menu_css_class" => "fa-file-pdf-o",
+				"menu" => "Eventos por Contrato",
+				"menu_css_class" => "fa fa-area-chart",
 				"link" => "pages/reportes/grafico_evento_contrato/body.php"
 		),
 
 		"039" => array(
 				"show" => true,
 				"isSubmenu" => true,
-				"big" => "Gráfico Capacidad y Disponbilidad",
+				"big" => "Capacidad y Disponibilidad",
 				"small" => "Gráfico Eventos",
-				"menu" => "Gráfico Capacidad y Disponbilidad",
-				"menu_css_class" => "fa-file-pdf-o",
+				"menu" => "Capacidad y Disponibilidad",
+				"menu_css_class" => "fa fa-area-chart",
 				"link" => "pages/reportes/grafico_dispo_capa/body.php"
 		),
 

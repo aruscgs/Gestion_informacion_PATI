@@ -621,6 +621,12 @@ $reg_cur = $wish->conexion->query ( $current_query );
 
 
 <style>
+.h3{
+	font-family: -webkit-pictograph;
+
+}
+
+
 .oval-thought {
     position: relative;
     width: 269px;
@@ -743,7 +749,7 @@ $initialDate = $row ['fecha_inicio'];
 <!-- Main row -->
 <div class="box box-success">
 	<div class="box-header with-border">
-		<h3 class="box-title">Actividades</h3>
+		<h3 style="font-family: -webkit-pictograph;" class="box-title">Actividades</h3>
 
 
 	</div>
@@ -1162,7 +1168,7 @@ if($aux != 0){
 ?>
 
 							<a href="index.php?page=014" class="btn btn-app"  > <i
-							class="fa fa-plane"></i> Registro de ausentismo
+							class="fa fa-plane"></i> Registro de Ausentismo
 						</a>
 
 					</div>
@@ -1344,7 +1350,7 @@ if($row["fecha"] < "2018-02-09"){?>
 
 				<div class="pad">
 								<!-- Map will be created here -->
-								<h3 class="box-title">Registros Pendientes</h3>
+								<h3 style="font-family: -webkit-pictograph;" class="box-title">Registros Pendientes</h3>
 								<table id="pendientes"
 									class="table table-striped table-bordered">
 
@@ -1376,7 +1382,7 @@ if($row["fecha"] < "2018-02-09"){?>
 									<a href="index.php?page=046" class="btn btn-app"> <i
 										class="fa fa-edit"></i> Registro por Demanda
 									</a> <a href="index.php?page=014" class="btn btn-app"> <i
-										class="fa fa-plane"></i> Registro de ausentismo
+										class="fa fa-plane"></i> Registro de Ausentismo
 									</a>
 
 								</div>

@@ -199,10 +199,10 @@
 
 
 
-			<li><a href="https://gticonocimiento.arus.com.co/"   target="_blank"  ><i class="fa fa-file-text" aria-hidden="true"></i> <span>Gestión del Conocimiento</span></a></li>
+			<li><a href="https://gticonocimiento.arus.com.co/"   target="_blank"  ><i class="fa fa-globe" aria-hidden="true"></i> <span>Gestión del Conocimiento</span></a></li>
 
 
- <li><a href="http://gticursos.arus.com.co/wp-login.php?loggedout=true"   target="_blank"  ><i class="fa fa-file-text" aria-hidden="true"></i> <span>GTI Cursos</span></a></li>
+ <li><a href="http://gticursos.arus.com.co/wp-login.php?loggedout=true"   target="_blank"  ><i class="fa fa-globe" aria-hidden="true"></i> <span>GTI Cursos</span></a></li>
 
 
 
