@@ -20,9 +20,9 @@
 					}
 					$consulta->close ();
 			}
-			
+
 		}
-	
+
 ?>
 
 
@@ -35,7 +35,7 @@
 		<!-- MAP & BOX PANE -->
 		<div class="box box-success">
 			<div class="box-header with-border">
-				<h3 class="box-title">Mis Colaboradores</h3>
+				<h3 style="font-family: -webkit-pictograph;" class="box-title">Mis Colaboradores</h3>
 
 				<div class="box-tools pull-right">
 					<button type="button" class="btn btn-box-tool"
@@ -56,7 +56,7 @@
 							<table id="example" class="table table-striped table-bordered">
 								<thead>
 									<tr>
-										<th></th> 
+										<th></th>
 										<th>Nombre</th>
 										<th>Cargo</th>
 										<th>Celular</th>
