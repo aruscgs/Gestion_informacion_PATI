@@ -418,7 +418,12 @@ correo, contrato from (Select T4.horas, total, ((T4.horas*100)/total)
  T Group by id_contrato,correo, Contrato ) T2 ) T4 on
  T3.correo=T4.correo ) T5;";
 
-
+ $consulta22 = "SELECT columna, sum(valores) as 'valores' from (select a.nombre as 'columna' ,
+ count(DISTINCT b.id_evento) as 'valores' from  new_proyectos a, registro_masivo b,hosts c
+ where b.id_host=c.id and c.id_contrato=a.codigo and b.f_inicio between '<filtro1>' and '<filtro2>' GROUP
+ by a.codigo union (select  a.nombre as 'columna',COUNT(b.id) as 'valores'  from new_proyectos a,
+ incidentecop b,hosts c where b.id_host=c.id and c.id_contrato=a.codigo and b.estado = 'P' and
+ b.fecha between '<filtro1>' and '<filtro2>' GROUP by a.codigo))k group by columna";
 
 
 
@@ -918,6 +923,24 @@ $_REPORTS_CONFIG = array (
 				"grafico" => "pie",
 				"titulo" => "Reporte de eventos por contrato",
 				"query" => $consulta14,
+				"filtros" => array (
+						"filtro1" => array (
+								"nombre" => "Fecha Inicio",
+								"tipo" => "date"
+						),
+						"filtro2" => array (
+								"nombre" => "Fecha Fin",
+								"tipo" => "date"
+						)
+
+				)
+		),
+
+		"grafico_evento_abierto_contrato" => array (
+				"tipo" => "grafico",
+				"grafico" => "pie",
+				"titulo" => "Reporte de eventos abiertos por contrato",
+				"query" => $consulta22,
 				"filtros" => array (
 						"filtro1" => array (
 								"nombre" => "Fecha Inicio",

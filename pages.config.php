@@ -527,6 +527,7 @@ $_PAGE_CONFIG = array(
 						"page18"=> "039",
                                                 "page19"=> "057",
                                                 "page20" => "062",
+                                                "page21"=> "066",
 
 				)
 
@@ -945,6 +946,16 @@ $_PAGE_CONFIG = array(
 				"menu" => "Eventos por Contrato",
 				"menu_css_class" => "fa fa-area-chart",
 				"link" => "pages/reportes/grafico_evento_contrato/body.php"
+		),
+
+    "066" => array(
+				"show" => true,
+				"isSubmenu" => true,
+				"big" => "Eventos Abiertos por Contrato",
+				"small" => "Gráfico Eventos Abiertos por Contrato",
+				"menu" => "Eventos Abiertos por Contrato",
+				"menu_css_class" => "fa fa-area-chart",
+				"link" => "pages/reportes/grafico_evento_abierto_contrato/body.php"
 		),
 
 		"039" => array(
