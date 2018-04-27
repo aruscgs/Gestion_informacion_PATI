@@ -49,37 +49,28 @@
     border: 0px solid #69899F;
     font-size: 15px;   
   }
-.demotbl th{
-    padding:15px;
-    color:#fff;
-    text-shadow:1px 1px 1px #568F23;
-    background-color:#9DD929;
-    background:-webkit-gradient(
-        linear,
-        left bottom,
-        left top,
-        color-stop(0.02, rgb(123,192,67)),
-        color-stop(0.51, rgb(139,198,66)),
-        color-stop(0.87, rgb(158,217,41))
-        );
-    background: -moz-linear-gradient(
-        center bottom,
-        rgb(123,192,67) 3%,
-        rgb(139,198,66) 52%,
-        rgb(158,217,41) 88%
-        );
-    -webkit-border-top-left-radius:5px;
-    -webkit-border-top-right-radius:5px;
-    -moz-border-radius:5px 5px 0px 0px;
-    border-top-left-radius:5px;
-    border-top-right-radius:5px;
-  }
+.demotbl th {
+    /* padding: 15px; */
+    color: #fff;
+    /* text-shadow: 1px 1px 1px #568F23; */
+    /* background-color: #9DD929; */
+    /* background: -webkit-gradient( linear, left bottom, left top, color-stop(0.02, rgb(123,192,67)), color-stop(0.51, rgb(139,198,66)), color-stop(0.87, rgb(158,217,41)) ); */
+    background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #006699), color-stop(1, #008FD6) );
+    background: -moz-linear-gradient( center bottom, rgb(123,192,67) 3%, rgb(139,198,66) 52%, rgb(158,217,41) 88% );
+    -webkit-border-top-left-radius: 5px;
+    -webkit-border-top-right-radius: 5px;
+    -moz-border-radius: 5px 5px 0px 0px;
+    border-top-left-radius: 2px;
+    border-top-right-radius: 0px;
+        text-align: center;
+            PADDING: 10PX;
+}
 .demotbl td{
     width:100px;
     padding:10px;
     text-align:center;
     vertical-align: top;
-    background-color:#DEF3CA;
+    background-color:white;
     -moz-border-radius:2px;
     -webkit-border-radius:2px;
     border-radius:2px;

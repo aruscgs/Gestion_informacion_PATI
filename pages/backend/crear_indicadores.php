@@ -4,174 +4,7 @@
 <script src="plugins/jQuery/jquery-2.2.3.min.js"></script>
 <script src="plugins/alertify.min.js"></script>
 
-<style>
 
-
-
-#search {
-    float: right;
-    margin-top: 9px;
-    width: 250px;
-}
-
-
-.search {
-    padding: 5px 0;
-    width: 230px;
-    height: 30px;
-    position: relative;
-    left: 10px;
-    float: left;
-    line-height: 22px;
-}
-
-    .search input {
-        position: absolute;
-        float: Left;
-
-
-        height: 30px;
-        line-height: 18px;
-        padding: 0 2px 0 2px;
-        border-radius:1px;
-    }
-
-        .search:hover input, .search input:focus {
-            width: 200px;
-            margin-left: 0px;
-        }
-
-#btn_search {
-    height: 30px;
-    position: absolute;
-    right: 0;
-    top: 5px;
-    border-radius:1px;
-}
-
-
-
-
-
-.demotbl {
-    border: 0px solid #69899F;
-    font-size: 11px;   
-  }
-.demotbl th{
-    padding:15px;
-    color:#fff;
-    text-shadow:1px 1px 1px #568F23;
-    background-color:#9DD929;
-    background:-webkit-gradient(
-        linear,
-        left bottom,
-        left top,
-        color-stop(0.02, rgb(123,192,67)),
-        color-stop(0.51, rgb(139,198,66)),
-        color-stop(0.87, rgb(158,217,41))
-        );
-    background: -moz-linear-gradient(
-        center bottom,
-        rgb(123,192,67) 3%,
-        rgb(139,198,66) 52%,
-        rgb(158,217,41) 88%
-        );
-    -webkit-border-top-left-radius:5px;
-    -webkit-border-top-right-radius:5px;
-    -moz-border-radius:5px 5px 0px 0px;
-    border-top-left-radius:5px;
-    border-top-right-radius:5px;
-  }
-.demotbl td{
-    width:100px;
-    padding:10px;
-    text-align:center;
-    vertical-align: top;
-    background-color:#DEF3CA;
-    -moz-border-radius:2px;
-    -webkit-border-radius:2px;
-    border-radius:2px;
-    color:#666;
-    text-shadow:1px 1px 1px #fff;
-
-  }
-
-
-
-tr:hover td { background: #d0dafd; }
-
-
-	.select2-container--default .select2-selection--single, .w3-input
-	{
-		padding: 5px;
-	    display: block;
-	    border: none;
-	    border-bottom: 1px solid #ccc;
-	}
-	
-	.ms-options ms-active
-	{
-		min-height: 100px; 
-		max-height: 100px;
-	}
-	
-	.ms-drop.bottom
-	{
-		width: 310px;
-		
-	}
-
-    #busqueda{
-
-    
-    width: 204px;
-    line-height: 18px;
-}
-
-
-#buscar{
-    margin-left: 34px;
-        padding: 7px;
-}
-
-
-#btnExport{
-   cursor: pointer;
-    width: 65px;
-     margin-right: 594px;
-    position: relative;
-    display: inline-block;
-    box-sizing: border-box;
-    padding: 0.5em 1em;
-    border: 1px solid #999;
-    border-radius: 2px;
-    cursor: pointer;
-    font-size: 0.88em;
-    color: black;
-    white-space: nowrap;
-    overflow: hidden;
-    background-color: #e9e9e9;
-    background-image: -webkit-linear-gradient(top, #fff 0%, #e9e9e9 100%);
-    background-image: -moz-linear-gradient(top, #fff 0%, #e9e9e9 100%);
-    background-image: -ms-linear-gradient(top, #fff 0%, #e9e9e9 100%);
-    background-image: -o-linear-gradient(top, #fff 0%, #e9e9e9 100%);
-    background-image: linear-gradient(to bottom, #fff 0%, #e2dcdc 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,StartColorStr='white', EndColorStr='#e9e9e9');
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    text-decoration: none;
-    outline: none;
-
-  
-    margin-left: 35px;
-    margin-bottom: 11px;
-    
-}
-
-
-</style>
 
 
 
@@ -253,7 +86,7 @@ id_cliente=$cliente");
            
  <div style=" width: 101.5%; height:280px; overflow-y: scroll;">
 
-<table id="indicadores_operacion" class="demotbl">  
+<table id="indicadores_operacion" class="datagrid">  
          <thead>
           <tr id="tbl_titulo">
            
@@ -887,13 +720,18 @@ if(cumplimiento < 100 && cumplimiento> 0.00){
 
 </script>
    
-   <div><button type="button" style="margin: 25px;" class="btn btn-primary" onclick="verifica_datos()">Guardar indicadores</button></div>
+   <div><button id="guardar_indicadores" type="button" style="margin: 25px;" class="btn btn-primary" onclick="verifica_datos()">Guardar indicadores</button></div>
    
  <div id="resultado"></div>  
  
  
  
  	<style> 
+ 	
+#guardar_indicadores{
+
+background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #006699), color-stop(1, #008FD6) );
+} 	
 	
 .first-name {
 	margin: 0 25px 25px;
@@ -906,4 +744,190 @@ if(cumplimiento < 100 && cumplimiento> 0.00){
 	-webkit-box-shadow: 0px 0px 20px #000000;
 	box-shadow: 0px 0px 20px #000000;
 	}
+	
+	
+	
+.sticky {
+  position: fixed;
+  top: 0;
+  width: 100%
+}
+
+/* Add some top padding to the page content to prevent sudden quick movement (as the header gets a new position at the top of the page (position:fixed and top:0) */
+.sticky + .content {
+  padding-top: 102px;
+}
+
+
+#search {
+    float: right;
+    margin-top: 9px;
+    width: 250px;
+}
+
+
+.search {
+    padding: 5px 0;
+    width: 230px;
+    height: 30px;
+    position: relative;
+    left: 10px;
+    float: left;
+    line-height: 22px;
+}
+
+    .search input {
+        position: absolute;
+        float: Left;
+
+
+        height: 30px;
+        line-height: 18px;
+        padding: 0 2px 0 2px;
+        border-radius:1px;
+    }
+
+        .search:hover input, .search input:focus {
+            width: 200px;
+            margin-left: 0px;
+        }
+
+#btn_search {
+    height: 30px;
+    position: absolute;
+    right: 0;
+    top: 5px;
+    border-radius:1px;
+}
+
+.w3-input {
+    padding: 5px;
+    display: block;
+    border: none;
+    border-bottom: 1px solid #ccc;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.27);
+}
+
+
+
+.datagrid  { border-collapse: collapse; text-align: left; width: 100%; } 
+.datagrid {font: normal 12px/150% Arial, Helvetica, sans-serif; background: #fff; overflow: hidden; 
+ -webkit-border-radius: 3px; -moz-border-radius: 3px; border-radius: 3px; }
+.datagrid td, .datagrid table th { padding: 3px 10px; }
+.datagrid thead th {background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #006699), 
+color-stop(1, #008FD6) );     font-style: italic;  height: 31px;background:-moz-linear-gradient( center top, #006699 5%, #008FD6 100% );
+text-align:center;filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#006699', endColorstr='#008FD6');
+background-color:#006699; color:#FFFFFF;font-size: 12px; font-weight: bold; border-left: 1px solid #0070A8; } 
+.datagrid thead th:first-child { border: none; }
+.datagrid tbody td {
+color: #526d7b;  
+  font-style: italic;
+    border-left: 1px solid #E1EEF4;
+    text-align: center;
+    font-size: 14px;
+    font-weight: normal;
+        padding: 10px;
+}
+
+.demotbl {
+    border: 0px solid #69899F;
+    font-size: 11px;   
+  }
+
+.demotbl td{
+    width:100px;
+    padding:10px;
+    text-align:center;
+    vertical-align: top;
+    -moz-border-radius:2px;
+    -webkit-border-radius:2px;
+    border-radius:2px;
+    color:#666;
+    text-shadow:1px 1px 1px #fff;
+
+  }
+
+
+
+tr:hover td { background: #d0dafd; }
+
+
+	.select2-container--default .select2-selection--single, .w3-input
+	{
+		padding: 5px;
+	    display: block;
+	   /* border: none; */
+	    border-bottom: 1px solid #ccc;
+	}
+	
+	.ms-options ms-active
+	{
+		min-height: 100px; 
+		max-height: 100px;
+	}
+	
+	.ms-drop.bottom
+	{
+		width: 310px;
+		
+	}
+
+    #busqueda{
+
+    
+    width: 204px;
+    line-height: 18px;
+}
+
+
+#buscar{
+    margin-left: 34px;
+        padding: 7px;
+}
+
+
+#btnExport{
+   cursor: pointer;
+    width: 65px;
+     margin-right: 594px;
+    position: relative;
+    display: inline-block;
+    box-sizing: border-box;
+    padding: 0.5em 1em;
+    border: 1px solid #999;
+    border-radius: 2px;
+    cursor: pointer;
+    font-size: 0.88em;
+    color: black;
+    white-space: nowrap;
+    overflow: hidden;
+    background-color: #e9e9e9;
+    background-image: -webkit-linear-gradient(top, #fff 0%, #e9e9e9 100%);
+    background-image: -moz-linear-gradient(top, #fff 0%, #e9e9e9 100%);
+    background-image: -ms-linear-gradient(top, #fff 0%, #e9e9e9 100%);
+    background-image: -o-linear-gradient(top, #fff 0%, #e9e9e9 100%);
+    background-image: linear-gradient(to bottom, #fff 0%, #e2dcdc 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,StartColorStr='white', EndColorStr='#e9e9e9');
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    text-decoration: none;
+    outline: none;
+
+  
+    margin-left: 35px;
+    margin-bottom: 11px;
+    
+}
+
+#guardar_indicadores{
+
+background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #006699), color-stop(1, #008FD6) );}
+
+}
+
+#guardar_indicadores:hover{
+background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #07496a), color-stop(1, #397999) );
+}	
  </style>

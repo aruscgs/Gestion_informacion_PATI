@@ -58,48 +58,43 @@
     font-size: 15px;
 
   }
-.demotbl th{
-    padding:15px;
-    color:#fff;
-    text-shadow:1px 1px 1px #568F23;
-    background-color:#9DD929;
-    background:-webkit-gradient(
-        linear,
-        left bottom,
-        left top,
-        color-stop(0.02, rgb(123,192,67)),
-        color-stop(0.51, rgb(139,198,66)),
-        color-stop(0.87, rgb(158,217,41))
-        );
-    background: -moz-linear-gradient(
-        center bottom,
-        rgb(123,192,67) 3%,
-        rgb(139,198,66) 52%,
-        rgb(158,217,41) 88%
-        );
-    -webkit-border-top-left-radius:5px;
-    -webkit-border-top-right-radius:5px;
-    -moz-border-radius:5px 5px 0px 0px;
-    border-top-left-radius:5px;
-    border-top-right-radius:5px;
-  }
-.demotbl td{
-    width:100px;
-    padding:10px;
-    text-align:center;
+
+.demotbl th {
+    /* padding: 15px; */
+    color: #fff;
+    /* text-shadow: 1px 1px 1px #568F23; */
+    /* background-color: #9DD929; */
+    /* background: -webkit-gradient( linear, left bottom, left top, color-stop(0.02, rgb(123,192,67)), color-stop(0.51, rgb(139,198,66)), color-stop(0.87, rgb(158,217,41)) ); */
+    background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #006699), color-stop(1, #008FD6) );
+    background: -moz-linear-gradient( center bottom, rgb(123,192,67) 3%, rgb(139,198,66) 52%, rgb(158,217,41) 88% );
+    -webkit-border-top-left-radius: 5px;
+    -webkit-border-top-right-radius: 5px;
+    -moz-border-radius: 5px 5px 0px 0px;
+    border-top-left-radius: 2px;
+    border-top-right-radius: 0px;
+        text-align: center;
+            PADDING: 10PX;
+}
+
+.demotbl td {
+    width: 100px;
+    padding: 10px;
+    text-align: center;
     vertical-align: top;
-    background-color:#DEF3CA;
-    -moz-border-radius:2px;
-    -webkit-border-radius:2px;
-    border-radius:2px;
-    color:#666;
-    text-shadow:1px 1px 1px #fff;
+    /* background-color: white; */
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    border-radius: 2px;
+    color: #666;
+    /* text-shadow: 1px 1px 1px #fff; */
+}
 
-  }
-
-
-
-tr:hover td { background: #d0dafd; }
+b, strong {
+    font-weight: 700;
+    font-size: 13px;
+    font-style: italic;
+    /* text-align: center; */
+}
 
 
 	.select2-container--default .select2-selection--single, .w3-input
@@ -182,6 +177,13 @@ tr:hover td { background: #d0dafd; }
 
 }
 
+.w3-input {
+    padding: 5px;
+    display: block;
+    border: none;
+    border-bottom: 1px solid #ccc;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.27);
+}
 
 #excel{
 width: 500px;
